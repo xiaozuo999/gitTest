@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>jquery多个轮播</title>
+    <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="js/jquery.min.js"></script>
+</head>
+<style>
+    .container{
+        width: 650px;
+        margin-top: 50px;
+    }
+    .box{
+        width: 1920px;
+    }
+    .boxOne{
+        float: left;
+        width: 480px;
+        height: 250px;
+    }
+    .boxWrap{
+        width: 480px;
+        height: 250px;
+        overflow: hidden;
+        margin: 0 auto;
+
+    }
+    .slider{
+        height: 250px;
+        margin-bottom: 30px;
+    }
+    .c1{
+        background: #ff8080;
+    }
+    .c2{
+        background: #8dd35f;
+    }
+    .c3{
+        background: #ffe680;
+    }
+    .c4{
+        background: #80b3ff;
+    }
+    .btntp{
+        margin-top: 100px;
+        height: 45px;
+        display: block;
+    }
+    .btntpL{
+        background: url(images/iconFXL.png) #fff 50% 50% no-repeat;
+    }
+    .btntpL:hover{
+        background: url(images/iconFXL.png) #ddd 50% 50% no-repeat;
+    }
+    .btntpR{
+         background: url(images/iconFXR.png)  #fff 50% 50% no-repeat;
+    }
+    .btntpR:hover{
+         background: url(images/iconFXR.png)  #ddd 50% 50% no-repeat;
+    }
+    .col-md-20{
+        float: left;
+        width: 20%;
+        border: 1px solid #ddd;
+        height:60px;
+        padding: 10px;
+    }
+    .container2{
+        padding:0 20px;
+    }
+    .active{
+        border: 1px solid red;
+    }
+    .one1:hover{
+        background: #f6f6f6;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+    }
+
+</style>
+<body>
+
+<div class="container">
+    <div class="row slider">
+        <div class="slider1">
+            <div class="col-md-1 col-xs-1">
+                <a href="#" class="btntp btntpL"  onclick="fun.left()">
+                </a>
+            </div>
+            <div class="col-md-10 col-xs-10">
+                <div class="boxWrap">
+                    <div class="box">
+                        <div class="box1">
+                            <div class="boxOne c1">1</div>
+                            <div class="boxOne c2">2</div>
+                            <div class="boxOne c3">3</div>
+                            <div class="boxOne c4">4</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1 col-xs-1">
+                <a href="#" class="btntp btntpR" onclick="fun.right()">
+                </a>
+            </div>
+        </div>
+        <div class="slider2" style="display: none;">
+            <div class="col-md-1 col-xs-1">
+                <a href="#" class="btntp btntpL"  onclick="fun2.left()">
+                </a>
+            </div>
+            <div class="col-md-10 col-xs-10">
+                <div class="boxWrap">
+                    <div class="box">
+                        <div class="box1">
+                            <div class="boxOne c1">a</div>
+                            <div class="boxOne c2">b</div>
+                            <div class="boxOne c3">c</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1 col-xs-1">
+                <a href="#" class="btntp btntpR" onclick="fun2.right()">
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="container2">
+        <div class="row" id="meum1" style="margin-bottom:8px">
+            <div class="col-md-20">
+                <h4>条件一</h4>
+            </div>
+            <div class="col-md-20 one1 active" onclick="fun.selectActive(this)">1</div>
+            <div class="col-md-20 one1" onclick="fun.selectActive(this)">2</div>
+            <div class="col-md-20 one1" onclick="fun.selectActive(this)">3</div>
+            <div class="col-md-20 one1" onclick="fun.selectActive(this)">4</div>
+        </div>
+         <div class="row" id="meum2">
+            <div class="col-md-20">
+                <h4>条件二</h4>
+            </div>
+            <div class="col-md-20 one1" onclick="fun2.selectActive(this)">a</div>
+            <div class="col-md-20 one1" onclick="fun2.selectActive(this)">b</div>
+            <div class="col-md-20 one1" onclick="fun2.selectActive(this)">c</div>
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+var fun={
+    i:0,
+    b:$(".boxOne").width(),
+    len1:$(".slider1 .box1").find(".boxOne").length,
+    left:function(){
+        this.i--;
+        if(this.i<=-1){
+            this.i=this.len1-1;
+        }
+        $(".box").stop(true);
+        $(".slider1 .box").animate({marginLeft:"-"+this.b*this.i});
+        this.activeFun();
+    },
+    right:function(){
+        this.i++;
+        if(this.i>=this.len1){
+            this.i=0;
+        }
+        $(".slider1 .box").animate({marginLeft:"-"+this.b*this.i});
+        this.activeFun();
+    },
+    activeFun:function(){
+        $(".active").removeClass('active');
+        $("#meum1 .one1").eq(this.i).addClass('active');
+    },
+    selectActive:function(obj){
+        $(".slider1").show();
+        $(".slider2").hide();
+        $(".active").removeClass('active');
+        $(obj).addClass('active');
+        var index=$(obj).index();
+        fun.i=index-1;
+        $(".slider1 .box").animate({marginLeft:"-"+fun.b*fun.i});
+    }
+}
+var fun2={
+    i:0,
+    b:$(".boxOne").width(),
+    len1:$(".slider2 .box1").find(".boxOne").length,
+    left:function(){
+        this.i--;
+        if(this.i<=-1){
+            this.i=this.len1-1;
+        }
+        $(".box").stop(true);
+        $(".slider2 .box").animate({marginLeft:"-"+this.b*this.i});
+        this.activeFun();
+    },
+    right:function(){
+        this.i++;
+        if(this.i>=this.len1){
+            this.i=0;
+        }
+        $(".slider2 .box").animate({marginLeft:"-"+this.b*this.i});
+        this.activeFun();
+    },
+    activeFun:function(){
+        $(".active").removeClass('active');
+        $("#meum2 .one1").eq(this.i).addClass('active');
+    },
+    selectActive:function(obj){
+        $(".slider2").show();
+        $(".slider1").hide();
+        $(".active").removeClass('active');
+        $(obj).addClass('active');
+        var index=$(obj).index();
+        fun.i=index-1;
+        $(".slider2 .box").animate({marginLeft:"-"+fun.b*fun.i});
+    }
+}
+</script>
+</body>
+</html>
