@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue组件</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <script src="node_modules/vue-router/dist/vue-router.js"></script>
+</head>
+<style>
+    *{
+        padding;0;
+        marign:0;
+    }
+    .nav>a{
+        width: 33%;
+        line-height: 50px;
+        display: inline-block;
+        text-align: center;
+        font-size: 18px;
+        float: left;
+        color:#000;
+    }
+    .active{
+        color:red !important;
+    }
+</style>
+
+<body>
+<div id="box">
+    <nav class="nav">
+        <a v-link="{path:'/page1'}" class="active">栏目一</a>
+        <a v-link="{path:'/page2'}">栏目二</a>
+        <a v-link="{path:'/page3'}">栏目三</a>
+    </nav>
+    <div class="main">
+        <router-view></router-view>
+    </div>
+</div>
+<script>
+ //准备的东西
+ //1.组件
+ //2.路由
+ //.
+
+//1. 准备根组件
+//var App=Vue.extend();
+//
+////2. 创建组件
+//var Page1=Vue.extend({
+//    template:'<h3>栏目一内容</h3>'
+//})
+////3. 准备路由
+//var router=new VueRouter();
+//
+////4. 关联组件
+//router.map({
+//    'page1':{
+//      component:Page1
+//    }
+//})
+////5. 启动路由
+//router.start(App,'#box');
+
+ //1. 准备一个根组件
+ var App=Vue.extend();
+
+ //2. Home News组件都准备
+ var Home=Vue.extend({
+     template:'<h3>我是主页</h3>'
+ });
+
+ var News=Vue.extend({
+     template:'<h3>我是新闻</h3>'
+ });
+
+ //3. 准备路由
+ var router=new VueRouter();
+
+ //4. 关联
+ router.map({
+     'home':{
+         component:Home
+     },
+     'news':{
+         component:News
+     }
+ });
+
+ //5. 启动路由
+ router.start(App,'#box');
+</script>
+
+</script>
+
+
+</body>
+</html>
