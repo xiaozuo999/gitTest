@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>商品页</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="../node_modules/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/reset.css">
+    <script src="../js/jquery.min.js"></script>
+<style>
+    .activeBj{
+        background: #fff;
+        border: none !important;
+    }
+    .goods{
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        overflow: hidden;
+        position: absolute;
+    }
+    .menu{
+        background: #f3f5f7;
+        font-size: 11px;
+        overflow: scroll;
+        height:600px;
+        width: 80px;
+        max-width: 80px;
+        min-width: 80px;
+    }
+    .menu>ul{
+        display: table;
+    }
+    .menu>ul>li{
+        padding:0 15px;
+        line-height: 1.5;
+    }
+    .text{
+        height: 48px;
+        overflow: hidden;
+        display:table-cell;
+        vertical-align:middle;
+   }
+    .food{
+        width: 100%;
+        font-size: 12px;
+    }
+    .border1{
+        border-bottom:1px solid #d9dde1;
+    }
+    .footList{}
+    .footList h3{
+        font-size: 12px;
+        padding-left: 18px;
+        background: #f3f5f7;
+        line-height: 24px;
+        border-left:2px solid #d9dde1;
+        color:#93999f;
+    }
+    .foodList2{
+        /*padding:0 20px;*/
+        padding: 0 33px 0 20px;
+    }
+    .icon{
+        width: 10px;
+        height: 10px;
+        background: red;
+        display: inline-block;
+    }
+    .iconTe{
+        background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMDY3IDc5LjE1Nzc0NywgMjAxNS8wMy8zMC0yMzo0MDo0MiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MzEyMkUyN0Q1M0IzMTFFNkExMTdCNjk0ODU0MDU5Q0UiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MzEyMkUyN0U1M0IzMTFFNkExMTdCNjk0ODU0MDU5Q0UiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDozMTIyRTI3QjUzQjMxMUU2QTExN0I2OTQ4NTQwNTlDRSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDozMTIyRTI3QzUzQjMxMUU2QTExN0I2OTQ4NTQwNTlDRSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pskd84kAAATBSURBVHjarFZtTJtVFH76DS2lfLQULQQnY2xukglu/hCzIRISNVOj84eKITpdsgQSY8zcYpYYF+cSNydGliXTaOKS/diELDATp4MMthFGcCIMNwKhyPhuoUAp0C+fe19ogU6NyU5y0/vee8859zznOedWhbrCUgBVHHbcXxnlqFTRwQAnmTHboQAQDgIqNaDWrdnzcy+0tKflguqfnAyKXasyVykGQ4tU0sOoS4BOpYE3OI+AWI9IGCadGWoanwl4+RmmqtDlhVTatQ5SeQUsLl0Leo1eua1vBIdz98BZfB4/bf8cRk0cEPAB/hme9uCrLe+hZ+dZ1D7+GR5NXA94B5V9EZmIKiqLUZf+WWRaNuL4IxX4Y6YPVr0FFq0JRdZ8BOncoDMiUZsAHyOy6iywG5Lxgr0QF0abkawxYLejFB92V8MroloBqXYlrnriucv+pBzf/lUvl72BeSz4xvBU+g58v/UQXYWQrk+KqB3OfQc2Q6o0NLzgwqddJwB9ciSSqANiaDMoit0z/ciIS5PzRK0RVTTc4P4dVb1n+G3Cy45i5Jmz5f61yU5cGW+Fl0m/NtVJiyYlJzERMHkhkTDKRnMWNpkfiuxUrNuN6cAcPmqppEY8Mk0PRhycctbi0p3TgPlhSQ4FHrW0h6WZ8qHSwa5PkV/7u0+iur9GzicWp7CrbT9uzTpRsr4MxetejRgXsi1pE3Zmv4Geknp8nXcQZjJPMnFVBILTTNRWwQjKmeEGvP7A03I+yeRfHG3Bz08cR37yFgSprCW+k0xmPG/78Ya34fZ7kaZPhD3OinPDl9Ew0sg8WCT1tZEIeLjAkotmdweGiKst6yW5k8R6OJBThkZ3Ow50fYEgYfCzLhbo+M2sF3GQUamY+H2dx3Bh6FfcFSzSJUaKT3EgwoIGlbe+xBxvYyQFM+KVJNvImE827MHpgTq0jl6lsllhCGuiL21b5Mwr6UW4Pd2LsYk2+EUusFy+dYVT/LWAScxlHRzKKccOawHzYSEUGswG53DT04sckwO3vQNwGGwwM6oQYTURVjNZtlLym8rxG51IqgKeKItoKIVGX3OUrFLwEIrnb3yAE5srUZ7xLDFuRLfnT5hIx8eSN6MoNV+eqx+7jgaOO3PDBCPqNFrXxO266wZqRpvgZKsQ1azUgQmeuSGc57oQceOjfWfx/tV3cdJZE1H/hhAe6zgCr2gnpHKsA7WBuVZhb8dRhvkWLk+0L3UonmdO2l03MciKLrVtR09xLZCcJ/eWJY1nYHQo+QyH7uFAMIlNbdw3DDfDNKij6CXw1kNT3fhh6JLsrKecP0JL/LPi0v/zUVjTX8NKNarCzH603MOiwtlvjvR8h9apLubiOTifqYFRRL2McGyrXhvBallWEB1VOmPo03MjqB1pwjSrO5U5EzWyLAth//9xoOJD48Pd+QlcHG/BonxMeJQ4h4lvWUsFCppFBU/LjvOLqw11I1dkN4i1VFfoEWRZBROX0w0pMoqRBTcrNxB7B65lm7JYC3HsU/0IBGaX6BlexXLhgLUNY4wBFp58BkV31MTH3Es+r4xAMkbQMta4EJ8AepwjKzb9xn/hRliBbMXDcw/jQlzCwV6OavFA3+e/LS6OfX8LMADW/rWE+F3eIAAAAABJRU5ErkJggg==) ;
+        background-size:10px 10px;
+        background-repeat:no-repeat;
+    }
+    .iconZhe{
+        background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMDY3IDc5LjE1Nzc0NywgMjAxNS8wMy8zMC0yMzo0MDo0MiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NDUxMzhFRUM1M0IzMTFFNkExMTdCNjk0ODU0MDU5Q0UiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NDUxMzhFRUQ1M0IzMTFFNkExMTdCNjk0ODU0MDU5Q0UiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo0NTEzOEVFQTUzQjMxMUU2QTExN0I2OTQ4NTQwNTlDRSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo0NTEzOEVFQjUzQjMxMUU2QTExN0I2OTQ4NTQwNTlDRSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pox67+QAAARASURBVHjarFZbbBRVGP5mdvbS3e52t7Td2lDaIG2kSAtBIVHjBRMhhFBJMDU+EY3B8KCJvhiffODReCFqTPDBKAYvCTFqxCgB0lBjQhQUFlIs1KIi272wu3Rvs7MzfmdmOzPb1oQmnPS02/+c8//f//3f+c9KeOPnbQAOcsZxZ0eS80WFvw5x9jYtGQZQ55T4WZatv0ZjTVrClW5Y656mxTbOD3kaHQv3+xQZoRYFitdjBZsPWtGAWyqg1hlYshwXa+ayrPD/asPujBUigNrknZt23R1DYu8wxp8ewqN9BFKo4sHeCPZt6cEj96xANOwHUkWgrGFtdwif7FyDH/ashZ/AUGJAyQ6iKovSJSgP9/VF/Obc0BnEqXwV98db8dZjq8wt755NYuJyBluHOvH8+k776MTe9dhxOIFZkaFXNm1OABFU8E4EOZFqY8RDXnjvakWqXLNtL4x0Yf/GOGTziIF8pY6pXAVfTd1EVWRRc847AVQd8agfoyNxPLQybJtf3dyDZ9Z14Oy/RbOOAsexP/N4ffwa8nWdLBmYq2oo8DwqBOFXLPTGwgCajqjfg5fu60Zni9c2z5D/C9mKmYlBtBL5/WwyjV9/mwXaAw61PEt1NEThFFq2P1E1k5kKhg+dw8unZmzz27/cwM6DZ/DeuSQFYh0cag9i5UAM61j4/u5WbF4dxflnR3Bk1wBiAQap6UtQ1Bh1KiPHlOdHiv8LVG7xvUbaXqGivJRplXXzUv9eyvPejiC+vJzF0fOz1p0gIGXRBaNRNxzT/g1xPLwqAtWF6qNECj9eTGF0OI4xylaMk9cKOHD6L5y8MUeqPLZUZbf/FhanLebHtv422/ZATysGWfysK6vjMwUcOTGD71ns+XH6+i2cIHJDb77Rio28qmNsUxzvbO1HRCCwneWx/fAFjG10WlUswPU2P3+cfeYZCqGprdgZiHS0OqZ5odzOxfh8Mot6uoQul7I0w7jtjufUgI4TmTK+5mURWT7BFhEkZQHRY6jt3rDP3npdtANZvq0AslvH6TkVo58m8MHvSfq0eCzViDYawCb2HNM590xMk/uAZ5kZUG7RkA8Vj2bS4WmoYE7VEIv4sIXtQoyPL6WRvVm2lLKsANT7mp4wvtk92CStIB09NdBOwDKmWKMDP/1N9KxHXV8mReT7KmtwMV1GV9DrYk5iF+3jhdLx3Ld/oMgg8zL0ueRo3uAliq+4a5Atqnj8i0s4+uQgVlOGx6ZzOH4lhzdJ3fg/BYxTAAj57O6bYrGv5KqYJGXfXc3R22LaJL7J4rZE7JbN7ujzyQiy7eYEWsl6hEzOWxRH40Qr6AtzJll40SzNPc1J5JWmLBrvqsr+ruqadcBjydRccx9m7ynxCS2JJ1S8AYq80LnJoqhBapFZ9HNxS8X7+n+PvQmG+wT3wrm01LcBZAT6fZzviwf6Dn9tyYhe+Z8AAwA383zjPVFQZwAAAABJRU5ErkJggg==) ;
+        background-size:10px 10px;
+        background-repeat:no-repeat;
+    }
+    .foodList2 li{
+        padding: 15px;
+        border-bottom:1px solid #d9dde1;
+        position: relative;
+    }
+    .goodsImg{
+        width: 57px;
+        height: 57px;
+    }
+    .foodText{
+        margin-left: 15px;
+        display: inline-block;
+        vertical-align: top;
+    }
+    .addIcon{
+        position: absolute;
+        right: 0;
+        width: 20px;
+        height: 20px;
+        background: #00a0dc;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 20px;
+        color: #fff;
+        bottom: 13px;
+        right: 0;
+    }
+    .foodText{
+
+    }
+    .foodText>h4{
+        font-size: 14px;
+        color:#07111b;
+        padding-bottom: 7px;
+    }
+    .fT{
+        color:#93999f;
+        padding-bottom: 6px;
+    }
+    .newPrice{
+        color:red;
+        font-size: 14px;
+    }
+
+</style>
+</head>
+<body>
+<div class="goods">
+    <div class="menu">
+        <ul>
+            <li class="activeBj"><span class="text">热销榜</span></li>
+            <li><span class="text border1"><span class="icon iconTe"></span>单人精彩套餐</span></li>
+            <li><span class="text border1"><span class="icon iconZhe"></span>冰爽饮品限时特惠</span></li>
+            <li><span class="text border1">精选热菜</span></li>
+            <li><span class="text border1">爽口凉菜</span></li>
+            <li><span class="text border1">精选热菜</span></li>
+            <li><span class="text border1">爽口凉菜</span></li>
+            <li><span class="text border1">精选热菜</span></li>
+            <li><span class="text border1">爽口凉菜</span></li>  <li><span class="text border1">精选热菜</span></li>
+            <li><span class="text border1">爽口凉菜</span></li>  <li><span class="text border1">精选热菜</span></li>
+            <li><span class="text border1">爽口凉菜</span></li>  <li><span class="text border1">精选热菜</span></li>
+            <li><span class="text border1">爽口凉菜</span></li>  <li><span class="text border1">精选热菜</span></li>
+            <li><span class="text border1">爽口凉菜</span></li>
+            <li><span class="text border1">精选热菜</span></li>
+            <li><span class="text border1">爽口凉菜</span></li>
+            <li><span class="text border1">精选热菜</span></li>
+            <li><span class="text border1">爽口凉菜</span></li>
+        </ul>
+    </div>
+    <div class="food">
+        <ul class="footList">
+            <li>
+                <h3>热销榜</h3>
+                <ul class="foodList2">
+                    <li>
+                        <img src="http://fuss10.elemecdn.com/c/cd/c12745ed8a5171e13b427dbc39401jpeg.jpeg?imageView2/1/w/114/h/114" alt="" class="goodsImg">
+                        <div class="foodText">
+                            <h4>皮蛋瘦肉粥</h4>
+                            <p class="fT">咸粥</p>
+                            <p class="fT">月售229份  好评率100%</p>
+                            <p class="newPrice">￥10</p>
+                            <span class="addIcon fa fa-plus"></span>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="http://fuss10.elemecdn.com/c/cd/c12745ed8a5171e13b427dbc39401jpeg.jpeg?imageView2/1/w/114/h/114" alt="" class="goodsImg">
+                        <div class="foodText">
+                            <h4>皮蛋瘦肉粥</h4>
+                            <p class="fT">咸粥</p>
+                            <p class="fT">月售229份  好评率100%</p>
+                            <p class="newPrice">￥10</p>
+                            <span class="addIcon fa fa-plus"></span>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <h3>热销榜</h3>
+                <ul class="foodList2">
+                    <li>
+                        <img src="http://fuss10.elemecdn.com/c/cd/c12745ed8a5171e13b427dbc39401jpeg.jpeg?imageView2/1/w/114/h/114" alt="" class="goodsImg">
+                        <div class="foodText">
+                            <h4>皮蛋瘦肉粥</h4>
+                            <p class="fT">咸粥</p>
+                            <p class="fT">月售229份  好评率100%</p>
+                            <p class="newPrice">￥10</p>
+                            <span class="addIcon fa fa-plus"></span>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="http://fuss10.elemecdn.com/c/cd/c12745ed8a5171e13b427dbc39401jpeg.jpeg?imageView2/1/w/114/h/114" alt="" class="goodsImg">
+                        <div class="foodText">
+                            <h4>皮蛋瘦肉粥</h4>
+                            <p class="fT">咸粥</p>
+                            <p class="fT">月售229份  好评率100%</p>
+                            <p class="newPrice">￥10</p>
+                        </div>
+                        <span class="addIcon fa fa-plus"></span>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
