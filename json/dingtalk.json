@@ -1,0 +1,40 @@
+{
+  "header": {
+    "logo": "../images/logo.png",
+    "nav":[
+      {
+        "title":"案例",
+        "url":"anlie.html"
+      },
+      {
+        "title":"帮助",
+        "url":"help.html"
+      },
+      {
+        "title":"DING峰会",
+        "url":"dingtalk.html"
+      },
+      {
+        "title":"注册",
+        "url":"register.html"
+      }
+    ]
+  },
+  "footer": {
+    "logo":"../images/logo2.png",
+    "text1":"通过ISO27001-2013安全认证",
+    "text2":"阿里钉钉 © 2017 浙 B2-20080224-16"
+  },
+  "content":[
+    {
+      "title":"钉钉样板房",
+      "detail":"共享优秀工作方式",
+      "banner":"../images/banner1.png"
+    },
+    {
+      "title":"钉钉样板房2",
+      "detail":"共享优秀工作方式2",
+      "banner":"../images/banner1.png"
+    }
+  ]
+}

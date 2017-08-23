@@ -1,0 +1,45 @@
+.header{
+    width: 100%;
+    background:#f8f8f8;
+    color:#ddd;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    border-bottom: 1px solid #ddd;
+    z-index:100;
+}
+.logo{
+    padding:15px;
+    float: left;
+}
+.logo img{
+
+}
+.links{
+    line-height: 62px;
+    float: right;
+    position: absolute;
+    right: 20px;
+}
+.links li{
+    float: left;
+    padding:0 7px;
+}
+.main{
+    margin-top: 50px;
+}
+.footer{
+    font-size: 11px;
+    line-height: 20px;
+    color:#444;
+    text-align: center;
+    background: #e4e4e4;
+    padding:18px 0px;
+    margin-top: 20px;
+}
+.footerLogo{
+    width: 60px;
+}
+.footer p{
+    line-height: 20px;
+}
