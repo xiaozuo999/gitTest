@@ -1,0 +1,67 @@
+{
+  "banner": [
+    {
+      "img": "images/bannerA1.png",
+      "title": "图片1"
+    },
+    {
+      "img": "images/bannerA1.png",
+      "title": "图片1json"
+    },
+  ],
+  "meum": [
+    {
+      "typeId":0,
+      "typeName":"全部"
+    },
+    {
+      "typeId":1,
+      "typeName":"互联网/信息"
+    },
+    {
+      "typeId":2,
+      "typeName":"医疗医药"
+    },
+    {
+      "typeId":3,
+      "typeName":"全部"
+    },
+    {
+      "typeId":4,
+      "typeName":"全部"
+    }
+    "全部","互联网/信息","","政府/事业单位","制造业","房地产业","教育行业"
+  ],
+  "content":[
+    {
+      "type":"教育行业",
+      "company":"杭州市育才外国语学校",
+      "title":"实现老师和家长沟通无缝对接",
+      "img":"images/bannerA1.png"
+    },
+    {
+      "type":"教育行业2",
+      "company":"杭州市育才外国语学校2",
+      "title":"实现老师和家长沟通无缝对接2",
+      "img":"images/bannerA2.png"
+    },
+    {
+      "type":"教育行业3",
+      "company":"杭州市育才外国语学校2",
+      "title":"实现老师和家长沟通无缝对接2",
+      "img":"images/bannerA2.png"
+    },
+    {
+      "type":"教育行业4",
+      "company":"杭州市育才外国语学校2",
+      "title":"实现老师和家长沟通无缝对接2",
+      "img":"images/bannerA2.png"
+    },
+    {
+      "type":"教育行业5",
+      "company":"杭州市育才外国语学校2",
+      "title":"实现老师和家长沟通无缝对接2",
+      "img":"images/bannerA2.png"
+    }
+  ]
+}
