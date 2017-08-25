@@ -6,11 +6,61 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/public.css">
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="../node_modules/vue/dist/vue.js"></script>
 </head>
 <style>
+    .main {
+        margin-top: 63px;
+        color:#fff;
+    }
+.rank{
+    background:url(../images/bigBj.png) no-repeat center;
+    padding-top: 7px;
+}
+.rankTable{
+    padding: 20px;
+}
+table{
+    margin:0 auto;
+    font-size: 16px;
+    padding: 15px;
+}
 
+tr {
+    border: 1px solid #333;
+}
+table td {
+    border: 0;
+    background: transparent;
+    color: #fff;
+}
+    .tableTitle>td{
+        color:#425784;
+        background: #0a1e4d;
+        font-size: 12px;
+    }
+    button.btn.btn-default.dropdown-toggle {
+        background: transparent;
+        color: #fff;
+        padding: 0 20px;
+        border-radius: 20px;
+    }
+    .nameBox{
+        line-height: 1.5;
+    }
+    table td{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 100%;
+    }
+    .rankNum{
+        color:#fc4265;
+        font-size: 20px;
+    }
 </style>
 <body>
 <div id="box">
@@ -18,36 +68,28 @@
     <div class="main">
         <div class="rank">
             <div class="rankBanner text-center">
-                <img src="images/logoKu.png" alt="">
-                <h3>江苏省制造业</h3>
-                <h3>TOP10排行榜</h3>
+                <h3 class="nameBox">  <img src="../images/logoKu.png" alt="">江苏省制造业 <br>TOP10排行榜</h3>
                 <div class="btn-group dropup">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">默认
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">切换其它行业
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">功能</a></li>
-                        <li><a href="#">另一个功能</a></li>
-                        <li><a href="#">其他</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">分离的链接</a></li>
+                        <li v-for="item in result.allCompany"><a href="#">{{item.type}}</a></li>
                     </ul>
                 </div>
             </div>
             <div class="rankTable">
-               <table>
-                   <tr>
+
+               <table  v-for="(item,index) in result.allCompany" v-show="index==0">
+                   <tr class="tableTitle text-center">
                        <td>排名</td>
                        <td>公司名称</td>
                    </tr>
-                   <tr>
-                       <td><img src="../images/iconRank1.png" alt=""></td>
-                       <td>上海细微信息咨询XXXXX有限公司</td>
-                   </tr>
-                   <tr>
-                       <td><img src="../images/iconRank1.png" alt=""></td>
-                       <td>上海细微信息咨询XXXXX有限公司</td>
-                   </tr>
+                       <tr v-for="(item2,index) in item.company">
+                           <td class="text-center" v-show="index<3"><img v-bind:src='"../images/iconRank"+index+".png"'> </td>
+                           <td class="text-center rankNum" v-show="index>=3">{{index+1}} </td>
+                           <td class="companyName">{{item2}}</td>
+                       </tr>
                </table>
             </div>
         </div>
@@ -79,18 +121,23 @@
     new Vue({
         el:'#box',
         data:{
-           result:[
-                {
-                    "title":"钉钉样板房",
-                    "detail":"共享优秀工作方式",
-                    "banner":"../images/banner1.png"
-                },
-                {
-                    "title":"钉钉样板房2",
-                    "detail":"共享优秀工作方式2",
-                    "banner":"../images/banner1.png"
-                }
-           ]
+           result:{
+               "allCompany":[
+                   {
+                       "type": "制造业",
+                       "company": ["1上海细微信息咨询有限公司","江苏车置宝信息科技股份有限公司","南京南瑞继保电气有限公司","南京特易有信金融信息咨询有限公司","南京壹玖柒玖信息技术有限公司","南京领添信息技术有限公司"]
+                   },
+                   {
+                       "type": "互联网信息/科技",
+                       "company": ["2上海细微信息咨询有限公司","江苏车置宝信息科技股份有限公司","南京南瑞继保电气有限公司","南京特易有信金融信息咨询有限公司","南京壹玖柒玖信息技术有限公司","南京领添信息技术有限公司"]
+                   },
+                   {
+                       "type": "服务业",
+                       "company": ["3上海细微信息咨询有限公司","江苏车置宝信息科技股份有限公司","南京南瑞继保电气有限公司","南京特易有信金融信息咨询有限公司","南京壹玖柒玖信息技术有限公司","南京领添信息技术有限公司"]
+                   }
+               ],
+               "updataTime":"2017年7月31日"
+           }
        },
         components:{
             'header2':{

@@ -1,40 +1,36 @@
 {
-  "header": {
-    "logo": "../images/logo.png",
-    "nav":[
+  "rank": {
+    "allCompany":[
       {
-        "title":"案例",
-        "url":"anlie.html"
+        "type": "制造业",
+        "company": ["1上海细微信息咨询有限公司","江苏车置宝信息科技股份有限公司","南京南瑞继保电气有限公司","南京特易有信金融信息咨询有限公司","南京壹玖柒玖信息技术有限公司","南京领添信息技术有限公司"]
       },
       {
-        "title":"帮助",
-        "url":"help.html"
+        "type": "互联网信息/科技",
+        "company": ["2上海细微信息咨询有限公司","江苏车置宝信息科技股份有限公司","南京南瑞继保电气有限公司","南京特易有信金融信息咨询有限公司","南京壹玖柒玖信息技术有限公司","南京领添信息技术有限公司"]
       },
       {
-        "title":"DING峰会",
-        "url":"dingtalk.html"
-      },
-      {
-        "title":"注册",
-        "url":"register.html"
+        "type": "服务业",
+        "company": ["3上海细微信息咨询有限公司","江苏车置宝信息科技股份有限公司","南京南瑞继保电气有限公司","南京特易有信金融信息咨询有限公司","南京壹玖柒玖信息技术有限公司","南京领添信息技术有限公司"]
       }
-    ]
+    ],
+    "updataTime":"2017年7月31日"
   },
-  "footer": {
-    "logo":"../images/logo2.png",
-    "text1":"通过ISO27001-2013安全认证",
-    "text2":"阿里钉钉 © 2017 浙 B2-20080224-16"
-  },
-  "content":[
+  "video": [
     {
-      "title":"钉钉样板房",
-      "detail":"共享优秀工作方式",
-      "banner":"../images/banner1.png"
+      "img":"../images/videoImg.png",
+      "title":"钉钉超级发布会现场直播",
+      "url":"#"
     },
     {
-      "title":"钉钉样板房2",
-      "detail":"共享优秀工作方式2",
-      "banner":"../images/banner1.png"
+      "img":"../images/videoImg.png",
+      "title":"2钉钉超级发布会现场直播",
+      "url":"#"
+    },
+    {
+      "img":"../images/videoImg.png",
+      "title":"3钉钉超级发布会现场直播",
+      "url":"#"
     }
   ]
 }
