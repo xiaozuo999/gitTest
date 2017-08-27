@@ -1,0 +1,148 @@
+{
+  "banner": [
+    {
+      "img": "images/bannerA1.png",
+      "title": "图片1"
+    },
+    {
+      "img": "images/bannerA2.png",
+      "title": "图片2"
+    },
+    {
+      "img": "images/bannerA3.png",
+      "title": "图片3"
+    }
+  ],
+  "meum": [
+    {
+      "typeId":0,
+      "typeName":"全部"
+    },
+    {
+      "typeId":1,
+      "typeName":"互联网/信息"
+    },
+    {
+      "typeId":2,
+      "typeName":"医疗医药"
+    },
+    {
+      "typeId":3,
+      "typeName":"全部"
+    },
+    {
+      "typeId":4,
+      "typeName":"全部"
+    }
+  ],
+  "caseMeum":[
+    {
+      "typeId":1,
+      "type":"教育行业"
+    },
+    {
+      "typeId":2,
+      "type":"贸易/批发/零售"
+    },
+    {
+      "typeId":3,
+      "type":"制造业"
+    },
+    {
+      "typeId":4,
+      "type":"互联网/信息技术服务"
+    },
+    {
+      "typeId":5,
+      "type":"医疗医药"
+    },
+    {
+      "typeId":6,
+      "type":"金融业"
+    },
+    {
+      "typeId":7,
+      "type":"建筑业"
+    },
+    {
+      "typeId":8,
+      "type":"服务"
+    },
+    {
+      "typeId":9,
+      "type":"商业服务"
+    }
+  ],
+  "case":[
+      {
+        "typeId":1,
+        "type":"教育行业",
+        "company":"杭州市育才外国语学校",
+        "title":"实现老师和家长沟通无缝对接",
+        "img":"images/bannerA1.png"
+      },
+      {
+        "typeId":2,
+        "type":"贸易/批发/零售",
+        "company":"上海盒马网络科技有限公司",
+        "title":"钉钉助力盒马极致生鲜",
+        "img":"images/bannerA2.png"
+      },
+    {
+      "typeId":3,
+      "type":"制造业",
+      "company":"杭州朝阳橡胶有限公司  ",
+      "title":"杭州朝阳橡胶有限公司  ",
+      "img":"images/bannerA3.png"
+    },
+    {
+      "typeId":4,
+      "type":"互联网/信息技术服务",
+      "company":"互联网/信息技术服务",
+      "title":"让天下没有难做的生意",
+      "img":"images/bannerA4.png"
+    },
+    {
+      "typeId":5,
+      "type":"医疗医药",
+      "company":"新疆佳音医院（有限公司）  ",
+      "title":"移动互联网时代的掌上医院",
+      "img":"images/bannerA4.png"
+    },
+    {
+      "typeId":6,
+      "type":"金融业",
+      "company":"中和农信  ",
+      "title":"移动办公快速解决农户燃眉之需",
+      "img":"images/bannerA4.png"
+    },
+    {
+      "typeId":7,
+      "type":"建筑业",
+      "company":"深圳广田集团有限公司 ",
+      "title":"化繁为简的办公方式",
+      "img":"images/bannerA4.png"
+    },
+    {
+      "typeId":8,
+      "type":"服务业",
+      "company":"内蒙古西贝餐饮连锁    ",
+      "title":"西北菜代表的移动化办公实践",
+      "img":"images/bannerA4.png"
+    },
+    {
+      "typeId":1,
+      "type":"教育行业",
+      "company":"11杭州市育才外国语学校",
+      "title":"实现老师和家长沟通无缝对接",
+      "img":"images/bannerA1.png"
+    },
+    {
+      "typeId":2,
+      "type":"贸易/批发/零售",
+      "company":"11上海盒马网络科技有限公司",
+      "title":"钉钉助力盒马极致生鲜",
+      "img":"images/bannerA2.png"
+    }
+  ]
+  }
