@@ -1,23 +1,31 @@
 {
-  "nav": [
-    "案例",
-    "帮助",
-    "DING峰会",
-    "注册"
+  "logo": "images/logo.png",
+  "nav":[
+    {
+      "title":"首页",
+      "url":"index.html"
+    },
+    {
+      "title":"案例",
+      "url":"case.html"
+    },
+    {
+      "title":"DING峰会",
+      "url":"dingtalk.html"
+    }
   ],
-  "logoPath":"images/logo.png",
-  "footer": {
-    "text1": "通过ISO27001-2013安全认证",
-    "text2": "阿里钉钉 © 2017 浙 B2-20080224-16"
+  "footer":{
+    "logo":"images/logo2.png",
+    "text1":"通过ISO27001-2013安全认证",
+    "text2":"阿里钉钉 © 2017 浙 B2-20080224-16"
   },
-  "logoPath2":"images/logo2.png",
-  "mainContent":{
-    box1:{
+  "content":{
+    "box1":{
       "title":"钉钉样板房",
       "detail":"共享优秀工作方式",
       "banner":"images/banner1.png"
     },
-    box2:{
+    "box2":{
       "title":"钉钉样板房2",
       "detail":"共享优秀工作方式2",
       "banner":"images/banner1.png"

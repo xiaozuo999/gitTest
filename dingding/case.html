@@ -2,167 +2,124 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>案例详情页</title>
+    <title>vue组件</title>
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/public.css">
-    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script src="../js/jquery.min.js"></script>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="../node_modules/vue/dist/vue.js"></script>
 </head>
 <style>
-.main {
-    margin-top: 63px;
-}
-    .companyInfo{
-        color:#999999;
-        font-size: 12px;
+    .meumBar{
+        overflow: scroll;
+        width: 100%;
     }
-    .companyLogo {
-        width: 60px;
-        height: 60px;
-        position: absolute;
-        right: 0;
-        top: 0 !important;
+    .meumBar>ul{
+        width:800px;
     }
-    section{
-        font-size: 17px;
-        position: relative;
-        padding-bottom: 20px;
-    }
-    .companyLogo{
-        width: 60px;
-        height: 60px;
-    }
-    .speakBox{
-        padding-bottom: 1px;
-    }
-    .speakContent{
-        color: #3296fa;
-        font-weight: bold;
-    }
-    .speakerAvatar{
-        border-radius: 50%;
-        width: 45px;
-        height: 45px;
-        position: absolute;
-    }
-    .speakName {
-        font-size: 12px;
-        padding-left: 59px;
-        padding-top: 8px;
-    }
-    .speak>span{
-        color:#333;
-    }
-    .speakBox{}
-    .speakBox .title{
-        font-weight: 600;
-        color: #333333;
-        font-size: 18px;
-    }
-    .speakBox li{
+    .meumBar li{
         float: left;
+        line-height: 45px;
+        width: 65px;
+        text-align: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        padding: 0 3px;
     }
-li.title {
-    font-size: 16px;
-    font-weight: 600;
-    padding: 5px;
-}
-    .speakBox {
-        border-left: 8px solid #3296fa;
-        padding-left: 10px;
-        color:#333333;
+    .meumBar li a{
+        color:#999;
     }
-section.solveBox {
-    font-size: 14px;
-}
-    .solveBox li{
-        float: left;
-        width: 33.33%;
-        padding: 7px;
+    .articleOne{
+        display: block;
+        border-bottom: 1px solid #eee;
+        padding:20px 0;
+        background: #fff;
     }
-    .solveBox .title{
-        font-size: 16px;
-        font-weight: 600;
-        color:#333;
-    }
-    .odd{
-        background:#f8f8f8;
-    }
-    table td{
+    .articleOne:last-child{
         border: 0;
     }
-
+    .container a{
+        color:#333333;
+    }
+    .item img{
+        width: 100%;
+    }
+    .active{
+        color:#3793fe !important;
+    }
+    .container{
+        position: relative;
+        min-height: 50px;
+    }
+    .noData{
+        position: absolute;
+        z-index: -1;
+        text-align: center;
+        padding: 15px;
+        display: block;
+        width: 100%;
+        top: 17px;
+    }
 </style>
 <body>
 <div id="box">
     <header2></header2>
-    <div class="main">
-          <div class="banner">
-              <img v-bind:src=result.banner alt="">
-          </div>
-        <div class="container">
-           <section>
-                <img v-bind:src=result.logo  v-bind:alt=result.name class="companyLogo">
-                <h3>{{result.title}}</h3>
-                <p class="companyInfo">
-                    企业名称：{{result.name}} <br>
-                    企业行业:{{result.type}} <br>
-                    企业规模：{{result.scope}} <br>
-                    最常用功能：{{result.like}} <br>
-                    使用钉钉的目地：{{result.target}} <br>
-                </p>
-               <p>
-                   {{result.info}}
-               </p>
-           </section>
-            <section>
-                <i class=""></i>
-                <div class="speakBox">
-                    <p class="speakContent">{{result.speak.content}}</p>
-                    <p>
-                        <img v-bind:src=result.speak.avatar alt="" class="speakerAvatar">
-                        <div>
-                            <div class="speakName">
-                                {{result.speak.name}}<br>
-                                <span>{{result.speak.position}}</span>
-                            </div>
-                        </div>
-                    </p>
+    <div class="main" style="margin:63px 0px 30px">
+        <div class="banner">
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <!--<template v-for="(item,index) in result.banner">-->
+                    <li data-target="#carousel-example-generic" v-for="(item,index) in result.banner" v-bind:data-slide-to="index"  v-bind:class="{active:index==0}"></li>
+                    <!--</template>-->
+                </ol>
+                <div class="carousel-inner" role="listbox">
+                    <div class="item" v-for="(item,index) in result.banner" v-bind:class="{active:index==0}">
+                        <img v-bind:src=item.img  v-bind:alt=item.title>
+                    </div>
                 </div>
-            </section>
-            <section class="solveBox">
-                <table border="0">
-                    <tr class="title">
-                        <td>痛点</td>
-                        <td>解决方案</td>
-                        <td>效果</td>
-                    </tr>
-                    <template v-for="(item,index) in result.solve">
-                        <tr>
-                            <td v-bind:class={odd:oddFun(index)}>{{item.question}}</td>
-                            <td v-bind:class={odd:oddFun(index)}>{{item.methods}}</td>
-                            <td v-bind:class={odd:oddFun(index)}>{{item.effect}}</td>
-                        </tr>
-                    </template>
-                </table>
-            </section>
-            <section v-for="item in result.artice">
-                <h4 style="font-weight: bold">{{item.title}}</h4>
-                <p  v-html=item.content></p>
-            </section>
+                <!-- Controls -->
+                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+        <div class="meumBar">
+            <ul>
+                <li><a href="javascript:"  v-bind:class="{active:showId==0}" @click="changeType(0)">全部</a></li>
+                <li v-for="item in result.caseMeum"><a href="javascript:" @click="changeType(item.typeId)" v-bind:class="{active:showId==item.typeId}">{{item.type}}</a></li>
+            </ul>
+        </div>
+        <div class="container">
+            <a href="caseDetail.html" class="articleOne" v-for="item in result.case" v-show="showId==item.typeId" v-bind:class="{show:showId==0}">
+                <div class="row">
+                    <div class="col-xs-8">
+                        <div class="type">{{item.type}} | {{item.company}}</div>
+                        <h4>{{item.title}}</h4>
+                    </div>
+                    <div class="col-xs-4" style="overflow: hidden">
+                        <img v-bind:src=item.img alt="" width="130px">
+                    </div>
+                </div>
+            </a>
+            <p  class="text-center noData">暂无数据</p>
         </div>
     </div>
-    <footer2>
-    </footer2>
+    <footer2> </footer2>
 </div>
+
 
 <script type="text" id="header">
     <header class="header">
         <div class="logo">
-             <a href="index.html"><img v-bind:src="result.logo" alt="logo" width="71px;"></a>
+            <a href="index.html"><img v-bind:src="result.logo" alt="logo" width="71px;"></a>
         </div>
         <ul class="links">
             <li v-for="item in result.nav"><a v-bind:href=item.url>{{item.title}}</a></li>
@@ -182,87 +139,162 @@ section.solveBox {
     new Vue({
         el:'#box',
         data:{
-           result:{
-                "id": "100",
-                "banner": "images/bannerA1.png",
-                "logo":"images/logoA1.png",
-                "title":"传统生产企业信息化升级",
-                "name":"杭州市育才外国语学校",
-                "type":"教育行业",
-                "scope":"100-500人",
-                "like":"审批、DING信息、公告",
-                "target":"提升光驱效率",
-                "info":"杭州市育才外国语学校始建于1995年，是杭州知名学校。目前学校有26个班，在校学生998人，教职工70余人。 依托于智能办公平台钉钉，该校成为教育行业“互联网+”的领导者。",
-                "speak": {
-                    "name": "张军林",
-                    "position": "杭州市育才外国语学校校长",
-                    "avatar": "images/speaker1.jpg",
-                    "content":"钉钉很好的解决了我们跨学校沟通、协同的工作，实现了我们学校内部的有效沟通机制，其协同工具在保证了我们内部的资源协调的同时，又能够很好的跟我们外包的业务有效的结合起来，真正提高了我们整体的办公协作效率。"
-                },
-                "solve":[
+            "result":{
+                "banner": [
                     {
-                        "question":"老师同家长沟通难题",
-                        "methods":"用钉钉公告下发校园通知，未读还可以通过DING进行通知",
-                        "effect":"大大提升了效率，通过钉钉公告和DING就可以完成通知"
+                        "img": "images/bannerA1.png",
+                        "title": "图片1"
                     },
                     {
-                        "question":"22老师同家长沟通难题",
-                        "methods":"22用钉钉公告下发校园通知，未读还可以通过DING进行通知",
-                        "effect":"22大大提升了效率，通过钉钉公告和DING就可以完成通知"
+                        "img": "images/bannerA2.png",
+                        "title": "图片2"
                     },
                     {
-                        "question":"33老师同家长沟通难题",
-                        "methods":"用钉钉公告下发校园通知，未读还可以通过DING进行通知",
-                        "effect":"大大提升了效率，通过钉钉公告和DING就可以完成通知"
-                    },
-                    {
-                        "question":"44老师同家长沟通难题",
-                        "methods":"22用钉钉公告下发校园通知，未读还可以通过DING进行通知",
-                        "effect":"22大大提升了效率，通过钉钉公告和DING就可以完成通知"
+                        "img": "images/bannerA3.png",
+                        "title": "图片3"
                     }
                 ],
-               "artice":[
-                   {
-                       "title":"老师同家长信息传达准确高效",
-                       "content":"——在和家长沟通方面，用钉钉前后有什么变化吗？<br><br>\n" +
-                       "张军林（校长）：沟通效率提高很多。全校有6个年级28个班，将近1000名学生。小学生不准用手机，我们把所有的学生家长都按班级放进了钉钉组织架构，而且多数学生都加进来两名家长，总数接近2000人。比如三年级2班学生陈兵的家长，在钉钉里面就有“陈兵的爸爸、陈兵的妈妈”。<br>\n" +
-                       "家长纳入学校组织架构后，好处显而易见。就像去年的台风天通知停课，班主任在群里发一下通知，然后再DING一下，没人会漏掉信息。"
-                   },
-                   {
-                       "title":"校园实现无纸化办公",
-                       "content":"——钉钉如何帮助教师日常教学积累？<br><br>\n" +
-                       "张军林（校长）：以前教师的值周本和计划簿等都需要用纸质资料留存，耗时费力不说，查找还非常繁琐。\n" +
-                       "现在关于学生和教学记录等资料，教师直接在钉钉上通过日志、周报、钉盘等功能留存，方便查找，统计起来也非常方便。教师可以对教育过程中的经验进行阶段性总结，及时调整教学计划。\n" +
-                       ""
-                   }
-               ]
-            }
-         },
+                "caseMeum":[
+                    {
+                        "typeId":1,
+                        "type":"教育行业"
+                    },
+                    {
+                        "typeId":2,
+                        "type":"贸易/批发/零售"
+                    },
+                    {
+                        "typeId":3,
+                        "type":"制造业"
+                    },
+                    {
+                        "typeId":4,
+                        "type":"互联网/信息技术服务"
+                    },
+                    {
+                        "typeId":5,
+                        "type":"医疗医药"
+                    },
+                    {
+                        "typeId":6,
+                        "type":"金融业"
+                    },
+                    {
+                        "typeId":7,
+                        "type":"建筑业"
+                    },
+                    {
+                        "typeId":8,
+                        "type":"服务"
+                    },
+                    {
+                        "typeId":9,
+                        "type":"商业服务"
+                    }
+                ],
+                "case":[
+                    {
+                        "typeId":"1",
+                        "type":"教育行业",
+                        "company":"杭州市育才外国语学校",
+                        "title":"实现老师和家长沟通无缝对接",
+                        "img":"images/bannerA1.png"
+                    },
+                    {
+                        "typeId":"2",
+                        "type":"贸易/批发/零售",
+                        "company":"上海盒马网络科技有限公司",
+                        "title":"钉钉助力盒马极致生鲜",
+                        "img":"images/bannerA2.png"
+                    },
+                    {
+                        "typeId":"3",
+                        "type":"制造业",
+                        "company":"杭州朝阳橡胶有限公司  ",
+                        "title":"杭州朝阳橡胶有限公司  ",
+                        "img":"images/bannerA3.png"
+                    },
+                    {
+                        "typeId":"4",
+                        "type":"互联网/信息技术服务",
+                        "company":"互联网/信息技术服务",
+                        "title":"让天下没有难做的生意",
+                        "img":"images/bannerA4.png"
+                    },
+                    {
+                        "typeId":"5",
+                        "type":"医疗医药",
+                        "company":"新疆佳音医院（有限公司）  ",
+                        "title":"移动互联网时代的掌上医院",
+                        "img":"images/bannerA4.png"
+                    },
+                    {
+                        "typeId":"6",
+                        "type":"金融业",
+                        "company":"中和农信  ",
+                        "title":"移动办公快速解决农户燃眉之需",
+                        "img":"images/bannerA4.png"
+                    },
+                    {
+                        "typeId":"7",
+                        "type":"建筑业",
+                        "company":"深圳广田集团有限公司 ",
+                        "title":"化繁为简的办公方式",
+                        "img":"images/bannerA4.png"
+                    },
+                    {
+                        "typeId":"8",
+                        "type":"服务业",
+                        "company":"内蒙古西贝餐饮连锁    ",
+                        "title":"西北菜代表的移动化办公实践",
+                        "img":"images/bannerA4.png"
+                    },
+                    {
+                        "typeId":"1",
+                        "type":"教育行业",
+                        "company":"11杭州市育才外国语学校",
+                        "title":"实现老师和家长沟通无缝对接",
+                        "img":"images/bannerA1.png"
+                    },
+                    {
+                        "typeId":"2",
+                        "type":"贸易/批发/零售",
+                        "company":"11上海盒马网络科技有限公司",
+                        "title":"钉钉助力盒马极致生鲜",
+                        "img":"images/bannerA2.png"
+                    }
+                ]
+            },
+            "showId":0
+        },
         methods:{
-            oddFun:function(index){
-                var a=index%2;
-                return b= a==0 ? true :false;
+            changeType:function(typeId){
+                this.showId=typeId;
             }
         },
         components:{
-            'header2':{
-              template:'#header',
-                data(){
-                  return{
-                      result:{
-                          "logo": "images/logo.png",
-                          "nav":[
-                              {
-                                  "title":"案例",
-                                  "url":"index.html"
-                              },
-                              {
-                                  "title":"DING峰会",
-                                  "url":"dingtalk.html"
-                              }
-                          ]
-                      }
-                  }
+            header2: {
+                template: '#header',
+                data() {
+                    return {
+                        result: {
+                            "logo": "images/logo.png",
+                            "nav": [
+                                {
+                                    "title": "首页",
+                                    "url": "index.html"
+                                },
+                                {
+                                    "title": "案例",
+                                    "url": "case.html"
+                                },
+                                {
+                                    "title": "DING峰会",
+                                    "url": "dingtalk.html"
+                                }
+                            ]
+                        }
+                    }
                 }
             },
             'footer2':{
@@ -280,7 +312,6 @@ section.solveBox {
         }
     })
 </script>
-
 
 </body>
 </html>

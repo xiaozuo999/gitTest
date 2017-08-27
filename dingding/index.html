@@ -2,41 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>vue组件</title>
+    <title>钉钉首页</title>
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
-    <script src="node_modules/vue/dist/vue.js"></script>
-    <script src="js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/public.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script src="../node_modules/vue/dist/vue.js"></script>
 </head>
 <style>
-    .header{
-        width: 100%;
-        background:#f8f8f8;
-        color:#ddd;
-        overflow: hidden;
-        position: fixed;
-        top: 0;
-        border-bottom: 1px solid #ddd;
-        z-index:100;
-    }
-    .logo{
-        padding:15px;
-        float: left;
-    }
-    .logo img{
-
-    }
-    .links{
-        line-height: 62px;
-        float: right;
-        position: absolute;
-        right: 20px;
-    }
-    .links li{
-        float: left;
-        padding:0 7px;
-    }
     .main{
         margin-top: 50px;
     }
@@ -57,27 +30,12 @@
     .slideBanner img{
         width: 30em;
     }
-    .footer{
-        font-size: 11px;
-        line-height: 20px;
-        color:#444;
-        text-align: center;
-        background: #e4e4e4;
-        padding:18px 0px;
-    }
-    .footerLogo{
-        width: 60px;
-    }
-    .footer p{
-        line-height: 20px;
-    }
-
 </style>
 <body>
 <div id="box">
     <header2></header2>
     <div class="main">
-        <div class="slide  text-center" v-for="item in content">
+        <div class="slide  text-center" v-for="(item,index) in content" v-bind:class="{s2:oddFun(index)}">
             <h3>{{item.title}}</h3>
             <p>{{item.detail}}</p>
             <a href="#">查看详情 <i class="glyphicon glyphicon-chevron-right"></i></a>
@@ -88,22 +46,22 @@
     </div>
     <footer2> </footer2>
 </div>
-<script type="x-template" id="Header">
-   <header class="header">
-           <div class="logo">
-               <img v-bind:src="result.logoPath" alt="logo" width="71px;">
-           </div>
-           <ul class="links">
-               <li v-for="item in result.nav"><a href="#">{{item}}</a></li>
-           </ul>
-     </header>
+<script type="text" id="header">
+    <header class="header">
+        <div class="logo">
+             <a href="index.html"><img v-bind:src="result.logo" alt="logo" width="71px;"></a>
+        </div>
+        <ul class="links">
+            <li v-for="item in result.nav"><a v-bind:href=item.url>{{item.title}}</a></li>
+        </ul>
+    </header>
 </script>
 
-<script type="x-template" id="Footer">
+<script type="text2" id="footer">
     <footer class="footer">
-        <p><a href="#"><img v-bind:src="result.logoPath2" alt="" class="footerLogo"></a></p>
-        <p>{{result.footer.text1}}</p>
-        <p>{{result.footer.text2}}</p>
+        <p><a href="#"><img v-bind:src="result.logo" alt="" class="footerLogo"></a></p>
+        <p>{{result.text1}}</p>
+        <p>{{result.text2}}</p>
     </footer>
 </script>
 
@@ -124,33 +82,45 @@
                 }
             }
         },
+        methods:{
+            oddFun:function(index){
+                var a=index%2;
+                return b= a==0 ? true :false;
+            }
+        },
         components:{
             header2:{
-                template:'#Header',
+                template:'#header',
                 data(){
                     return {
                         result:{
-                            "nav": [
-                                "案例",
-                                "帮助",
-                                "DING峰会",
-                                "注册"
-                            ],
-                            "logoPath":"images/logo.png"
+                            "logo": "images/logo.png",
+                            "nav":[
+                                {
+                                    "title":"首页",
+                                    "url":"index.html"
+                                },
+                                {
+                                    "title":"案例",
+                                    "url":"case.html"
+                                },
+                                {
+                                    "title":"DING峰会",
+                                    "url":"dingtalk.html"
+                                }
+                            ]
                         }
                     }
                 }
             },
-            footer2:{
-                template:"#Footer",
+            'footer2':{
+                template:'#footer',
                 data(){
                     return{
                         result:{
-                            "footer": {
-                                "text1": "通过ISO27001-2013安全认证",
-                                "text2": "阿里钉钉 © 2017 浙 B2-20080224-16"
-                            },
-                            "logoPath2":"images/logo2.png"
+                            "logo":"images/logo2.png",
+                            "text1":"通过ISO27001-2013安全认证",
+                            "text2":"阿里钉钉 © 2017 浙 B2-20080224-16"
                         }
                     }
                 }
@@ -158,13 +128,6 @@
         }
     })
 </script>
-
-<script>
-    $(function(){
-        $(".slide:odd").addClass("s2");
-    })
-</script>
-
 
 </body>
 </html>

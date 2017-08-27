@@ -1,7 +1,5 @@
 {
-  "name": "dingding",
+  "name": "钉钉官网手机版",
   "version": "0.0.1",
-  "dependencies": {
-    
-  }
+  "技术栈": ["vue","bootstrap","jquery"]
 }

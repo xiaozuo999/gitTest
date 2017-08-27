@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>钉钉首页</title>
+    <title>案例详情页</title>
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/public.css">
@@ -12,178 +12,87 @@
     <script src="../node_modules/vue/dist/vue.js"></script>
 </head>
 <style>
-    .main {
-        margin-top: 63px;
-    }
-.rank{
-    background: url(images/bigBj.png) no-repeat;
-    padding-top: 7px;
-    background-size: cover;
-    width: 100%;
-    color:#fff;
+.main {
+    margin-top: 63px;
 }
-.rankTable{
-    padding: 20px;
-}
-table{
-    margin:0 auto;
-    font-size: 16px;
-    padding: 15px;
-}
-
-tr {
-    border: 1px solid #333;
-}
-table td {
-    border: 0;
-    background: transparent;
-    color: #fff;
-}
-    .tableTitle>td{
-        color:#425784;
-        background: #0a1e4d;
+    .companyInfo{
+        color:#999999;
         font-size: 12px;
     }
-    button.btn.btn-default.dropdown-toggle {
-        background: transparent;
-        color: #fff;
-        padding: 0 20px;
-        border-radius: 20px;
+    .companyLogo {
+        width: 60px;
+        height: 60px;
+        position: absolute;
+        right: 0;
+        top: 0 !important;
     }
-    .nameBox{
-        line-height: 1.5;
+    section{
+        font-size: 17px;
+        position: relative;
+        padding-bottom: 20px;
+    }
+    .companyLogo{
+        width: 60px;
+        height: 60px;
+    }
+    .speakBox{
+        padding-bottom: 1px;
+    }
+    .speakContent{
+        color: #3296fa;
+        font-weight: bold;
+    }
+    .speakerAvatar{
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        position: absolute;
+    }
+    .speakName {
+        font-size: 12px;
+        padding-left: 59px;
+        padding-top: 8px;
+    }
+    .speak>span{
+        color:#333;
+    }
+    .speakBox{}
+    .speakBox .title{
+        font-weight: 600;
+        color: #333333;
+        font-size: 18px;
+    }
+    .speakBox li{
+        float: left;
+    }
+li.title {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 5px;
+}
+    .speakBox {
+        border-left: 8px solid #3296fa;
+        padding-left: 10px;
+        color:#333333;
+    }
+section.solveBox {
+    font-size: 14px;
+}
+    .solveBox li{
+        float: left;
+        width: 33.33%;
+        padding: 7px;
+    }
+    .solveBox .title{
+        font-size: 16px;
+        font-weight: 600;
+        color:#333;
+    }
+    .odd{
+        background:#f8f8f8;
     }
     table td{
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        width: 100%;
-    }
-    .rankTitle{
-        max-width:60px;
-    }
-    .md{
-        color:#fc4265;
-        font-size: 20px;
-        max-width: 112px;
-        display: block;
-    }
-    .show{
-        display:block !important;
-    }
-    .manBox{
-        width: 100%;
-        overflow: scroll;
-        color:#fff;
-    }
-    .manList{
-        width: 780px;
-        display: block;
-        overflow: hidden;
-    }
-    .manOne{
-        float: left;
-        width: 148px;
-        height: 180px;
-        overflow: hidden;
-        margin-right: 10px;
-        position: relative;
-    }
-    .manOne:last-child{
-        margin:0;
-    }
-    .manAvatar{
-        width: 148px;
-        position: absolute;
-        z-index: -1;
-    }
-    .spokesman{
-        /*color:#fff;*/
-        padding: 10px;
-    }
-    .manInfo {
-        margin-top: 115px;
-        padding: 20px 7px 7px;
-        opacity: .8;
-        background: -moz-linear-gradient(bottom,#000 0,transparent 100%);
-        background: -webkit-gradient(linear,0 100%,0 0,from(#000),to(transparent));
-        background: -webkit-linear-gradient(bottom,#000 0,transparent 100%);
-        background: -o-linear-gradient(bottom,#000 0,transparent 100%);
-        background: -ms-linear-gradient(bottom,#000 0,transparent 100%);
-        background: linear-gradient(to top,#000 0,transparent 100%);
-    }
-    .speaker{
-        padding: 10px;
-        background: #f8f8f8;
-    }
-    .speakerAvatar img{
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-    }
-    .speakerAvatar {
-        position: absolute;
-    }
-
-    .listItem {
-        background: #fff;
-        padding: 15px 15px 15px  18px;
-        border: 1px solid #ddd;
-        position: relative;
-        overflow: hidden;
-    }
-    .right {
-        display: inline-block;
-        float: left;
-        padding-left: 48px;
-    }
-    .videoLists {
-        margin: 0 -10px;
-    }
-    .videoIcon{
-        position: absolute;
-        width: 42px;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        left: 0;
-        margin: auto;
-    }
-    .moreVideo{
-        font-size: 14px;
-        text-align: right;
-        float: right;
-    }
-    .videoImgBox {
-        position: relative;
-    }
-    .boxTitle{
-        padding: 10px;
-    }
-    .videoTitle{
-        padding-right: 12px;
-        padding-left: 12px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        line-height: 2.2;
-    }
-    .logoKu{
-        display: block;
-        margin:0 auto;
-    }
-    img.videoImg {
-        width: 100%;
-    }
-    .video .col-xs-6{
-        padding: 0 2px;
-    }
-    .video .row{
-        margin:0 -2px;
-    }
-    .containerVideo{
-        margin-right: auto;
-        margin-left: auto;
+        border: 0;
     }
 
 </style>
@@ -191,81 +100,59 @@ table td {
 <div id="box">
     <header2></header2>
     <div class="main">
-        <div class="rank">
-            <div class="rankBanner text-center">
-                <h3 class="nameBox">  <img src="images/logoKu.png" alt="" class="logoKu">江苏省
-                    <span v-show="!isShow">{{result.allCompany[0].type}}</span>
-                    <!--<span >{{curentTypeName}}</span> -->
-                    <br>
-                    <span>TOP10排行榜</span>
-                </h3>
-                <div class="btn-group dropup">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        <span v-show="!isShow">切换其它行业</span>
-                        <span v-show="isShow">{{curentTypeName}}</span>
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                        <li v-for="(item,index) in result.allCompany" @click="change(index,$event)"><a href="#">{{item.type}}</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="rankTable">
-               <table  v-for="(item,index) in result.allCompany"  style="display:none;"  v-bind:class="{show:activeIndex==index}">
-                   <tr class="tableTitle text-center">
-                       <td class="md">排名</td>
-                       <td>公司名称</td>
-                   </tr>
-                   <tr v-for="(item2,index) in item.company">
-                       <td class="text-center  md" v-show="index<3"><img v-bind:src='"images/iconRank"+index+".png"'> </td>
-                       <td class="text-center rankNum md" v-show="index>=3">{{index+1}} </td>
-                       <td class="companyName">{{item2}}</td>
-                   </tr>
-               </table>
-                <p style="font-size:10px;color:#019bee;" class="text-center"><i class="glyphicon glyphicon-info-sign"></i> 排行榜数据截止{{result.updataTime}}</p>
-            </div>
-        </div>
-        <div class="spokesman">
-            <h3 class="moduleTitle">历届嘉宾&代言人</h3>
-            <div class="manBox">
-                <div class="manList" v-bind:style='"width:"+result.spokesman.length*158+"px"'>
-                    <div class="manOne" v-for="item in result.spokesman">
-                         <img v-bind:src=item.avatar v-bind:alt=item.name class="manAvatar">
-                        <div class="manInfo">
-                            <div class="manName">{{item.name}}</div>
-                            <div class="manFrom">{{item.company}}{{item.position}}</div>
+          <div class="banner">
+              <img v-bind:src=result.banner alt="">
+          </div>
+        <div class="container">
+           <section>
+                <img v-bind:src=result.logo  v-bind:alt=result.name class="companyLogo">
+                <h3>{{result.title}}</h3>
+                <p class="companyInfo">
+                    企业名称：{{result.name}} <br>
+                    企业行业:{{result.type}} <br>
+                    企业规模：{{result.scope}} <br>
+                    最常用功能：{{result.like}} <br>
+                    使用钉钉的目地：{{result.target}} <br>
+                </p>
+               <p>
+                   {{result.info}}
+               </p>
+           </section>
+            <section>
+                <i class=""></i>
+                <div class="speakBox">
+                    <p class="speakContent">{{result.speak.content}}</p>
+                    <p>
+                        <img v-bind:src=result.speak.avatar alt="" class="speakerAvatar">
+                        <div>
+                            <div class="speakName">
+                                {{result.speak.name}}<br>
+                                <span>{{result.speak.position}}</span>
+                            </div>
                         </div>
-                    </div>
+                    </p>
                 </div>
-            </div>
-        </div>
-        <div class="speaker">
-            <h3>与会者说</h3>
-            <div class="speakerList">
-                <div class="listItem" v-for="item in result.speaker">
-                    <div class="speakerAvatar">
-                        <img v-bind:src=item.avatar alt="">
-                    </div>
-                    <div class="right">
-                        <p>{{item.name}} {{item.position}}</p>
-                        <p>{{item.content}}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="video">
-            <h3 class="boxTitle">往期精彩 <a href="#" class="moreVideo">更多视频及资料下载</a></h3>
-            <div class="containerVideo">
-                <div class="row videoListItem">
-                    <div class="col-xs-6" v-for="item in result.video">
-                        <div class="videoImgBox">
-                            <img v-bind:src=item.img  v-bind:alt=item.title class="videoImg">
-                            <img src="images/videoIcon.png" alt="" class="videoIcon">
-                        </div>
-                        <p class="videoTitle">{{item.title}}</p>
-                    </div>
-                </div>
-            </div>
+            </section>
+            <section class="solveBox">
+                <table border="0">
+                    <tr class="title">
+                        <td>痛点</td>
+                        <td>解决方案</td>
+                        <td>效果</td>
+                    </tr>
+                    <template v-for="(item,index) in result.solve">
+                        <tr>
+                            <td v-bind:class={odd:oddFun(index)}>{{item.question}}</td>
+                            <td v-bind:class={odd:oddFun(index)}>{{item.methods}}</td>
+                            <td v-bind:class={odd:oddFun(index)}>{{item.effect}}</td>
+                        </tr>
+                    </template>
+                </table>
+            </section>
+            <section v-for="item in result.artice">
+                <h4 style="font-weight: bold">{{item.title}}</h4>
+                <p  v-html=item.content></p>
+            </section>
         </div>
     </div>
     <footer2>
@@ -296,162 +183,65 @@ table td {
         el:'#box',
         data:{
            result:{
-               "allCompany":[
+                "id": "100",
+                "banner": "images/bannerA1.png",
+                "logo":"images/logoA1.png",
+                "title":"传统生产企业信息化升级",
+                "name":"杭州市育才外国语学校",
+                "type":"教育行业",
+                "scope":"100-500人",
+                "like":"审批、DING信息、公告",
+                "target":"提升光驱效率",
+                "info":"杭州市育才外国语学校始建于1995年，是杭州知名学校。目前学校有26个班，在校学生998人，教职工70余人。 依托于智能办公平台钉钉，该校成为教育行业“互联网+”的领导者。",
+                "speak": {
+                    "name": "张军林",
+                    "position": "杭州市育才外国语学校校长",
+                    "avatar": "images/speaker1.jpg",
+                    "content":"钉钉很好的解决了我们跨学校沟通、协同的工作，实现了我们学校内部的有效沟通机制，其协同工具在保证了我们内部的资源协调的同时，又能够很好的跟我们外包的业务有效的结合起来，真正提高了我们整体的办公协作效率。"
+                },
+                "solve":[
+                    {
+                        "question":"老师同家长沟通难题",
+                        "methods":"用钉钉公告下发校园通知，未读还可以通过DING进行通知",
+                        "effect":"大大提升了效率，通过钉钉公告和DING就可以完成通知"
+                    },
+                    {
+                        "question":"22老师同家长沟通难题",
+                        "methods":"22用钉钉公告下发校园通知，未读还可以通过DING进行通知",
+                        "effect":"22大大提升了效率，通过钉钉公告和DING就可以完成通知"
+                    },
+                    {
+                        "question":"33老师同家长沟通难题",
+                        "methods":"用钉钉公告下发校园通知，未读还可以通过DING进行通知",
+                        "effect":"大大提升了效率，通过钉钉公告和DING就可以完成通知"
+                    },
+                    {
+                        "question":"44老师同家长沟通难题",
+                        "methods":"22用钉钉公告下发校园通知，未读还可以通过DING进行通知",
+                        "effect":"22大大提升了效率，通过钉钉公告和DING就可以完成通知"
+                    }
+                ],
+               "artice":[
                    {
-                       "type": "互联网信息/科技",
-                       "company": ["上海细微信息咨询有限公司","江苏车置宝信息科技股份有限公司","南京南瑞继保电气有限公司","南京特易有信金融信息咨询有限公司","南京壹玖柒玖信息技术有限公司","南京领添信息技术有限公司"]
+                       "title":"老师同家长信息传达准确高效",
+                       "content":"——在和家长沟通方面，用钉钉前后有什么变化吗？<br><br>\n" +
+                       "张军林（校长）：沟通效率提高很多。全校有6个年级28个班，将近1000名学生。小学生不准用手机，我们把所有的学生家长都按班级放进了钉钉组织架构，而且多数学生都加进来两名家长，总数接近2000人。比如三年级2班学生陈兵的家长，在钉钉里面就有“陈兵的爸爸、陈兵的妈妈”。<br>\n" +
+                       "家长纳入学校组织架构后，好处显而易见。就像去年的台风天通知停课，班主任在群里发一下通知，然后再DING一下，没人会漏掉信息。"
                    },
                    {
-                       "type": "制造业",
-                       "company": ["江苏车置宝信息科技股份有限公司","南京南瑞继保电气有限公司","南京特易有信金融信息咨询有限公司","南京壹玖柒玖信息技术有限公司","南京领添信息技术有限公司"]
-                   },
-                   {
-                       "type": "服务业",
-                       "company": ["南京南瑞继保电气有限公司","南京特易有信金融信息咨询有限公司","南京壹玖柒玖信息技术有限公司","南京领添信息技术有限公司"]
-                   }
-               ],
-               "updataTime":"2017年7月31日",
-               "spokesman":[
-                   {
-                       "avatar":"images/man1.jpg",
-                       "name":"李开复",
-                       "company":"创新工场",
-                       "position":"创始人"
-                   },
-                   {
-                       "avatar":"images/man2.jpg",
-                       "name":"无招",
-                       "company":"阿里钉钉",
-                       "position":"资深总监"
-                   },
-                   {
-                       "avatar":"images/man3.jpg",
-                       "name":"高晓松",
-                       "company":"阿里娱乐",
-                       "position":"战略委员会主席"
-                   },
-                   {
-                       "avatar":"images/man4.jpg",
-                       "name":"张泉灵",
-                       "company":"创新工场",
-                       "position":"创始人"
-                   },
-                   {
-                       "avatar":"images/man5.jpg",
-                       "name":"李开复",
-                       "company":"创新工场",
-                       "position":"创始人"
-                   },
-                   {
-                       "avatar":"images/man1.jpg",
-                       "name":"李开复",
-                       "company":"创新工场",
-                       "position":"创始人"
-                   },
-                   {
-                       "avatar":"images/man2.jpg",
-                       "name":"无招",
-                       "company":"阿里钉钉",
-                       "position":"资深总监"
-                   },
-                   {
-                       "avatar":"images/man3.jpg",
-                       "name":"高晓松",
-                       "company":"阿里娱乐",
-                       "position":"战略委员会主席"
-                   },
-                   {
-                       "avatar":"images/man4.jpg",
-                       "name":"张泉灵",
-                       "company":"创新工场",
-                       "position":"创始人"
-                   },
-                   {
-                       "avatar":"images/man5.jpg",
-                       "name":"李开复",
-                       "company":"创新工场",
-                       "position":"创始人"
-                   },
-                   {
-                       "avatar":"images/man1.jpg",
-                       "name":"李开复",
-                       "company":"创新工场",
-                       "position":"创始人"
-                   }
-               ],
-               "speaker":[
-                   {
-                       "name":"刘达",
-                       "avatar":"images/speaker1.jpg",
-                       "company":"魔飞公寓",
-                       "position":"CEO",
-                       "content":"峰会更深层解读了“钉钉能为我们提供哪些帮助”。钉钉是一种工作方式，用互联网思维让企业更加高效！"
-                   },
-                   {
-                       "name":"贺宁",
-                       "avatar":"images/speaker2.jpg",
-                       "company":"武汉同力智能系统股份有限公司",
-                       "position":"总经理",
-                       "content":"（峰会）让我们有机会重新认识公司管理模式，巅峰传统的工作理念，提升效率。 "
-                   },
-                   {
-                       "name":"2刘达",
-                       "avatar":"images/speaker1.jpg",
-                       "company":"魔飞公寓",
-                       "position":"CEO",
-                       "content":"峰会更深层解读了“钉钉能为我们提供哪些帮助”。钉钉是一种工作方式，用互联网思维让企业更加高效！"
-                   },
-                   {
-                       "name":"2贺宁",
-                       "avatar":"images/speaker2.jpg",
-                       "company":"武汉同力智能系统股份有限公司",
-                       "position":"总经理",
-                       "content":"（峰会）让我们有机会重新认识公司管理模式，巅峰传统的工作理念，提升效率。 "
-                   }
-               ],
-               "video": [
-                   {
-                       "img":"images/video1.jpg",
-                       "title":"钉钉超级发布会现场直播",
-                       "url":"#"
-                   },
-                   {
-                       "img":"images/video2.jpg",
-                       "title":"DING峰会杭州站首发M1",
-                       "url":"#"
-                   },
-                   {
-                       "img":"images/video1.jpg",
-                       "title":"DING峰会郑州站精华版",
-                       "url":"#"
-                   },
-                   {
-                       "img":"images/video1.jpg",
-                       "title":"钉钉超级发布会现场直播钉钉超级发布会现场直播",
-                       "url":"#"
-                   },
-                   {
-                       "img":"images/video2.jpg",
-                       "title":"DING峰会杭州站首发M1",
-                       "url":"#"
-                   },
-                   {
-                       "img":"images/video1.jpg",
-                       "title":"DING峰会郑州站精华版",
-                       "url":"#"
+                       "title":"校园实现无纸化办公",
+                       "content":"——钉钉如何帮助教师日常教学积累？<br><br>\n" +
+                       "张军林（校长）：以前教师的值周本和计划簿等都需要用纸质资料留存，耗时费力不说，查找还非常繁琐。\n" +
+                       "现在关于学生和教学记录等资料，教师直接在钉钉上通过日志、周报、钉盘等功能留存，方便查找，统计起来也非常方便。教师可以对教育过程中的经验进行阶段性总结，及时调整教学计划。\n" +
+                       ""
                    }
                ]
-           },
-            isShow:false,
-            curentTypeName:"",
-            activeIndex:0
-       },
+            }
+         },
         methods:{
-            change:function(index){
-                this.activeIndex=index;
-                var name=$(event.currentTarget).text();
-               this.curentTypeName=name;
-               this.isShow=true;
+            oddFun:function(index){
+                var a=index%2;
+                return b= a==0 ? true :false;
             }
         },
         components:{
