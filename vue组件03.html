@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue父子组件传值</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <script src="node_modules/vue/dist/vue.js"></script>
+</head>
+<style>
+    .header{
+        background: #f8f8f8;
+        border-bottom: 1px solid #ddd;
+        overflow: hidden;
+        height: 70px;
+        line-height: 70px;
+    }
+    .logoBox{
+        float: left;
+        margin-left: 15px;
+    }
+    .logo{
+        width: 75px;
+    }
+    .meumBox{
+        float: right;
+        margin-right: 15px;
+    }
+    .drapMeum{
+        line-height: 40px;
+        background: #fff;
+        position: absolute;
+        width: 100%;
+
+    }
+    .drapMeum li{
+        border-bottom: 1px solid #ddd;
+        padding-left: 15px;
+    }
+    .container{
+        margin-top: 20px;
+    }
+    .contentBox{
+        margin-top: 20px;
+        margin-left: 20px;
+    }
+</style>
+
+
+<body>
+<div id="box">
+    <header2></header2>
+    <main2></main2>
+</div>
+</body>
+
+
+<template id="header">
+<header>
+    <div class="header">
+        <div class="logoBox">
+            <img src="images/logo.png" alt="logo" class="logo">
+        </div>
+        <div class="meumBox">
+            <a href="javascript:" class="meum" @click="showMeum">菜单</a>
+        </div>
+    </div>
+</header>
+    <drapMeum></drapMeum>
+</template>
+
+
+<template  id="drapMeum">
+<div class="drapMeum" v-show="isMeum">
+    <ul>
+        <a href="#"><li>首页</li></a>
+        <a href="#"><li>案例</li></a>
+        <a href="#"><li>钉峰会</li></a>
+    </ul>
+</div>
+</template>
+
+
+<template  id="main">
+<div class="container">
+<ul class="nav nav-tabs">
+  <li role="presentation" class="active"><a href="#">Home</a></li>
+  <li role="presentation"><a href="#">Profile</a></li>
+  <li role="presentation"><a href="#">Messages</a></li>
+</ul>
+<div class="contentBox">
+     内容一
+</div>
+</div>
+</template>
+
+<script>
+    var vm=new Vue({
+        el:"#box",
+        components:{
+            'main2':{
+                data(){
+                    return {
+                        msg:'welcome vue'
+                    }
+                },
+                methods:{
+                    change(){
+                        this.msg='changed';
+                    }
+                },
+                template:'#main'
+            },
+            'header2':{
+                data(){
+                    return {
+                        isMeum:true
+                    }
+                },
+                methods:{
+                    change(){
+                        this.msg='changed';
+                    },
+                    showMeum(){
+                        this.isMeum= this.isMeum==true ? false:true;
+                    }
+                },
+                template:"<p>我是组件header2</p><bbb></bbb>",
+                components:{
+                    // "drapMeum":{
+                    //     template:"#drapMeum"
+                    // },
+                    "bbb":{
+                        template:"<h3>我是bbb组件</h3>"
+                    }
+                }
+            }
+        }
+    })
+</script>
+</html>
