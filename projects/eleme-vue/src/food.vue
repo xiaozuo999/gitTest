@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h3>头部</h3>
+    <h3>我是商品页</h3>
   </div>
 </template>
 
