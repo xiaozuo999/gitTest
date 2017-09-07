@@ -1,3 +1,6 @@
+/*.headerBox{*/
+/*position: fixed;    */
+/*}*/
 .header{
     background: rgba(7,17,27,0.5);
     color:#fff;
@@ -84,6 +87,9 @@
     background: rgba(0,0,0,0.2);
     right: 0;
     top: 0;
+}
+.main {
+    padding-bottom: 50px;
 }
 /*meum导航部分*/
 .menu{
@@ -198,6 +204,56 @@
 .li-content{
     dicell
 }
+/*购物车模块*/
+.shopCart{
+    position: fixed;
+    bottom: 0;
+    background: #141d27;
+    line-height: 48px;
+    color:#80858a;
+    width: 100%;
+    left: 0;
+}
+.shopCart-left{
+    float: left;
+}
+.shopCart-right{
+    width: 108px;
+    font-size: 12px;
+    float: right;
+    background: #2b333b;
+    text-align: center;
+}
+.cartBox{
+    width: 56px;
+    height: 56px;
+    background: #2b343c;
+    border: 2px solid #141d27;
+    position: absolute;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 26px;
+    bottom: 4px;
+    left: 15px;
+    line-height: 58px;
+}
+.cartNum{
+    background: #f01414;
+    font-size: 12px;
+    font-weight: 600;
+    position: absolute;
+    height: 22px;
+    width: 22px;
+    border-radius: 50%;
+    color: #fff;
+    line-height: 22px;
+}
+.carBox2{text-indent: 96px;font-size: 16px;font-weight: 600;}
+span.price-total {
+    padding-right: 14px;
+    border-right: 1px solid #3e4042;
+}
+
 
 
 

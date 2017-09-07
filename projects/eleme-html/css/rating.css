@@ -1,0 +1,24 @@
+.ratings{}
+.ratings-content{
+    padding:20px 15px;
+    overflow: hidden;
+}
+.ratings-content-left{
+    float: left;
+    width: 110px;
+    border-right: 1px solid #e6e7e8;
+    text-align: center;
+    margin-right: 10px;
+}
+.ratings-content-right{
+    float: left;
+}
+.split{
+    background: #f3f5f7;
+    border-top:solid 1px #dadee1;
+    height:12px;
+}
+.ratings-select{
+    
+}
+.ratings-warpper{}

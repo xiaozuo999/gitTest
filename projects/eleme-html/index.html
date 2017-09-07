@@ -2,8 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!--<meta name="viewport"-->
-          <!--content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">-->
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>eleme</title>
@@ -11,125 +9,150 @@
     <link rel="stylesheet" href="icon/demo-files/demo.css">
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/rating.css">
+    <script src="js/vue.min.js"></script>
+    <script src="js/jquery.min.js"></script>
 </head>
 <body>
-<header class="header">
-    <div class="top1">
-        <img src="images/seller_avatar_256px.jpg" alt="" class="img-companyLogo">
-        <div class="headerTxt">
-            <div class="title">
-                <span class="icon icon-brand"></span>
-                粥品香坊（回龙观）
-            </div>
-            <div class="time">
-                蜂鸟专送/38分钟送达
-            </div>
-            <div class="discount">
-                <span class="icon-discount"></span>
-                在线支付满28减5
-                <div class="discount-btn">
-                    5个 <span class="icon-keyboard_arrow_right"></span>
+<div id="box">
+<div class="headerBox">
+    <header class="header">
+        <div class="top1">
+            <img src="images/seller_avatar_256px.jpg" alt="" class="img-companyLogo">
+            <div class="headerTxt">
+                <div class="title">
+                    <span class="icon icon-brand"></span>
+                    {{seller.name}}
+                </div>
+                <div class="time">
+                    {{seller.description}}/{{seller.deliveryTime}}分钟送达
+                </div>
+                <div class="discount">
+                    <span class="icon-discount"></span>
+                    在线支付满28减5
+                    <div class="discount-btn">
+                        5个 <span class="icon-keyboard_arrow_right"></span>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="top2">
+            <span class="icon icon-bulletin"></span>
+            <span class="companyInfo">{{seller.bulletin}}</span>
+            <span class="icon-keyboard_arrow_right icon-lg"></span>
+        </div>
+        <div class="headerBj">
+            <img src="images/seller_avatar_256px.jpg" alt="" class="img-headerBj">
+        </div>
+    </header>
+    <div class="menu">
+        <a href="javascript:" class="active">商品</a>
+        <a href="javascript:">评论</a>
+        <a href="javascript:">商家</a>
     </div>
-    <div class="top2">
-        <span class="icon icon-bulletin"></span>
-        <span class="companyInfo">粥品香坊其烹饪粥料的秘方源于中国千年古法，在融和现代制作工艺，由世界烹饪大师屈浩先生领衔研发。坚守纯天然、0添加的良心品质深得消费者青睐，发展至今成为粥类的引领品牌。是2008年奥运会和2013年园博会指定餐饮服务商。</span>
-        <span class="icon-keyboard_arrow_right icon-lg"></span>
-    </div>
-    <div class="headerBj">
-        <img src="images/seller_avatar_256px.jpg" alt="" class="img-headerBj">
-    </div>
-</header>
-<div class="menu">
-    <a href="javascript:" class="active">商品</a>
-    <a href="javascript:">评论</a>
-    <a href="javascript:">商家</a>
 </div>
 <div class="main">
-    <div class="food">
+    <div class="food" style="display:none;">
         <div class="food-left">
             <ul class="food-lists">
-                <li class="active2"><span class="li-content">热销榜</span></li>
-                <li><span class="li-content"><span class="icon icon-specialties"></span>单人精彩套餐</span></li>
-                <li><span class="li-content"><span class="icon icon-discount"></span>热销榜</span></li>
+                <li v-for="(item,index) in goods" v-bind:class="{active2:index==0}">
+                    <span class="li-content">
+                        <span class="icon icon-specialties" v-show="item.type==1"></span>
+                        <span class="icon icon-discount" v-show="item.type==2"></span>
+                        {{item.name}}
+                    </span>
+                </li>
             </ul>
         </div>
         <div class="food-right">
-            <div class="food-item">
+            <div class="food-item" v-for="item in goods">
                 <div class="food-item-title">
-                    热销榜
+                    {{item.name}}
                 </div>
                 <div class="food-item-content">
-                    <div class="content-item">
-                        <img src="images/cai.jpeg" alt="" width="57" class="img-food">
+                    <div class="content-item" v-for="item2 in item.foods">
+                        <img v-bind:src=item2.icon  alt="" width="57" class="img-food">
                         <div class="content-item-box">
                             <div class="content-title">
-                                娃娃菜炖豆腐
+                                {{item2.name}}
                             </div>
                             <div class="content-sell">
-                                月售43  好评92
+                                月售{{item2.sellCount}}  好评{{item2.rating}}
                             </div>
                             <div class="content-price">
-                                <span class="color-active">￥17<span></span>  <span class="icon-add_circle"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="content-item">
-                        <img src="images/cai.jpeg" alt="" width="57" class="img-food">
-                        <div class="content-item-box">
-                            <div class="content-title">
-                                娃娃菜炖豆腐
-                            </div>
-                            <div class="content-sell">
-                                月售43  好评92
-                            </div>
-                            <div class="content-price">
-                                <span class="color-active">￥17<span></span>  <span class="icon-add_circle"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="food-item">
-                <div class="food-item-title">
-                    热销榜
-                </div>
-                <div class="food-item-content">
-                    <div class="content-item">
-                        <img src="images/cai.jpeg" alt="" width="57" class="img-food">
-                        <div class="content-item-box">
-                            <div class="content-title">
-                                娃娃菜炖豆腐
-                            </div>
-                            <div class="content-sell">
-                                月售43  好评92
-                            </div>
-                            <div class="content-price">
-                                <span class="color-active">￥17<span></span>  <span class="icon-add_circle"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="content-item">
-                        <img src="images/cai.jpeg" alt="" width="57" class="img-food">
-                        <div class="content-item-box">
-                            <div class="content-title">
-                                娃娃菜炖豆腐
-                            </div>
-                            <div class="content-sell">
-                                月售43  好评92
-                            </div>
-                            <div class="content-price">
-                                <span class="color-active">￥17<span></span>  <span class="icon-add_circle"></span>
+                                <span class="color-active">￥{{item2.price}}</span>
+                                <span class="price-old" v-show="item.foods.oldPrice">￥{{item2.oldPrice}}</span>
+                                <span class="icon-add_circle"></span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="shopCart">
+            <div class="shopCart-left">
+                <div class="cartWrap">
+                    <div class="cartBox">
+                        <span class="icon-shopping_cart"></span>
+                        <span class="cartNum"  style="display:none">12</span>
+                    </div>
+                    <div class="carBox2 text-center">
+                        <span class="price-total">￥0</span>
+                    </div>
+                </div>
+            </div>
+            <div class="shopCart-right">
+                <strong>￥20元起送</strong>
+            </div>
+        </div>
+    </div style="display:none;">
+    <div class="ratings">
+        <div class="ratings-content">
+            <div class="ratings-content-left">
+               <h1 class="graded">4.2</h1>
+                <p>综合评分</p>
+                <p class="color2">高于周边商家69.2%</p>
+            </div>
+            <div class="ratings-content-right">
+                右边
+            </div>
+        </div>
+        <div class="split"></div>
+        <div class="ratings-select">
+            <p>我是过滤条件</p>
+        </div>
+        <div class="ratings-warpper">
+            <p>我是主要内容</p>
+        </div>
     </div>
+
+</div>
 </div>
 </body>
+<script>
+    $.post('data.json',function(result){
+        new Vue({
+            el:"#box",
+            data:{
+                seller:result.seller,
+                goods:result.goods,
+                ratings:result.ratings
+            },
+            methods: {
+                add: function () {
+                    console.log(100);
+                }
+            }
+        })
+        $(function(){
+            $(".food-lists li").click(function(){
+                $(this).addClass("active2").siblings().removeClass("active2");
+                var index=$(this).index();
+                $("html,body").animate({"scrollTop":0},500);
+            })
+        })
+    });
+
+</script>
 
 </html>
