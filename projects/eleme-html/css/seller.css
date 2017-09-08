@@ -1,0 +1,99 @@
+/*商家页面*/
+.overview{
+    margin: 20px;
+    position: relative;
+    overflow: hidden;
+}
+h4{
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+.seller-ratings{
+    padding-bottom: 20px;
+}
+.seller-ratings-box{}
+.remark{}
+.remark li{
+    width: 33.33%;
+    float: left;
+    border-right: 1px solid #e6e7e8;
+    text-align: center;
+    display: inline-block;
+    margin: 15px 0;
+    box-sizing: border-box;
+    -moz-box-sizing:border-box; /* Firefox */
+    -webkit-box-sizing:border-box; /* Safari */
+}
+.remark li:last-child{
+    border: 0;
+}
+.fz24{
+    font-size: 24px;
+    /*font-weight: 600;*/
+}
+.favorite{
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 16px;
+    text-align: center;
+}
+.icon-favorite{
+    color: #d4d6d9;
+    font-size: 26px;
+}
+.seller-ratings-box .icon-star-full{
+    font-size: 16px;
+}
+.container{
+    padding:0 15px;
+}
+.bulletin{}
+.bulletin-info{
+    font-size: 16px;
+    padding-bottom: 15px;
+}
+.bulletin-item{
+    padding: 15px;
+    text-index:15px;
+}
+.bulletin-item .icon{
+    width: 16px;
+    height: 16px;
+}
+.bulletin-item .icon-decrease{
+    background: url(../images/decrease_3@2x.png) red no-repeat center;
+    -webkit-background-size:16px  16px;
+    background-size:16px 16px;
+}
+.bulletin-item .icon-discount{
+    background: url(../images/discount_3@2x.png) red no-repeat center;
+    -webkit-background-size:16px  16px;
+    background-size:16px 16px;
+}
+.bulletin-item .icon-special{
+    background: url(../images/special_3@2x.png) red no-repeat center;
+    -webkit-background-size:16px  16px;
+    background-size:16px 16px;
+}
+.pics-box{
+    width: 100%;
+    overflow: scroll;
+}
+.pics-items{
+    width: 800px;
+    margin-bottom: 15px;
+}
+.pics-item{
+    float: left;
+    margin-right: 10px;
+}
+.info-item{
+    padding: 15px;
+    text-index:15px;
+    border-top: 1px solid #e5e7e8;
+}
+.mt15{
+    margin-top: 15px;
+}
+
