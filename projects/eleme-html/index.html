@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="icon/style.css">
     <link rel="stylesheet" href="icon/demo-files/demo.css">
     <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/food.css">
     <link rel="stylesheet" href="css/rating.css">
+    <link rel="stylesheet" href="css/seller.css">
     <script src="js/vue.min.js"></script>
     <script src="js/jquery.min.js"></script>
 </head>
@@ -46,16 +47,16 @@
         </div>
     </header>
     <div class="menu">
-        <a href="javascript:" class="active">商品</a>
-        <a href="javascript:">评论</a>
-        <a href="javascript:">商家</a>
+        <a href="javascript:" v-bind:class="{active:activeIndex==0}" @click="change(0)">商品</a>
+        <a href="javascript:" v-bind:class="{active:activeIndex==1}" @click="change(1)">评论</a>
+        <a href="javascript:" v-bind:class="{active:activeIndex==2}" @click="change(2)">商家</a>
     </div>
 </div>
 <div class="main">
-    <div class="food" style="display:none;">
+    <div class="food" v-if="activeIndex==0">
         <div class="food-left">
             <ul class="food-lists">
-                <li v-for="(item,index) in goods" v-bind:class="{active2:index==0}">
+                <li v-for="(item,index) in goods" v-bind:class="{active2:activeIndex2==index}" @click="change2(index)">
                     <span class="li-content">
                         <span class="icon icon-specialties" v-show="item.type==1"></span>
                         <span class="icon icon-discount" v-show="item.type==2"></span>
@@ -105,27 +106,177 @@
                 <strong>￥20元起送</strong>
             </div>
         </div>
-    </div style="display:none;">
-    <div class="ratings">
+    </div>
+    <div class="ratings" v-if="activeIndex==1">
         <div class="ratings-content">
             <div class="ratings-content-left">
-               <h1 class="graded">4.2</h1>
+               <h1 class="graded color-yellow">4.2</h1>
                 <p>综合评分</p>
-                <p class="color2">高于周边商家69.2%</p>
+                <p class="color-gray">高于周边商家69.2%</p>
             </div>
             <div class="ratings-content-right">
-                右边
+                <div class="ratings-content-right-1">
+                    <span>服务态度</span>
+                    <div class="ratings-star">
+                        <span class="icon-star-full color-yellow"></span>
+                        <span class="icon-star-full color-yellow"></span>
+                        <span class="icon-star-full color-yellow"></span>
+                        <span class="icon-star-full color-yellow"></span>
+                        <span class="icon-star-full"></span>
+                    </div>
+                    <span class="color-yellow"> 4.1</span>
+                </div>
+                <div class="ratings-content-right-1">
+                    <span>服务态度</span>
+                    <div class="ratings-star">
+                        <span class="icon-star-full color-yellow"></span>
+                        <span class="icon-star-full color-yellow"></span>
+                        <span class="icon-star-full color-yellow"></span>
+                        <span class="icon-star-full color-yellow"></span>
+                        <span class="icon-star-full"></span>
+                    </div>
+                    <span class="color-yellow"> 4.1</span>
+                </div>
+                <div class="ratings-content-right-1">
+                    <span>服务态度</span>
+                    <span class="color-gray"> 38分钟</span>
+                </div>
             </div>
         </div>
         <div class="split"></div>
         <div class="ratings-select">
-            <p>我是过滤条件</p>
+           <span class="btn-select" v-bind:class="{'bg-blue':activeIndex3==2}" @click="change3(2)">全部{{ratings.length}}</span>
+           <span class="btn-select" v-bind:class="{'bg-blue':activeIndex3==0}" @click="change3(0)">满意{{data0}}</span>
+           <span class="btn-select bg-gray" v-bind:class="{'bg-darkblue':activeIndex3==1}"  @click="change3(1)">吐槽{{data1}}</span>
         </div>
-        <div class="ratings-warpper">
-            <p>我是主要内容</p>
+        <div class="ratings-wrapper">
+           <div class="ratings-wrapper-title">
+               <span class="icon-check_circle"></span>
+               <span class="color-gray">只看有内容的评论</span>
+           </div>
+            <div class="ratings-items">
+                <div class="ratings-item" v-for="item in ratings" v-bind:data-rateType="item.rateType" v-show="activeIndex3==item.rateType || activeIndex3==2">
+
+                    <div class="ratings-item-left">
+                        <img v-bind:src=item.avatar alt="" class="user-avatar">
+                    </div>
+                    <div class="ratings-item-right">
+                       <div class="ratings-item-right-1">
+                           <strong>{{item.username}}</strong>  <span class="releaseTime color-gray">{{ratings.Time}}</span>
+                       </div>
+                        <div class="ratings-item-right-2">
+                            <div class="item-star-box">
+                                <span class="icon-star-full color-yellow" v-for="n in item.score"></span>
+                                <span class="icon-star-full" v-for="n in 5-item.score"></span>
+                            </div>
+                            <span class="color-gray">{{item.deliveryTime}}</span>
+                        </div>
+                        <div class="ratings-item-right-3">
+                            <p>
+                                {{item.text}}
+                            </p>
+                        </div>
+                        <div class="ratings-item-right-4">
+                            <span class="icon-thumb_up"></span>
+                            <span class="tag color-gray" v-for="item3 in item.recommend">{{item3}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+    <div class="seller" v-if="activeIndex==2">
+        <div class="overview">
+            <h4>粥品香坊（回龙观）</h4>
+            <div class="seller-ratings bdb1-gray">
+                <span class="seller-ratings-box">
+                    <i class="icon-star-full color-yellow"></i>
+                    <i class="icon-star-full color-yellow"></i>
+                    <i class="icon-star-full color-yellow"></i>
+                    <i class="icon-star-full color-yellow"></i>
+                    <i class="icon-star-full"></i>
+                </span>
+                <span>(24)  月售90单</span>
+            </div>
+            <ul class="remark">
+               <li>
+                   <p class="color-gray">起送价</p>
+                   <span class="fz24">20</span>元
+               </li>
+                <li>
+                    <p class="color-gray">起送价</p>
+                    <span class="fz24">20</span>元
+                </li>
+                <li>
+                    <p class="color-gray">起送价</p>
+                    <span class="fz24">20</span>元
+                </li>
+            </ul>
+            <div class="favorite" @click="favorite" >
+                <span class="icon-favorite" v-bind:class="{active:!istrue}"></span>
+                <p v-show="istrue">收藏</p>
+                <p v-show="!istrue">已收藏</p>
+            </div>
+        </div>
+        <div class="split"></div>
+        <div class="bulletin">
+            <div class="container">
+                <h4 class="mt15">公告与活动</h4>
+                <div class="bulletin-info">
+                    粥品香坊其烹饪粥料的秘方源于中国千年古法，在融和现代制作工艺，由世界烹饪大师屈浩先生领衔研发。坚守纯天然、0添加的良心品质深得消费者青睐，发展至今成为粥类的引领品牌。是2008年奥运会和2013年园博会指定餐饮服务商。
+                </div>
+                <div class="bulletin-item bdt1-gray">
+                    <span class="icon icon-decrease"></span>
+                    在线支付满28减5
+                </div>
+                <div class="bulletin-item bdt1-gray">
+                    <span class="icon icon-discount"></span>
+                    VC无限橙果汁全场8折
+                </div>
+                <div class="bulletin-item bdt1-gray">
+                    <span class="icon icon-special"></span>
+                    VC无限橙果汁全场8折
+                </div>
 
+            </div>
+        </div>
+        <div class="split"></div>
+        <div class="pics">
+            <div class="container">
+                <h4 class="mt15">商家实景</h4>
+                <div class="pics-box">
+                    <div class="pics-items">
+                        <div class="pics-item bdt1-gray">
+                            <img src="images/sj.jpeg" alt="" width="120px">
+                        </div>
+                        <div class="pics-item bdt1-gray">
+                            <img src="images/sj.jpeg" alt="" width="120px">
+                        </div>
+                        <div class="pics-item bdt1-gray">
+                            <img src="images/sj.jpeg" alt="" width="120px">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="split"></div>
+        <div class="info">
+            <div class="container">
+                <h4 class="mt15">商家信息</h4>
+                <div class="info-items">
+                    <div class="info-item">
+                        该商家支持发票，请下单写好发票抬头
+                    </div>
+                    <div class="info-item">
+                        该商家支持发票，请下单写好发票抬头该商家支持发票，请下单写好发票抬头该商家支持发票，单写好发票抬头
+                    </div>
+                    <div class="info-item">
+                        该商家支持发票，请下单写好发票抬头
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </div>
 </body>
@@ -136,20 +287,37 @@
             data:{
                 seller:result.seller,
                 goods:result.goods,
-                ratings:result.ratings
+                ratings:result.ratings,
+                istrue:true,
+                activeIndex:0,
+                activeIndex2:0,
+                activeIndex3:2,
+                data0:0,
+                data1:0
             },
             methods: {
-                add: function () {
-                    console.log(100);
+                favorite:function(){
+                    this.istrue=!this.istrue;
+                },
+                change:function(index){
+                    this.activeIndex=index;
+                },
+                change2:function(index){
+                    this.activeIndex2=index;
+                },
+                change3:function(index){
+                    this.activeIndex3=index;
                 }
+            },
+            computed:{
+//                data0:function(){
+//                    return 100;
+//                },
+//                data1:function(){
+//                    return 200;
+//                },
+                
             }
-        })
-        $(function(){
-            $(".food-lists li").click(function(){
-                $(this).addClass("active2").siblings().removeClass("active2");
-                var index=$(this).index();
-                $("html,body").animate({"scrollTop":0},500);
-            })
         })
     });
 
