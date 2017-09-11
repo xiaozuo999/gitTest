@@ -78,9 +78,11 @@
     border-bottom: 1px solid #e5e7e8;
 }
 .icon-check_circle{
-    color: #00c850;
     font-size: 28px;
     vertical-align: middle;
+}
+.color-green{
+    color: #00c850;
 }
 .ratings-items{}
 .ratings-item{

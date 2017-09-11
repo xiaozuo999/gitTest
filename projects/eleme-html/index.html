@@ -11,11 +11,11 @@
     <link rel="stylesheet" href="css/food.css">
     <link rel="stylesheet" href="css/rating.css">
     <link rel="stylesheet" href="css/seller.css">
-    <script src="js/vue.min.js"></script>
+    <script src="js/vue.js"></script>
     <script src="js/jquery.min.js"></script>
 </head>
 <body>
-<div id="box">
+<div id="box" v-cloak>
 <div class="headerBox">
     <header class="header">
         <div class="top1">
@@ -145,18 +145,17 @@
         </div>
         <div class="split"></div>
         <div class="ratings-select">
-           <span class="btn-select" v-bind:class="{'bg-blue':activeIndex3==2}" @click="change3(2)">全部{{ratings.length}}</span>
-           <span class="btn-select" v-bind:class="{'bg-blue':activeIndex3==0}" @click="change3(0)">满意{{data0}}</span>
-           <span class="btn-select bg-gray" v-bind:class="{'bg-darkblue':activeIndex3==1}"  @click="change3(1)">吐槽{{data1}}</span>
+           <span class="btn-select" v-bind:class="{'bg-blue':filtA==2}" @click="change3(2)">全部{{ratings.length}}</span>
+           <span class="btn-select" v-bind:class="{'bg-blue':filtA==0}" @click="change3(0)">满意{{data0}}</span>
+           <span class="btn-select bg-gray" v-bind:class="{'bg-darkblue':filtA==1}"  @click="change3(1)">吐槽{{data1}}</span>
         </div>
         <div class="ratings-wrapper">
-           <div class="ratings-wrapper-title">
-               <span class="icon-check_circle"></span>
+           <div class="ratings-wrapper-title" @click="change4(filtB)">
+               <span class="icon-check_circle" v-bind:class="{'color-green':filtB}"></span>
                <span class="color-gray">只看有内容的评论</span>
            </div>
             <div class="ratings-items">
-                <div class="ratings-item" v-for="item in ratings" v-bind:data-rateType="item.rateType" v-show="activeIndex3==item.rateType || activeIndex3==2">
-
+                <div class="ratings-item" v-for="item in ratings"   v-show="filtAA(item.rateType) && isTxt(item.text)">
                     <div class="ratings-item-left">
                         <img v-bind:src=item.avatar alt="" class="user-avatar">
                     </div>
@@ -291,9 +290,10 @@
                 istrue:true,
                 activeIndex:0,
                 activeIndex2:0,
-                activeIndex3:2,
                 data0:0,
-                data1:0
+                data1:0,
+                filtA:2,
+                filtB:true
             },
             methods: {
                 favorite:function(){
@@ -305,18 +305,37 @@
                 change2:function(index){
                     this.activeIndex2=index;
                 },
-                change3:function(index){
-                    this.activeIndex3=index;
+                change3:function(filtA){
+                    this.filtA=filtA;
+                },
+                change4:function(filtB){
+                    this.filtB=!this.filtB;
+                },
+                filtAA:function(obj){
+                    console.log(this.data0++);
+                    if(this.filtA==2){
+                        return true;
+                    }
+                    else{
+                       if(this.filtA==obj){
+                           return true;
+                       }
+                        return false;
+                    }
+                },
+                isTxt:function(obj){
+                    if(!this.filtB){
+                        return true;
+                    }
+                    else{
+                        if(obj==''){
+                            return false;
+                        }
+                        else{
+                            return true;
+                        }
+                    }
                 }
-            },
-            computed:{
-//                data0:function(){
-//                    return 100;
-//                },
-//                data1:function(){
-//                    return 200;
-//                },
-                
             }
         })
     });

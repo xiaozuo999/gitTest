@@ -1,3 +1,6 @@
+[v-cloak] {
+    display: none;
+}
 .header{
     background: rgba(7,17,27,0.5);
     color:#fff;
@@ -81,7 +84,7 @@
     top: 0;
 }
 .main {
-    /*padding-bottom: 50px;*/
+    padding-top: 153px;
 }
 /*meum导航部分*/
 .menu{
@@ -89,7 +92,7 @@
     overflow: hidden;
 }
 .menu a{
-    width: 33.33%;
+    width: 33%;
     display: inline-block;
     line-height: 35px;
     text-align: center;
@@ -242,6 +245,13 @@
 span.price-total {
     padding-right: 14px;
     border-right: 1px solid #3e4042;
+}
+.headerBox {
+    position: fixed;
+    background: #fff;
+    overflow: hidden;
+    z-index: 100;
+    width: 100%;
 }
 
 
