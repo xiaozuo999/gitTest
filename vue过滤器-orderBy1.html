@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>vue过滤器-orderBy2</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+   <script type="text/javascript" src="js/vue1.0.js"></script>
+</head>
+<style>
+
+</style>
+
+<body>
+
+<div id="box">
+<p>在input框中输入1是正序，-1是倒序</p>
+<hr>
+    <input type="text" name="" v-model="a">
+    <ul>
+        <li v-for="item in soft | orderBy a">{{item}}</li>
+    </ul>
+</div>
+
+<script type="text/javascript">
+new Vue({
+    el:"#box",
+    data:{
+       soft:["tc","evernote","mindmanager","sublimt"],
+       a:""
+    }
+})
+
+</script>
+</body>
+</html>
