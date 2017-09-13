@@ -146,15 +146,40 @@
     position: relative;
     font-size: 14px;
 }
-.content-price .icon-add_circle{
+.addGoods{
     color:#00a0dc;
-    /* width: 18px; */
-    /* height: 18px; */
     position: absolute;
     top: -9px;
     right: 0;
     font-size: 25px;
 }
+.addGoods .icon-add_circle{
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 5px;
+    right: 0px;
+}
+.icon-remove_circle_outline{
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 5px;
+    right: 50px;
+}
+.addGoods .selectNum{
+    color:#ddd;
+    font-size: 14px;
+    position: absolute;
+    right: 33px;
+    top: 8px;
+}
+
+
+
+
+
+
 .active2{
     background: #ffffff !important;
 }

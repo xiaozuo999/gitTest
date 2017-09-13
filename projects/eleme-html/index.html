@@ -83,7 +83,11 @@
                             <div class="content-price">
                                 <span class="color-active">￥{{item2.price}}</span>
                                 <span class="price-old" v-show="item.foods.oldPrice">￥{{item2.oldPrice}}</span>
-                                <span class="icon-add_circle"></span>
+                                <div class="addGoods">
+                                    <span class="icon-remove_circle_outline" @click="reduce()"></span>
+                                    <span class="selectNum">{{selectNum}}</span>
+                                    <span class="icon-add_circle" @click="add()"></span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -293,7 +297,8 @@
                 data0:0,
                 data1:0,
                 filtA:2,
-                filtB:true
+                filtB:true,
+                selectNum:0
             },
             methods: {
                 favorite:function(){
@@ -335,6 +340,12 @@
                             return true;
                         }
                     }
+                },
+                add:function(){
+                    this.selectNum++;
+                },
+                reduce:function(){
+                    this.selectNum--;
                 }
             }
         })

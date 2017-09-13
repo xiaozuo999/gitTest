@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>vue购物车</title>
+    <link rel="stylesheet" type="text/css" href="css/public.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css"; rel="stylesheet">
+    <!-- <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script> -->
+    <!-- <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> -->
+    <script type="text/javascript" src="js/vue.js"></script>
+</head>
+<style>
+.items{
+    margin: 100px;
+}
+.glyphicon{
+}
+.glyphicon-minus{}
+.glyphicon-plus{}
+.num{
+    min-width: 40px;
+    width:40px;
+    text-align: center;
+}
+.add{
+    width: 25px;
+    height: 25px;
+    border: 1px solid #00a0dc;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 12px;
+    display: inline-block;
+    line-height: 23px;
+    background: #00a0dc;
+    color:#fff;
+}
+.reduce{
+    width: 25px;
+    height: 25px;
+    border: 1px solid #00a0dc;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 12px;
+    display: inline-block;
+    line-height: 23px;
+}
+a:active{
+    color:#333;
+}
+th {
+    text-align: center;
+}
+td{
+    vertical-align: middle !important;
+    position: relative !important;
+}
+.oneBox{
+     position: relative;
+}
+.goodsBox{
+    text-align: left;
+    padding-top: 32px;
+}
+.goodsBox-left{
+    float: left;
+    margin-right: 20px;
+}
+.img-goods{}
+.goodsBox-right{
+    float: left;
+}
+.freeGoods{}
+.s1{
+    float: left;
+}
+.s2{
+    float: left;
+    color:#888;
+}
+.goodsName{
+    margin-bottom: 15px;
+}
+ul,li{
+    text-decoration:none;
+    list-style: none;
+}
+.active{
+    color:#00a0dc !important;
+}
+.glyphicon-ok-sign{
+    color:#636363;
+}
+a{
+    color:#333;
+}
+</style>
+<body>
+<div class="container table-responsive" style="margin-top:20px" id="box">
+    <table class="table text-center">
+        <caption style="margin-bottom:20px;">购物车模块</caption>
+        <thead style="background: #636363;color:#fff;border:0">
+            <tr>
+                <th width="40px"></th>
+                <th>商品名称</th>
+                <th>商品金额</th>
+                <th>商品数量</th>
+                <th>总金额</th>
+                <th>编辑</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="item in items" v-show="item.show">
+                <td height="120px">
+                    <!-- <input type="checkbox" name="" > -->
+                    <a href="javascript:">
+                        <span class="glyphicon glyphicon-ok-sign" v-bind:class="{active:item.checked}" @click="selectFun(item)"></span>
+                    </a>
+                </td>
+                <td>
+                    <div class="goodsBox">
+                    <div class="goodsBox-left">
+                       <img v-bind:src=item.goodsImg alt="" width="55px" height="55px" class="img-goods">
+                    </div>
+                    <div class="goodsBox-right">
+                        <p class="goodsName">{{item.goodsName}}</p>
+                        <div class="freeGoods">
+                            <span class="s1">赠送</span>
+                            <ul class="s2">
+                                <li v-for="item2 in item.freeGoods">{{item2}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                </td>
+                <td >￥{{item.price}}</td>
+                <td class="oneBox">
+                    <div class="one">
+                        <a href="javascript:" class="reduce" @click="add(item,-1)">
+                            <span class="glyphicon glyphicon-minus"></span>
+                        </a>
+                        <input type="" name="价格" class="num" value="0" v-model="item.selectNum">
+                        <a href="javascript:" class="add" @click="add(item,1)"><span class="glyphicon glyphicon-plus"></span></a>
+                    </div>
+                        <p class="small">有货</p>
+                </td>
+                <td style="color:red">￥{{item.selectNum*item.price}}</td>
+                <td>
+                    <a href="javascript:" class="delete" @click="deleteFun(item)">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                </td>
+            </tr>
+
+   <tr>
+            <td>
+                 <!-- <input type="checkbox" name=""> -->
+                <a href="javascript:" @click="checkAllFun(checkAll)">
+                    <span class="glyphicon glyphicon-ok-sign" v-bind:class="{active:checkAll}"></span>
+                </a>
+            </td>
+                <td style="text-align: left">
+                    <a href="javascript:" @click="checkAllFun(false)" style="padding-right:15px;" v-bind:class="{active:checkAll}">全选</a>
+                    <a href="javascript:" @click="checkAllFun(true)" v-bind:class="{active:!checkAll}">取消全选</a>
+                </td>
+                <td colspan="4">
+                <div class="totalResult" style="text-align:right">
+                    <span>总价:￥{{totalMoney}}元</span>
+                    <button type="text" class="btn btn-danger" style="width:150px;margin-left:20px;">结账</button>
+                </div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript">
+
+new Vue({
+    el:"#box",
+    data:{
+        checkAll:false,
+        totalMoney:0,
+        items:[
+            {
+                goodsImg:'images/bannerA4.png',
+                goodsName:"杯子",
+                freeGoods:["打火机","打火机2"],
+                price:19,
+                amount:5,
+                selectNum:1,
+                show:true
+            },
+             {
+                goodsImg:'images/bannerA4.png',
+                goodsName:"杯子2",
+                freeGoods:["打火机"],
+                price:9,
+                amount:5,
+                selectNum:1,
+                show:true
+            }
+        ]
+    },
+    methods:{
+        add:function(a,b){
+            if(b>0){
+                a.selectNum++;
+            }
+            else{
+                if(a.selectNum>1){
+                    a.selectNum--;
+                }
+            }
+           this.calcTotalPrice(a.selectNum,a.price);
+        },
+        deleteFun:function(item){
+            item.show=false;
+        },
+        selectFun:function(item){
+            if(!item.checked){
+                // 在vue中，往item的变量里面，全局注册了一个叫做checked的变量，它的值是true,
+                // 在vue中监听，不存在变量；
+                 Vue.set(item,"checked",true); //全局注册
+               //this.$set(item,"checked",true);  //局部注册
+            }
+            else{
+                item.checked=!item.checked;
+            }
+        },
+        checkAllFun:function(a){
+            this.checkAll=!this.checkAll;
+        },
+        calcTotalPrice:function(a,b){
+           this.totalMoney=this.totalMoney+a*b;
+        }
+    },
+    computed:{
+    }
+})
+
+
+
+// function add(obj){
+//     var a=parseInt($(obj).prev().val());
+//     $(obj).prev().val(++a);
+// }
+// function reduce(obj){
+//     var a=parseInt($(obj).next().val());
+//     if(a>0){
+//         $(obj).next().val(--a);
+//     }
+// }
+// function deleteFun(obj){
+//    $(obj).parent().parent().remove();
+// }
+
+</script>
+</body>
+</html>

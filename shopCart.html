@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>jquery购物车</title>
+    <link rel="stylesheet" type="text/css" href="css/public.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css"; rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+</head>
+<style>
+.items{
+    margin: 100px;
+}
+.glyphicon{
+}
+.glyphicon-minus{}
+.glyphicon-plus{}
+.num{
+    min-width: 40px;
+    width:40px;
+    text-align: center;
+}
+.add{
+    width: 25px;
+    height: 25px;
+    border: 1px solid #00a0dc;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 12px;
+    display: inline-block;
+    line-height: 23px;
+    background: #00a0dc;
+    color:#fff;
+}
+.reduce{
+    width: 25px;
+    height: 25px;
+    border: 1px solid #00a0dc;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 12px;
+    display: inline-block;
+    line-height: 23px;
+}
+a:active{
+    color:#333;
+}
+th {
+    text-align: center;
+}
+td{
+    vertical-align: middle !important;
+    position: relative !important;
+}
+.oneBox{
+     position: relative;
+}
+.goodsBox{
+    text-align: left;
+    padding-top: 32px;
+}
+.goodsBox-left{
+    float: left;
+    margin-right: 20px;
+}
+.img-goods{}
+.goodsBox-right{
+    float: left;
+}
+.freeGoods{}
+.s1{
+    float: left;
+}
+.s2{
+    float: left;
+    color:#888;
+}
+.goodsName{
+    margin-bottom: 15px;
+}
+ul,li{
+    text-decoration:none;
+    list-style: none;
+}
+</style>
+<body>
+<div class="container table-responsive" style="margin-top:20px">
+    <table class="table text-center">
+        <caption style="margin-bottom:20px;">购物车模块</caption>
+        <thead style="background: #636363;color:#fff;border:0">
+            <tr>
+                <th width="40px"></th>
+                <th>商品名称</th>
+                <th>商品金额</th>
+                <th>商品数量</th>
+                <th>总金额</th>
+                <th>编辑</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td height="120px">
+                    <input type="radio" name="">
+                </td>
+                <td>
+                    <div class="goodsBox">
+                    <div class="goodsBox-left">
+                       <img src="images/bannerA4.png" alt="" width="55px" height="55px" class="img-goods">
+                    </div>
+                    <div class="goodsBox-right">
+                        <p class="goodsName">杯子1</p>
+                        <div class="freeGoods">
+                            <span class="s1">赠送</span>
+                            <ul class="s2">
+                                <li>打火机</li>
+                                <li>打火机2</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                </td>
+                <td >￥19.00</td>
+                <td class="oneBox">
+                    <div class="one">
+                        <a href="javascript:" class="reduce" onclick="reduce(this)"> <span class="glyphicon glyphicon-minus"></span></a>
+                        <input type="" name="价格" class="num" value="0">
+                        <a href="javascript:" class="add" onclick="add(this)"><span class="glyphicon glyphicon-plus"></span></a>
+                    </div>
+                        <p class="small">有货</p>
+                </td>
+                <td style="color:red">￥19.00</td>
+                <td><a href="javascript:" class="delete" onclick="deleteFun(this)"><span class="glyphicon glyphicon-trash"></span></a></td>
+            </tr>
+              <tr>
+                <td height="120px">
+                    <input type="radio" name="">
+                </td>
+                <td>
+                    <div class="goodsBox">
+                    <div class="goodsBox-left">
+                       <img src="images/bannerA4.png" alt="" width="55px" height="55px" class="img-goods">
+                    </div>
+                    <div class="goodsBox-right">
+                        <p class="goodsName">杯子2</p>
+                        <div class="freeGoods">
+                            <span class="s1">赠送</span>
+                            <ul class="s2">
+                                <li>打火机</li>
+                                <li>打火机2</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                </td>
+                <td >￥19.00</td>
+                <td class="oneBox">
+                    <div class="one">
+                        <a href="javascript:" class="reduce" onclick="reduce(this)"> <span class="glyphicon glyphicon-minus"></span></a>
+                        <input type="" name="价格" class="num" value="0">
+                        <a href="javascript:" class="add" onclick="add(this)"><span class="glyphicon glyphicon-plus"></span></a>
+                    </div>
+                        <p class="small">有货</p>
+                </td>
+                <td style="color:red">￥19.00</td>
+                <td><a href="javascript:" class="delete" onclick="deleteFun(this)"><span class="glyphicon glyphicon-trash"></span></a></td>
+            </tr>
+   <tr>
+            <td>
+                 <input type="radio" name="">
+            </td>
+                <td style="text-align: left">
+                    <a href="javascript:">全选</a>
+                    <a href="javascript:">取消全选</a>
+                </td>
+                <td colspan="4">
+                <div class="totalResult" style="text-align:right">
+                    <span>总价:0.00￥元</span>
+                    <button type="text" class="btn btn-danger" style="width:150px;margin-left:20px;">结账</button>
+                </div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript">
+function add(obj){
+    var a=parseInt($(obj).prev().val());
+    $(obj).prev().val(++a);
+}
+function reduce(obj){
+    var a=parseInt($(obj).next().val());
+    if(a>0){
+        $(obj).next().val(--a);
+    }
+}
+function deleteFun(obj){
+   $(obj).parent().parent().remove();
+}
+// function countAll(){
+//     $(".oneBox").each(function(){
+//        var unit=$(this).find("input").val();
+//        var num=$(this).find("input").val();
+//     })
+// }
+</script>
+</body>
+</html>
