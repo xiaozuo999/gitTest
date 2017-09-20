@@ -85,7 +85,8 @@
                                 <span class="price-old" v-show="item.foods.oldPrice">￥{{item2.oldPrice}}</span>
                                 <div class="addGoods">
                                     <span class="icon-remove_circle_outline" @click="reduce()"></span>
-                                    <span class="selectNum">{{selectNum}}</span>
+                                    <!--<span class="selectNum">{{selectNum}}</span>-->
+                                    <input type="text" value="0" v-model="item.productQuentity">
                                     <span class="icon-add_circle" @click="add()"></span>
                                 </div>
                             </div>

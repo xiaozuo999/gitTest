@@ -94,6 +94,9 @@ ul,li{
 a{
     color:#333;
 }
+    .show{
+        display: block;
+    }
 </style>
 <body>
 <div class="container table-responsive" style="margin-top:20px" id="box">
@@ -110,9 +113,8 @@ a{
             </tr>
         </thead>
         <tbody>
-            <tr v-for="item in items" v-show="item.show">
+            <tr v-for="item in productList">
                 <td height="120px">
-                    <!-- <input type="checkbox" name="" > -->
                     <a href="javascript:">
                         <span class="glyphicon glyphicon-ok-sign" v-bind:class="{active:item.checked}" @click="selectFun(item)"></span>
                     </a>
@@ -127,52 +129,83 @@ a{
                         <div class="freeGoods">
                             <span class="s1">赠送</span>
                             <ul class="s2">
-                                <li v-for="item2 in item.freeGoods">{{item2}}</li>
+                                <li v-for="item2 in productList.freeGoods">{{item2}}</li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 </td>
-                <td >￥{{item.price}}</td>
+                <td >￥{{item.productPrice}}</td>
                 <td class="oneBox">
                     <div class="one">
                         <a href="javascript:" class="reduce" @click="add(item,-1)">
                             <span class="glyphicon glyphicon-minus"></span>
                         </a>
-                        <input type="" name="价格" class="num" value="0" v-model="item.selectNum">
-                        <a href="javascript:" class="add" @click="add(item,1)"><span class="glyphicon glyphicon-plus"></span></a>
+                        <input type="text" name="价格" class="num" disabled value="1" v-model.number="item.productQuentity" v-show="item.productQuentity">
+                        <input type="text" name="价格" class="num" disabled value="1" v-show="!item.productQuentity">
+                        <a href="javascript:" class="add" @click="add(item,1)">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </a>
                     </div>
                         <p class="small">有货</p>
                 </td>
-                <td style="color:red">￥{{item.selectNum*item.price}}</td>
+                <td style="color:red">￥
+                    <span v-show="item.productQuentity">{{item.productQuentity*item.productPrice}}</span>
+                    <span v-show="!item.productQuentity">{{item.productPrice}}</span>
+                </td>
                 <td>
-                    <a href="javascript:" class="delete" @click="deleteFun(item)">
+                    <a href="javascript:" class="delete" @click="delConfirm(item)">
                         <span class="glyphicon glyphicon-trash"></span>
                     </a>
                 </td>
             </tr>
 
-   <tr>
+        <tr>
             <td>
-                 <!-- <input type="checkbox" name=""> -->
-                <a href="javascript:" @click="checkAllFun(checkAll)">
+                <a href="javascript:" @click="selectAll()">
                     <span class="glyphicon glyphicon-ok-sign" v-bind:class="{active:checkAll}"></span>
                 </a>
             </td>
-                <td style="text-align: left">
-                    <a href="javascript:" @click="checkAllFun(false)" style="padding-right:15px;" v-bind:class="{active:checkAll}">全选</a>
-                    <a href="javascript:" @click="checkAllFun(true)" v-bind:class="{active:!checkAll}">取消全选</a>
-                </td>
-                <td colspan="4">
-                <div class="totalResult" style="text-align:right">
-                    <span>总价:￥{{totalMoney}}元</span>
-                    <button type="text" class="btn btn-danger" style="width:150px;margin-left:20px;">结账</button>
-                </div>
-                </td>
-            </tr>
+            <td style="text-align: left">
+                <a href="javascript:" @click="selectAll(false)" style="padding-right:15px;" v-bind:class="{active:checkAll}">全选</a>
+                <a href="javascript:" @click="selectAll(true)" v-bind:class="{active:!checkAll}">取消全选</a>
+            </td>
+            <td colspan="4">
+            <div class="totalResult" style="text-align:right">
+                <span>总价:￥{{totalMoney}}元</span>
+                <button type="text" class="btn btn-danger" style="width:150px;margin-left:20px;">结账</button>
+            </div>
+            </td>
+        </tr>
 
         </tbody>
     </table>
+<div class="modal fade in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: block;"  v-show="affirmBox">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" @click="delConfirm2">
+                    ×
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    确认删除吗？
+                </h4>
+            </div>
+            <div class="modal-body">
+                删除后无法回复
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" @click="delConfirm2">关闭
+                </button>
+                <button type="button" class="btn btn-primary" @click="delProduct()">
+                    确认删除
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<div class="modal-backdrop fade in" v-show="affirmBox"></div>
+
 </div>
 <script type="text/javascript">
 
@@ -181,43 +214,56 @@ new Vue({
     data:{
         checkAll:false,
         totalMoney:0,
-        items:[
+        affirmBox:false,
+        curProduct:"",
+        productList:[
             {
                 goodsImg:'images/bannerA4.png',
                 goodsName:"杯子",
                 freeGoods:["打火机","打火机2"],
-                price:19,
-                amount:5,
-                selectNum:1,
-                show:true
+                productPrice:10,
+                amount:5
             },
              {
                 goodsImg:'images/bannerA4.png',
                 goodsName:"杯子2",
                 freeGoods:["打火机"],
-                price:9,
-                amount:5,
-                selectNum:1,
-                show:true
+                productPrice:2,
+                amount:5
             }
         ]
     },
     methods:{
         add:function(a,b){
+            if(!a.productQuentity){
+                Vue.set(a,"productQuentity",1); //全局注册
+            }
             if(b>0){
-                a.selectNum++;
+                a.productQuentity++;
             }
             else{
-                if(a.selectNum>1){
-                    a.selectNum--;
+                if(a.productQuentity>1){
+                    a.productQuentity--;
                 }
             }
-           this.calcTotalPrice(a.selectNum,a.price);
+            this.calcTotalPrice();
         },
-        deleteFun:function(item){
-            item.show=false;
+        delConfirm:function(item){
+            this.affirmBox=true;
+            this.curProduct=item;
+        },
+        delProduct:function(){
+            //indexOf指定字符串值在字符串中首次出现的位置；
+            var index=this.productList.indexOf(this.curProduct);
+            this.productList.splice(index,1);
+            this.affirmBox=false;
+            this.calcTotalPrice();
+        },
+        delConfirm2:function(){
+            this.affirmBox=false;
         },
         selectFun:function(item){
+//            item.check=!item.check;
             if(!item.checked){
                 // 在vue中，往item的变量里面，全局注册了一个叫做checked的变量，它的值是true,
                 // 在vue中监听，不存在变量；
@@ -227,33 +273,38 @@ new Vue({
             else{
                 item.checked=!item.checked;
             }
+            this.calcTotalPrice();
         },
-        checkAllFun:function(a){
+        selectAll:function(){
             this.checkAll=!this.checkAll;
+            var a="";
+            if(this.checkAll){
+                a=true;
+            }
+            else{
+                a=false;
+            }
+            this.productList.forEach(function(item){
+                Vue.set(item,"checked",a); //全局注册
+            })
+            this.calcTotalPrice();
         },
-        calcTotalPrice:function(a,b){
-           this.totalMoney=this.totalMoney+a*b;
+        calcTotalPrice:function(){
+          var _this=this;
+          _this.totalMoney=0;
+          this.productList.forEach(function(item,index){
+              if(item.checked){
+                  if(!item.productQuentity){
+                      item.productQuentity=1;
+                  }
+                  _this.totalMoney+=item.productPrice*item.productQuentity;
+              }
+          })
         }
     },
     computed:{
     }
 })
-
-
-
-// function add(obj){
-//     var a=parseInt($(obj).prev().val());
-//     $(obj).prev().val(++a);
-// }
-// function reduce(obj){
-//     var a=parseInt($(obj).next().val());
-//     if(a>0){
-//         $(obj).next().val(--a);
-//     }
-// }
-// function deleteFun(obj){
-//    $(obj).parent().parent().remove();
-// }
 
 </script>
 </body>
