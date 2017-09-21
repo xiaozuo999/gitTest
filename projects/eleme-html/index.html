@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/food.css">
     <link rel="stylesheet" href="css/rating.css">
     <link rel="stylesheet" href="css/seller.css">
+    <link rel="stylesheet" href="css/animate.css">
     <script src="js/vue.js"></script>
     <script src="js/jquery.min.js"></script>
 </head>
@@ -82,12 +83,14 @@
                             </div>
                             <div class="content-price">
                                 <span class="color-active">￥{{item2.price}}</span>
-                                <span class="price-old" v-show="item.foods.oldPrice">￥{{item2.oldPrice}}</span>
-                                <div class="addGoods">
-                                    <span class="icon-remove_circle_outline" @click="reduce()"></span>
-                                    <!--<span class="selectNum">{{selectNum}}</span>-->
-                                    <input type="text" value="0" v-model="item.productQuentity">
-                                    <span class="icon-add_circle" @click="add()"></span>
+                                <span class="price-old" v-show="item2.oldPrice">￥{{item2.oldPrice}}</span>
+                                <div class="addGoodsBox fr">
+                                    <div class="addGoods">
+                                        <span class="icon-remove_circle_outline" @click="add(item2,-1,item.foods)"></span>
+                                        <span class="selectNum" v-show="!item2.selectNum">0</span>
+                                        <span class="selectNum" v-show="item2.selectNum">{{item2.selectNum}}</span>
+                                        <span class="icon-add_circle" @click="add(item2,1,item.foods)"></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -96,20 +99,52 @@
             </div>
         </div>
         <div class="shopCart">
-            <div class="shopCart-left">
-                <div class="cartWrap">
-                    <div class="cartBox">
-                        <span class="icon-shopping_cart"></span>
-                        <span class="cartNum"  style="display:none">12</span>
-                    </div>
-                    <div class="carBox2 text-center">
-                        <span class="price-total">￥0</span>
+            <div class="shopCart-list animated" v-show="cartList" v-bind:class="{slideInUp:cartList,slideOutDown:!cartList}">
+                <div class="shopCart-list-top">
+                    <span>购物车</span>
+                    <a href="javascript:" class="fr color-link" @click="empty()">清空</a>
+                </div>
+                <ul>
+                    <li class="bdb1-gray" v-for="item in cartProduct">
+                        <div class="shopCart-list-left fl">{{item.name}}</div>
+                        <div class="shopCart-list-right fr">
+                            <div class="content-price">
+                                <span class="color-active fl">￥{{item.price}}</span>
+                                <div class="addGoodsBox fr">
+                                    <div class="addGoods">
+                                        <span class="icon-remove_circle_outline"></span>
+                                        <span class="selectNum" >{{item.selectNum}}</span>
+                                        <span class="icon-add_circle"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="content">
+                <div class="shopCart-left">
+                    <div class="cartWrap">
+                        <div class="cartBox"  v-bind:class="{'bg-blue':totalAmount!=0}" @click="cartListFun(totalAmount)">
+                            <span class="icon-shopping_cart"></span>
+                            <span class="cartNum">{{totalAmount}}</span>
+                        </div>
+                        <div class="carBox2">
+                            <span class="price-total">￥{{totalMoney}}</span>
+                            <span class="carBox3" style="font-size:12px">
+                                另需配送费￥{{seller.deliveryPrice}}元
+                            </span>
+                        </div>
+
                     </div>
                 </div>
+                <div class="shopCart-right" v-bind:class="{'bg-green':seller.minPrice-totalMoney<=0}">
+                    <strong v-show="seller.minPrice-totalMoney>0"> <span v-show="totalMoney!=0">还差</span>￥{{seller.minPrice-totalMoney}}元起送</strong>
+                    <strong v-show="seller.minPrice-totalMoney<=0"> 去结算</strong>
+                </div>
             </div>
-            <div class="shopCart-right">
-                <strong>￥20元起送</strong>
-            </div>
+        </div>
+        <div class="maskBox animated" v-show="cartList" v-bind:class="{fadeIn:cartList,fadeOut:!cartList}" @click="closeCart()">
         </div>
     </div>
     <div class="ratings" v-if="activeIndex==1">
@@ -299,7 +334,11 @@
                 data1:0,
                 filtA:2,
                 filtB:true,
-                selectNum:0
+                totalMoney:0,
+                bgBlue:false,
+                totalAmount:0,
+                cartList:false,
+                cartProduct:[]
             },
             methods: {
                 favorite:function(){
@@ -342,11 +381,55 @@
                         }
                     }
                 },
-                add:function(){
-                    this.selectNum++;
+                add:function(item2,index,foods){
+                    if(!item2.selectNum){
+                        Vue.set(item2,"selectNum",0);   //全局注册变量
+                    }
+                    if(index>0){
+                        ++item2.selectNum;
+                    }
+                    else{
+                        --item2.selectNum;
+                    }
+                    this.calcTotalPrice(foods);
                 },
-                reduce:function(){
-                    this.selectNum--;
+                calcTotalPrice:function(foods){
+                    var _this=this;
+                    _this.totalMoney=0;
+                    _this.totalAmount=0;
+                    foods.forEach(function(item2,index){
+                        if(item2.selectNum){
+                            _this.totalMoney+=item2.price*item2.selectNum;
+                            //选择总数量
+                            _this.totalAmount+=item2.selectNum;
+                        }
+                    })
+                },
+                empty:function(){
+                },
+                cartListFun:function(num){
+                    if(num>0){
+                        this.cartList=!this.cartList;
+                        this.cartProduct=[];
+                        for(item in this.goods){
+                            for(item2 in item.name){
+                                console.log(item2);
+                            }
+
+//                            item.foods.forEach(function(item,index){
+//                                if(item.selectNum>0){
+//                                    this.cartProduct[index]={
+//                                        "name":item.name,
+//                                        "price":item.price,
+//                                        "selectNum":item.selectNum
+//                                    }
+//                                }
+//                            })
+                        }
+                    }
+                },
+                closeCart:function(){
+                    this.cartList=false;
                 }
             }
         })
