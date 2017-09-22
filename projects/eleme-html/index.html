@@ -56,24 +56,29 @@
 <div class="main">
     <div class="food" v-if="activeIndex==0">
         <div class="food-left">
-            <ul class="food-lists">
-                <li v-for="(item,index) in goods" v-bind:class="{active2:activeIndex2==index}" @click="change2(index)">
-                    <span class="li-content">
-                        <span class="icon icon-specialties" v-show="item.type==1"></span>
-                        <span class="icon icon-discount" v-show="item.type==2"></span>
-                        {{item.name}}
-                    </span>
-                </li>
-            </ul>
+            <div class="food-left-box">
+                <ul class="food-lists">
+                    <li v-for="(item,index) in goods" v-bind:class="{active2:activeIndex2==index}" @click="change2(index)">
+                        <span class="li-content">
+                            <span class="icon icon-specialties" v-show="item.type==1"></span>
+                            <span class="icon icon-discount" v-show="item.type==2"></span>
+                            {{item.name}}
+                        </span>
+                    </li>
+                </ul>
+            </div>
         </div>
         <div class="food-right">
-            <div class="food-item" v-for="item in goods">
+            <div class="food-right-box">
+                <div class="food-item" v-for="item in goods">
                 <div class="food-item-title">
                     {{item.name}}
                 </div>
                 <div class="food-item-content">
                     <div class="content-item" v-for="item2 in item.foods">
-                        <img v-bind:src=item2.icon  alt="" width="57" class="img-food">
+                        <div class="food-img">
+                            <img v-bind:src=item2.icon  alt="" width="57">
+                        </div>
                         <div class="content-item-box">
                             <div class="content-title">
                                 {{item2.name}}
@@ -96,6 +101,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
         <div class="shopCart">
@@ -406,26 +412,37 @@
                     })
                 },
                 empty:function(){
+                    var _this=this;
+                    this.goods.forEach(function(item,index){
+                        item.foods.forEach(function(item2,index2){
+                            if(item2.selectNum){
+                                item2.selectNum="";
+                                _this.cartProduct="";
+                            }
+                        })
+                    })
+                    _this.totalAmount=0;
+                    _this.totalMoney=0;
+                    _this.closeCart();
                 },
-                cartListFun:function(num){
-                    if(num>0){
+                cartListFun:function(totalAmount){
+                    var _this=this;
+                    var a="";
+                    if(totalAmount>0){
                         this.cartList=!this.cartList;
                         this.cartProduct=[];
-                        for(item in this.goods){
-                            for(item2 in item.name){
-                                console.log(item2);
-                            }
-
-//                            item.foods.forEach(function(item,index){
-//                                if(item.selectNum>0){
-//                                    this.cartProduct[index]={
-//                                        "name":item.name,
-//                                        "price":item.price,
-//                                        "selectNum":item.selectNum
-//                                    }
-//                                }
-//                            })
-                        }
+                        this.goods.forEach(function(item,index){
+                            item.foods.forEach(function(item2,index2){
+                                if(item2.selectNum){
+                                    a={
+                                        "name":item2.name,
+                                        "price":item2.price,
+                                        "selectNum":item2.selectNum
+                                    }
+                                     _this.cartProduct.push(a);
+                                }
+                            })
+                         })
                     }
                 },
                 closeCart:function(){

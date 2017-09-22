@@ -101,20 +101,23 @@
 }
 /*foodéƒ¨åˆ†*/
 .food{
-    display: table;
+    display: flex;
     min-height:100px;
     min-width: 50px;
     margin-bottom: 50px;
 }
 .food-left{
-    width: 80px;
-    display: table-cell;
     background: #f3f5f7;
     min-width: 80px;
+    height: 466px;
+    overflow-y: scroll;
+    -ms-flex: 0 0 80px;
+    flex: 0 0 80px;
 }
 .food-right{
-    display: table-cell;
-    width: 100%;
+    height: 466px;
+    flex: 1;
+    overflow-y: scroll;
 }
 .food-item{}
 .food-item-title{
@@ -127,11 +130,12 @@
 .food-item-content{
 }
 .content-item-box{
-    margin-left: 70px;
+    /*margin-left: 70px;*/
+    flex: 1;
 }
-.content-item{margin: 0 15px;padding: 15px 0;border-bottom: 1px solid #eee;}
-.img-food{
-    position: absolute;
+.content-item{margin: 0 15px;padding: 15px 0;border-bottom: 1px solid #eee;display: flex;}
+.food-img{
+    margin-right: 10px;
 }
 .color-active{
     color:#f01414;
@@ -218,8 +222,6 @@
     border-bottom: 1px solid #eee;
     padding:0 10px;
     display: table;
-
-
 }
 .food-lists li:last-child{
     border: 0;
@@ -336,7 +338,10 @@ span.price-total {
 .cartWrap {
     position: relative;
 }
-
+.food-right-box {
+    position: absolute;
+    width: 100%;
+}
 
 
 
