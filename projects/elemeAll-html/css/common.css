@@ -1,0 +1,26 @@
+/*初始化*/
+ ul,h3,p,input,li,dt,dl,dd,h1,h2,h3,h4,h5,h6{margin:0;padding:0;}
+ li{list-style:none;}
+ a{text-decoration:none;}
+ a,em{display:inline-block;}
+ em{font-style:normal;}
+ img{border:none;vertical-align:top;}
+ input{border:none;outline:none;}
+ body{margin:0;font:0.14rem/1.5 arial,"Microsoft Yahei","Hiragino Sans GB",sans-serif;}
+ .fl{float:left;}
+ .fr{float:right;}
+ .clear{zoom:1;}
+ .clear::after{content:"";display:block;clear:both;}
+ .color-grey{
+     color: #9f9f9f;
+ }
+ .space-between{
+     padding: 0.08rem;
+     display: flex;
+     display: -webkit-flex;
+     justify-content:space-between;
+ }
+ .bdb1{
+     border-bottom: 1px solid #e4e4e4;
+ }
+
