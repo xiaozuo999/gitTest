@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+    <title>ele城市选择</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/city.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/rem.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="node_modules/_vue-router@2.7.0@vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+<div id="box">
+    <header class="space-between header">
+        <a href="index.html"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
+        <span class="fz18"><strong v-cloak>{{city.name}}</strong></span>
+        <a href="index.html">切换城市</a>
+    </header>
+    <div class="top">
+        <div class="searchBox mb10">
+            <input type="search" placeholder="输入学校、商务楼、地址"  v-model="keyword" @keyup.enter="search()"  @key.up="searchUp()" @key.down="searchDown()">
+        </div>
+        <div class="buttonBox">
+            <button type="button"  class="btn btn-primary btn-block" @click="search()">提交</button>
+        </div>
+    </div>
+    <div class="content" v-cloak>
+        <p class="history" v-show="!searchContent">搜索历史</p>
+        <ul class="content-search">
+            <li v-for="item in searchContent" @click="home(item)" v-show="searchContent">
+                <h3 class="address-title">{{item.name}}</h3>
+                <p class="color-grey fz10">{{item.address}}</p>
+            </li>
+        </ul>
+        <ul class="content-search" v-show="!searchContent">
+            <li v-for="item in searchHistory" @click="home(this)">
+                <h3 class="address-title" >{{item.name}}</h3>
+                <p class="color-grey fz10">{{item.address}}</p>
+            </li>
+        </ul>
+        <div class="clearBox" v-show="searchHistory && !searchContent" @click="empty()">
+            清空所有
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+<script>
+//    if(localStorage.getItem(searchHistory)){
+//        VM.searchHistory=localStorage.getItem(searchHistory);
+//    }
+//    else{
+//        VM.searchHistory="";
+//    }
+//
+
+$.post("json/city-group.json",{},function(result){
+    var VM=new Vue({
+        el:"#box",
+        data:{
+            keyword:"",
+            searchContent:"",
+            searchHistory:""
+        },
+        methods:{
+            search:function(){
+                var _this=this;
+                if(_this.keyword){
+                    $.post("json/city-search.json",{"keyword":_this.keyword},function(result){
+                        _this.searchContent=result;
+                    });
+                }
+            },
+            empty:function(){
+                this.searchHistory="";
+                localStorage.clear();
+            },
+            home:function(obj){
+                var _this=this;
+                if(typeof(Storage)!=="undefined")
+                {
+                    _this.searchHistory.push(obj);
+                    localStorage.setItem(searchHistory,_this.searchHistory);
+                } else {
+                    alert("浏览器不支持本地存储功能，请升级您的浏览器");
+                }
+            },
+            searchTips:function(){
+
+            }
+        },
+        computed:{
+            city:function(){
+                var url=location.href;
+                var sc=url.split("type=")[1].split("|");
+                sc[0]=sc[0].split("")[0].toUpperCase();
+                console.log(sc);
+                var b=result[sc[0]][sc[1]];
+//                var b=result["E"][0];
+                console.log(b.name);
+                return b;
+            }
+        }
+    })
+
+})
+
+</script>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+    <title>ele城市选择</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/home.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/rem.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="node_modules/_vue-router@2.7.0@vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+<div id="box">
+    <header class="space-between">
+        <span>
+            ele.me
+        </span>
+        <span>
+            <i class="fa fa-user-o" aria-hidden="true"></i>
+        </span>
+    </header>
+    <div class="top">
+        <div class="space-between bdb1">
+            <span>当前定位城市</span>
+            <span class="color-gray">定位不准时，请在城市列表中选择</span>
+        </div>
+        <div class="space-between bdb1">
+            <span class="fz18"><a href="city.html"></a>深圳</span>
+            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+        </div>
+    </div>
+    <div class="main">
+        <div class="city-wrap city-hot">
+            <div class="content-title">
+                热门城市
+            </div>
+            <div class="content">
+                <div class="col-xs-3" v-for="(item,index) in cityHot" v-cloak>
+                    <a v-bind:href='"city.html?type="+item.pinyin+"|"+index' data-area_code="item.area_code" @click="city(item)">{{item.name}} </a>
+                </div>
+            </div>
+        </div>
+        <div class="city-wrap city-group">
+            <div class="city-group-one" v-for="(item,index) in cityGroup2" v-cloak>
+                <div class="content-title">
+                    {{softRule[index]}}<span v-show="index=='A'" class="fz10 color-grey">(按字母排序)</span>
+                </div>
+                <div class="content">
+                    <div class="row">
+                        <div class="col-xs-3 ellipsis" v-for="(item2,index2) in item">
+                            <a v-bind:href='"city.html?type="+item2.pinyin+"|"+index2' data-area_code="item2.area_code">{{item2.name}} </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
+
+<script>
+    $.post("json/city-hot.json",{},function(result){
+        $.post("json/city-group.json",{},function(result2){
+            new Vue({
+                el:"#box",
+                data:{
+                    cityHot:result,
+                    cityGroup:result2,
+                    softRule:["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"],
+                    cityGroup2B:[]
+                },
+                methods:{
+
+                },
+                computed:{
+                    cityGroup2:function(){
+                        for(var i=0;i<this.softRule.length;i++){
+                           var one=this.cityGroup[this.softRule[i]];
+                           this.cityGroup2B.push(one);
+                        }
+                        return this.cityGroup2B;
+                    }
+                }
+            })
+        })
+    })
+</script>
