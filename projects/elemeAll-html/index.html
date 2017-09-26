@@ -28,7 +28,7 @@
             <span class="color-gray">定位不准时，请在城市列表中选择</span>
         </div>
         <div class="space-between bdb1">
-            <span class="fz18"><a href="city.html"></a>深圳</span>
+            <span class="fz18" v-cloak><a v-bind:href='"city.html?type="+address.pinyin'></a>{{address.name}}</span>
             <i class="fa fa-chevron-right" aria-hidden="true"></i>
         </div>
     </div>
@@ -39,7 +39,7 @@
             </div>
             <div class="content">
                 <div class="col-xs-3" v-for="(item,index) in cityHot" v-cloak>
-                    <a v-bind:href='"city.html?type="+item.pinyin+"|"+index' data-area_code="item.area_code" @click="city(item)">{{item.name}} </a>
+                    <a v-bind:href='"city.html?type="+item.pinyin+"|"+index+"|hot"' data-area_code="item.area_code" @click="city(item)">{{item.name}} </a>
                 </div>
             </div>
         </div>
@@ -85,6 +85,19 @@
                            this.cityGroup2B.push(one);
                         }
                         return this.cityGroup2B;
+                    },
+                    address:function(){
+                        return  {
+                            "pinyin": "shanghai",
+                            "is_map": true,
+                            "longitude": 121.473701,
+                            "latitude": 31.23037,
+                            "sort": 1,
+                            "area_code": "021",
+                            "abbr": "SH",
+                            "name": "上海",
+                            "id": 1
+                        }
                     }
                 }
             })

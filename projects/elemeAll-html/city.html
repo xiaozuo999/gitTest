@@ -59,13 +59,14 @@
 //    }
 //
 
-$.post("json/city-group.json",{},function(result){
+
     var VM=new Vue({
         el:"#box",
         data:{
             keyword:"",
             searchContent:"",
-            searchHistory:""
+            searchHistory:"",
+            city2:""
         },
         methods:{
             search:function(){
@@ -96,15 +97,23 @@ $.post("json/city-group.json",{},function(result){
         },
         computed:{
             city:function(){
-                var url=location.href;
-                var sc=url.split("type=")[1].split("|");
-                sc[0]=sc[0].split("")[0].toUpperCase();
-                var b=result[sc[0]][sc[1]];
-                return b;
+                var _this=this;
+                var url = location.href;
+                var sc = url.split("type=")[1].split("|");
+                sc[0] = sc[0].split("")[0].toUpperCase();
+                if(sc.length==3){
+                    $.post("json/city-hot.json",{},function(result) {
+                        _this.city2 = result[sc[1]];
+                    })
+                }
+                else{
+                    $.post("json/city-group.json",{},function(result) {
+                        _this.city2 = result[sc[0]][sc[1]];
+                    })
+                }
+                return _this.city2;
             }
         }
     })
-
-})
 
 </script>
