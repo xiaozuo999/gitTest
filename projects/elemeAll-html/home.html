@@ -7,12 +7,12 @@
     <title>ele城市选择</title>
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/home.css">
-    <script src="js/jquery.js"></script>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <script src="node_modules/vue-router/dist/vue-router.js"></script>
+    <link href="node_modules/c-swipe/dist/swipe.css" rel="stylesheet"></head>
+    <script type="text/javascript" src="node_modules/c-swipe/dist/swipe.js"></script>
     <script src="js/rem.js"></script>
-    <script src="js/vue.js"></script>
-    <script src="node_modules/vue-route/dist/vue-router.js"></script>
-    <link href="../node-modules/c-swipe/dist/swipe.css" rel="stylesheet"></head>
-    <script type="text/javascript" src="../node-modules/c-swipe/dist/swipe.js"></script>
 
 </head>
 <body>
@@ -44,18 +44,16 @@
             附近商家
         </h5>
         <div class="items">
-            <div class="item">
+            <div class="item" v-for="item in restaurants">
                 <div class="item-left">
-                    <img src="http://images.cangdu.org/15e386ec1875697.jpeg" alt="" class="img-shop">
+                    <img v-bind:src='"http://images.cangdu.org/"+item.image_path' alt="" class="img-shop">
                 </div>
                 <div class="item-right">
                     <h4 class="item-right-1">
-                        <span class="seller-tab">品牌</span> <span>商家名称</span>
+                        <span class="seller-tab">品牌</span> <span>{{item.name}}</span>
                         <div class="item-right-1-right fr">
                             <ul>
-                                <li class="supports">保</li>
-                                <li class="supports">准</li>
-                                <li class="supports">票</li>
+                                <li class="supports" v-for="item2 in item.supports">{{item2.icon_name}}</li>
                             </ul>
                         </div>
                     </h4>
@@ -75,23 +73,41 @@
                                 <i class="fa fa-star-half"></i>
                             </span>
                         </div>
-                        <span>4.4</span>
+                        <span class="color-orange">{{item.rating}}</span>
                         <span>月售612单</span>
                         <div class="fr">
-                            <span class="tag-1 bg-color-active">蜂鸟专送</span>
-                            <span class="tag-1">准时达</span>
+                            <span class="tag-1 bg-color-active scale08">蜂鸟专送</span>
+                            <span class="tag-1 scale08">准时达</span>
                         </div>
                     </div>
                     <div class="item-right-3">
-                        ￥20起送/ 配送费约￥5元
-                        <div class="item-right-3-right fr">
-                            <span class="color-grey">1390.6公里/</span>  <span class="color-active">11小时25分钟</span>
+                        <span class="scale09">￥{{item.float_minimum_order_amount}}起送/ {{item.piecewise_agent_fee.tips}}</span>
+                        <div class="item-right-3-right fr scale09">
+                            <span class="color-grey">{{item.distance}}公里/</span>  <span class="color-active">{{item.order_lead_time}}</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <footer class="footer">
+        <div class="col-xs-3 text-center">
+            <i class="fa fa-shopping-basket color-active"></i>
+            <span>外卖</span>
+        </div>
+        <div class="col-xs-3 text-center">
+            <i class="fa fa-search"></i>
+            <span>搜索</span>
+        </div>
+        <div class="col-xs-3 text-center">
+            <i class="fa fa-reorder "></i>
+            <span>订单</span>
+        </div>
+        <div class="col-xs-3 text-center">
+            <i class="fa fa-user-o"></i>
+            <span>我的</span>
+        </div>
+    </footer>
 </div>
 </body>
 </html>
@@ -101,7 +117,8 @@
             el:"#box",
             data:{
                 dataBanner:"",
-                filteredItems:""
+                filteredItems:"",
+                restaurants:""
             },
             methods:{
             },
@@ -117,6 +134,9 @@
                         arr.push(_this.dataBanner.slice(8*i, 8*(i+1)));
                     }
                     _this.filteredItems=arr;
+                })
+                $.post("json/restaurants.json",{},function(result){
+                    _this.restaurants=result;
                 })
             }
         })

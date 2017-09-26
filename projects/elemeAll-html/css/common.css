@@ -62,4 +62,16 @@
 [v-cloak] {
     display: none;
 }
+.color-orange{
+    color:#ff9a0d;
+}
+.col-xs-3{
+    width: 25%;
+    float: left;
+    text-align: center;
+    padding: 6px 0;
+}
+.color-active{
+    color:#3190e8;
+}
 

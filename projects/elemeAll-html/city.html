@@ -7,9 +7,9 @@
     <title>ele城市选择</title>
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/city.css">
-    <script src="js/jquery.js"></script>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/vue/dist/vue.js"></script>
     <script src="js/rem.js"></script>
-    <script src="js/vue.js"></script>
     <script src="node_modules/vue-router/dist/vue-router.js"></script>
 </head>
 <body>
@@ -31,14 +31,18 @@
         <p class="history" v-show="!searchContent">搜索历史</p>
         <ul class="content-search">
             <li v-for="item in searchContent" @click="home(item)" v-show="searchContent">
-                <h3 class="address-title">{{item.name}}</h3>
-                <p class="color-grey fz10">{{item.address}}</p>
+                <a href="home.html">
+                    <h3 class="address-title">{{item.name}}</h3>
+                    <p class="color-grey fz10">{{item.address}}</p>
+                </a>
             </li>
         </ul>
         <ul class="content-search" v-show="!searchContent">
             <li v-for="item in searchHistory" @click="home(this)">
-                <h3 class="address-title" >{{item.name}}</h3>
-                <p class="color-grey fz10">{{item.address}}</p>
+                <a href="home.html">
+                    <h3 class="address-title" >{{item.name}}</h3>
+                    <p class="color-grey fz10">{{item.address}}</p>
+                </a>
             </li>
         </ul>
         <div class="clearBox" v-show="searchHistory && !searchContent" @click="empty()">
@@ -82,14 +86,14 @@
                 localStorage.clear();
             },
             home:function(obj){
-                var _this=this;
-                if(typeof(Storage)!=="undefined")
-                {
-                    _this.searchHistory.push(obj);
-                    localStorage.setItem(searchHistory,_this.searchHistory);
-                } else {
-                    alert("浏览器不支持本地存储功能，请升级您的浏览器");
-                }
+//                var _this=this;
+//                if(typeof(Storage)!=="undefined")
+//                {
+//                    _this.searchHistory.push(obj);
+//                    localStorage.setItem(searchHistory,_this.searchHistory);
+//                } else {
+//                    alert("浏览器不支持本地存储功能，请升级您的浏览器");
+//                }
             },
             searchTips:function(){
 

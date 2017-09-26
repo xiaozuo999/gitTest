@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "font-awesome": "",
+    "vue":"v2.1.10",
+    "vue-router":"",
+    "jquery":"v2.1.1",
+    "c-swipe":""
+  }
+}
