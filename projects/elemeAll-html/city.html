@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
     <title>ele城市选择</title>
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/city.css">
     <script src="js/jquery.js"></script>
     <script src="js/rem.js"></script>
     <script src="js/vue.js"></script>
-    <script src="node_modules/_vue-router@2.7.0@vue-router/dist/vue-router.js"></script>
+    <script src="node_modules/vue-router/dist/vue-router.js"></script>
 </head>
 <body>
 <div id="box">
@@ -99,10 +99,7 @@ $.post("json/city-group.json",{},function(result){
                 var url=location.href;
                 var sc=url.split("type=")[1].split("|");
                 sc[0]=sc[0].split("")[0].toUpperCase();
-                console.log(sc);
                 var b=result[sc[0]][sc[1]];
-//                var b=result["E"][0];
-                console.log(b.name);
                 return b;
             }
         }

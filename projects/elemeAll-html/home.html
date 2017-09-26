@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+    <title>ele城市选择</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/home.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/rem.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="node_modules/vue-route/dist/vue-router.js"></script>
+    <link href="../node-modules/c-swipe/dist/swipe.css" rel="stylesheet"></head>
+    <script type="text/javascript" src="../node-modules/c-swipe/dist/swipe.js"></script>
+
+</head>
+<body>
+<div id="box">
+    <header class="space-between header">
+        <a href="javascript:"><i class="fa fa-search" aria-hidden="true"></i></a>
+        <span>福田区车公庙地铁站</span>
+        <a href="javascript:"><i class="fa fa-user-o"></i></a>
+    </header>
+    <div class="banner bdb1" v-cloak>
+        <div class="swiper-wrapper">
+            <div class="bannerOne" v-for="(item,index) in filteredItems">
+                <a href="javascript:"  v-for="(item2,index2) in item">
+                    <figure>
+                        <img v-bind:src='"https://fuss10.elemecdn.com/"+item2.image_url' alt="">
+                        <figcaption>{{item2.title}}</figcaption>
+                    </figure>
+                </a>
+            </div>
+        </div>
+        <div class="swiper-pagination">
+            <span class="swiper-bot"></span>
+            <span class="swiper-bot swiper-active"></span>
+        </div>
+    </div>
+    <div class="container">
+        <h5 class="title">
+            <i class="fa fa-university"></i>
+            附近商家
+        </h5>
+        <div class="items">
+            <div class="item">
+                <div class="item-left">
+                    <img src="http://images.cangdu.org/15e386ec1875697.jpeg" alt="" class="img-shop">
+                </div>
+                <div class="item-right">
+                    <h4 class="item-right-1">
+                        <span class="seller-tab">品牌</span> <span>商家名称</span>
+                        <div class="item-right-1-right fr">
+                            <ul>
+                                <li class="supports">保</li>
+                                <li class="supports">准</li>
+                                <li class="supports">票</li>
+                            </ul>
+                        </div>
+                    </h4>
+                    <div class="item-right-2">
+                        <div class="starBox">
+                              <span class="starBox1 color-grey">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </span>
+                            <span class="starBox1" style="color:#ff9a0d;">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-half"></i>
+                            </span>
+                        </div>
+                        <span>4.4</span>
+                        <span>月售612单</span>
+                        <div class="fr">
+                            <span class="tag-1 bg-color-active">蜂鸟专送</span>
+                            <span class="tag-1">准时达</span>
+                        </div>
+                    </div>
+                    <div class="item-right-3">
+                        ￥20起送/ 配送费约￥5元
+                        <div class="item-right-3-right fr">
+                            <span class="color-grey">1390.6公里/</span>  <span class="color-active">11小时25分钟</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+<script>
+        new Vue({
+            el:"#box",
+            data:{
+                dataBanner:"",
+                filteredItems:""
+            },
+            methods:{
+            },
+            computed:{
+            },
+            created:function(){
+                var _this=this;
+                $.post("json/group-type.json",{},function(result){
+                    _this.dataBanner=result;
+                    var arr=[];
+                    var len=Math.ceil(_this.dataBanner.length/8);
+                    for(var i=0;i<len;i++){
+                        arr.push(_this.dataBanner.slice(8*i, 8*(i+1)));
+                    }
+                    _this.filteredItems=arr;
+                })
+            }
+        })
+</script>

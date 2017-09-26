@@ -1,5 +1,5 @@
 /*初始化*/
- ul,h3,p,input,li,dt,dl,dd,h1,h2,h3,h4,h5,h6{margin:0;padding:0;}
+ ul,h3,p,input,li,dt,dl,dd,h1,h2,h3,h4,h5,h6,figure,figcaption{margin:0;padding:0;}
  li{list-style:none;}
  a{text-decoration:none;color:#3190e8;}
  a,em{display:inline-block;}
