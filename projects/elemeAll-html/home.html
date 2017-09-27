@@ -13,14 +13,14 @@
     <link href="node_modules/c-swipe/dist/swipe.css" rel="stylesheet"></head>
     <script type="text/javascript" src="node_modules/c-swipe/dist/swipe.js"></script>
     <script src="js/rem.js"></script>
-
 </head>
 <body>
 <div id="box">
-    <header class="space-between header">
-        <a href="javascript:"><i class="fa fa-search" aria-hidden="true"></i></a>
-        <span>福田区车公庙地铁站</span>
-        <a href="javascript:"><i class="fa fa-user-o"></i></a>
+    <div class="img-loading" v-show="imgLoading" v-bind:style="{backgroundPositionY:positionY}"></div>
+    <header class="header">
+        <a href="search.html" class="header-left"><i aria-hidden="true" class="fa fa-search"></i></a>
+        <div class="header-center">福田区车公庙地铁站</div>
+        <a href="profile.html" class="header-right fr"><i aria-hidden="true" class="fa fa-user-o"></i></a>
     </header>
     <div class="banner bdb1" v-cloak>
         <div class="swiper-wrapper">
@@ -43,7 +43,7 @@
             <i class="fa fa-university"></i>
             附近商家
         </h5>
-        <div class="items">
+        <div class="items" v-cloak>
             <div class="item" v-for="item in restaurants">
                 <div class="item-left">
                     <img v-bind:src='"http://images.cangdu.org/"+item.image_path' alt="" class="img-shop">
@@ -88,25 +88,28 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     </div>
-    <footer class="footer">
-        <div class="col-xs-3 text-center">
+    <footer class="footer-menu flex">
+        <a href="home.html" class="text-center flex-1">
             <i class="fa fa-shopping-basket color-active"></i>
             <span>外卖</span>
-        </div>
-        <div class="col-xs-3 text-center">
+        </a>
+
+        <a href="search.html" class="text-center flex-1">
             <i class="fa fa-search"></i>
             <span>搜索</span>
-        </div>
-        <div class="col-xs-3 text-center">
+        </a>
+
+        <a href="order.html" class="text-center flex-1">
             <i class="fa fa-reorder "></i>
             <span>订单</span>
-        </div>
-        <div class="col-xs-3 text-center">
+        </a>
+
+        <a href="profile.html" class="text-center flex-1">
             <i class="fa fa-user-o"></i>
             <span>我的</span>
-        </div>
+        </a>
     </footer>
 </div>
 </body>
@@ -118,7 +121,9 @@
             data:{
                 dataBanner:"",
                 filteredItems:"",
-                restaurants:""
+                restaurants:"",
+                imgLoading:true,
+                positionY:0
             },
             methods:{
             },
@@ -138,6 +143,22 @@
                 $.post("json/restaurants.json",{},function(result){
                     _this.restaurants=result;
                 })
+            },
+            beforeCreate:function(){
+                var _this=this;
+                var i=0;
+                var timer=setInterval(function(){
+                    if(i>5){
+                        i--;
+                    }
+                    else{
+                        i++;
+                    }
+                    _this.positionY=-70*i+"px";
+                },1000);
+                setTimeout(function(){
+                    _this.imgLoading=false;
+                },3000);
             }
         })
 </script>

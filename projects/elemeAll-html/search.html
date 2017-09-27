@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+    <title>ele-搜索页面</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/search.css">
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <script src="node_modules/vue-router/dist/vue-router.js"></script>
+    <script src="js/rem.js"></script>
+</head>
+<body>
+<div id="box">
+    <header class="header">
+        <a href="home.html" class="header-left"><i aria-hidden="true" class="fa fa-chevron-left"></i></a>
+        <div class="header-center">搜索</div>
+    </header>
+    <div class="main mt35">
+        <div class="top">
+            <form  class="searhBox flex" method="post" onsubmit="return false">
+                <input type="search" class="flex-1 mr5" placeholder="请输入商家或美食名称" v-model="keyword" v-bind:class="{'bd-active':keyword==''}" autocomplete="on" required>
+                <button class="btn btn-primary" @click="search(keyword)">提交</button>
+            </form>
+        </div>
+        <div class="content" v-cloak>
+            <div class="content-box1" v-show="!searchLists">
+                <h4 class="title" v-show="searchHistory.length!=0">搜索历史</h4>
+                <div class="items">
+                    <div class="item flex bdb1" v-for="(item,index) in searchHistory">
+                        <a href="javascript:" class="flex-1" @click="search(item)">{{item}}</a>
+                        <a href="javascript:" class="p5" @click="remove(index)"><i class="fa fa-close"></i></a>
+                    </div>
+                </div>
+                <a  href="javascript:" class="empty-box color-active text-center block" v-show="searchHistory.length!=0" @click="empty()">
+                    清空搜索历史
+                </a>
+                <div class="empty-box color-active text-center block" v-show="keywordTips">
+                    很抱歉！无搜索结果
+                </div>
+            </div>
+
+            <div class="items2" v-show="searchLists">
+                <div class="item flex bdb1" v-for="(item,index) in searchLists">
+                    <a href="javascript:" class="flex-1" @click="search(item.name)">{{item.name}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer-menu flex">
+        <a href="home.html" class="text-center flex-1">
+            <i class="fa fa-shopping-basket"></i>
+            <span>外卖</span>
+        </a>
+
+        <a href="search.html" class="text-center flex-1">
+            <i class="fa fa-search color-active"></i>
+            <span>搜索</span>
+        </a>
+
+        <a href="order.html" class="text-center flex-1">
+            <i class="fa fa-reorder "></i>
+            <span>订单</span>
+        </a>
+
+        <a href="profile.html" class="text-center flex-1">
+            <i class="fa fa-user-o"></i>
+            <span>我的</span>
+        </a>
+    </footer>
+</div>
+</body>
+<script>
+    new Vue({
+        el:"#box",
+        data:{
+            keyword:"",
+            searchHistory:[],
+            searchLists:"",
+            keywordTips:false
+        },
+        methods:{
+            empty:function(){
+                this.searchHistory="";
+            },
+            remove:function(index){
+                this.searchHistory.splice(index,1);
+            },
+            search:function(kw){
+                var _this=this;
+                if(kw){
+//                    _this.searchLists="";
+                    _this.searchLists=[
+                        {
+                            "name":"a",
+                            "id":1
+                        },
+                        {
+                            "name":"c",
+                            "id":3
+                        }
+                    ]
+                    if(_this.searchLists!=""){
+                        _this.keywordTips=true;
+                    }
+                    else{
+                        _this.keywordTips=false;
+                    }
+                }
+            }
+        }
+    })
+</script>
+
+</html>
