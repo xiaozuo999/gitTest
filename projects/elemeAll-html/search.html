@@ -84,15 +84,19 @@
         methods:{
             empty:function(){
                 this.searchHistory="";
+                localStorage.clear();
             },
             remove:function(index){
                 this.searchHistory.splice(index,1);
+                localStorage.setItem("history",JSON.stringify(this.searchHistory));
             },
             search:function(kw){
-                var _this=this;
                 if(kw){
-//                    _this.searchLists="";
-                    _this.searchLists=[
+                    //本地存储
+                    this.searchHistory.push(kw);
+                    localStorage.setItem("history",JSON.stringify(this.searchHistory));
+                    console.log("storage赋值后"+JSON.parse(localStorage.getItem("history")));
+                    this.searchLists=[
                         {
                             "name":"a",
                             "id":1
@@ -101,14 +105,20 @@
                             "name":"c",
                             "id":3
                         }
-                    ]
-                    if(_this.searchLists!=""){
-                        _this.keywordTips=true;
+                    ];
+                    if(this.searchLists!=""){
+                        this.keywordTips=true;
                     }
                     else{
-                        _this.keywordTips=false;
+                        this.keywordTips=false;
                     }
                 }
+            }
+        },
+        created:function(){
+            var history=JSON.parse(localStorage.getItem("history"));
+            if(history){
+                this.searchHistory=history;
             }
         }
     })
