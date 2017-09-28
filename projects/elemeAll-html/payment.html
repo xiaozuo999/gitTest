@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+    <title>在线支付-eleme</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/vipcard.css">
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <script src="node_modules/vue-router/dist/vue-router.js"></script>
+    <script src="js/rem.js"></script>
+</head>
+<body>
+<div id="box">
+    <header class="header">
+        <a href="vipcard.html" class="header-left"><i aria-hidden="true" class="fa fa-chevron-left"></i></a>
+        <div class="header-center">会员中心</div>
+    </header>
+    <div class="main mt40">
+        <div class="timeBox p30 tac bg-white">
+            <p class="grey fz10">支付剩余时间</p>
+            <h1 class="fz30">{{time}}</h1>
+        </div>
+        <p class="p10">
+            选择支付方式
+        </p>
+        <div class="lists mb10">
+            <a href="javascript:" class="p15 bdb1 df jcb aic bg-white">
+                <div class="df aic">
+                    <img src="images/zhifubao.png" alt="zhifubao" width="40" height="40" class="mr5"> <span>支付宝</span>
+                </div>
+                <span class="green fz24">
+                    <i class="fa fa-check-circle"></i>
+                </span>
+            </a>
+            <a href="javascript:" class="p15 bdb1 df jcb aic bg-white">
+                <div class="df aic">
+                    <img src="images/weixin.png" alt="weixin" width="40" height="40" class="mr5"> <span>微信</span>
+                </div>
+                <span class="grey fz24">
+                    <i class="fa fa-check-circle"></i>
+                </span>
+            </a>
+        </div>
+        <div class="m10">
+            <button class="db btn btn-success btn-block b">确认支付</button>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    new Vue({
+        el:"#box",
+        data:{
+            time:"",
+            a:6000
+        },
+        methods:{
+            fomtime:function(){
+                console.log(111);
+                var _this=this;
+                _this.a=_this.a-1000;
+                var b=new Date();
+                b.setTime(0);
+                var c=new Date();
+                c.setTime(_this.a);
+                var day1=b.getDate();        //为方便调用，把天数、小时等单独定义
+                var hours1=b.getHours();
+                var minu1=b.getMinutes();
+                var seco1=b.getSeconds();
+                var day2=c.getDate();
+                var hours2=c.getHours();
+                var minu2=c.getMinutes();
+                var seco2=c.getSeconds();
+                var day=day2-day1;
+                var hours=hours2-hours1;
+                var minu=minu2-minu1;
+                var seco=seco2-seco1;
+                _this.time=hours+":"+minu+":"+seco;
+            }
+        },
+        created:function(){
+//            this.fomtime();
+//            setTimeout(this.fomtime(),1000);
+            setInterval(this.fomtime(),1000);
+        }
+    })
+</script>
+
+</html>
