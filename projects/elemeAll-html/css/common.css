@@ -124,7 +124,7 @@ input { border: none; outline: none; }
 .mb10 { margin-bottom: 10px; }
 .mb15 { margin-bottom: 15px; }
 .mb20 { margin-bottom: 20px; }
-.p { padding: 0; }
+.p0 { padding: 0; }
 .pt0 { padding-top: 0; }
 .pr0 { padding-right: 0; }
 .pb0 { padding-bottom: 0; }
@@ -145,7 +145,7 @@ input { border: none; outline: none; }
 /*其他  ellipsis*/
 .ellipsis { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .clear { zoom: 1; }
-.clear::after { content: ""; display: block; clear: both; }
+.clear::after { content: ""; display: block; clear: both;}
 
 /*常用按钮*/
 .btn {

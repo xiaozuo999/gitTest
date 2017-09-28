@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+    <title>兑换会员-eleme</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/vipcard.css">
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <script src="node_modules/vue-router/dist/vue-router.js"></script>
+    <script src="js/rem.js"></script>
+</head>
+<body>
+<div id="box">
+    <header class="header">
+        <a href="vipcard.html" class="header-left"><i aria-hidden="true" class="fa fa-chevron-left"></i></a>
+        <div class="header-center">会员中心</div>
+    </header>
+    <div class="main mt40">
+        <div class="p15">
+            <p>成功兑换后将关联到当前账号
+            </p>
+            <p>
+                4554545445787
+            </p>
+        </div>
+        <ul class="bg-white grey fz14">
+            <li class="p10 bdb1">
+                <input type="text" class="db" placeholder="请输入10位卡号" maxlength="10" v-model="account">
+            </li>
+            <li class="p10">
+                <input type="text" class="db" placeholder="请输入6位数字卡密" maxlength="6" v-model="password">
+            </li>
+        </ul>
+        <div class="p15">
+            <button class="btn btn-defalut btn-block" v-bind:class="{'btn-success':full}">兑换</button>
+        </div>
+        <div class="p25 grey">
+            <h4 class="mb10">温馨提示</h4>
+            <p data-v-3e3dbf9c="">新兑换的会员服务，权益以「会员说明」为准。</p> <p data-v-3e3dbf9c="">月卡：<b data-v-3e3dbf9c="">30次</b>减免配送费。</p> <p data-v-3e3dbf9c="">季卡：<b data-v-3e3dbf9c="">90次</b>减免配送费。</p> <p data-v-3e3dbf9c="">年卡：<b data-v-3e3dbf9c="">360</b>次减免配送费。</p> <p data-v-3e3dbf9c="">＊仅限蜂鸟专送订单，每日最多减免3单，每单最高减免4元（一个月按31天计算）</p>
+        </div>
+
+    </div>
+
+</div>
+</body>
+
+<script>
+    new Vue({
+        el:"#box",
+        data:{
+            account:"",
+            password:""
+        },
+        methods:{
+
+        },
+        computed:{
+            full:function(){
+                if(this.account.length==10 && this.password.length==6){
+                    return  true;
+                }
+                else{
+                    return false;
+                }
+            }
+        },
+        created:function(){
+        }
+    })
+</script>
+</html>

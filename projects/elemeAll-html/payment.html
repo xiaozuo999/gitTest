@@ -21,25 +21,25 @@
     <div class="main mt40">
         <div class="timeBox p30 tac bg-white">
             <p class="grey fz10">支付剩余时间</p>
-            <h1 class="fz30">{{time}}</h1>
+            <h1 class="fz30">{{remainingTime}}</h1>
         </div>
         <p class="p10">
             选择支付方式
         </p>
         <div class="lists mb10">
-            <a href="javascript:" class="p15 bdb1 df jcb aic bg-white">
+            <a href="javascript:" class="p15 bdb1 df jcb aic bg-white" @click="select()">
                 <div class="df aic">
                     <img src="images/zhifubao.png" alt="zhifubao" width="40" height="40" class="mr5"> <span>支付宝</span>
                 </div>
-                <span class="green fz24">
+                <span class="grey fz24" v-bind:class="{green:isActive}">
                     <i class="fa fa-check-circle"></i>
                 </span>
             </a>
-            <a href="javascript:" class="p15 bdb1 df jcb aic bg-white">
+            <a href="javascript:" class="p15 bdb1 df jcb aic bg-white" @click="select()">
                 <div class="df aic">
                     <img src="images/weixin.png" alt="weixin" width="40" height="40" class="mr5"> <span>微信</span>
                 </div>
-                <span class="grey fz24">
+                <span class="grey fz24" v-bind:class="{green:!isActive}">
                     <i class="fa fa-check-circle"></i>
                 </span>
             </a>
@@ -54,37 +54,49 @@
     new Vue({
         el:"#box",
         data:{
-            time:"",
-            a:6000
+            remainingTime:"00:15:00",
+            totalTime:900000,
+            isActive:true
         },
         methods:{
-            fomtime:function(){
-                console.log(111);
-                var _this=this;
-                _this.a=_this.a-1000;
-                var b=new Date();
-                b.setTime(0);
-                var c=new Date();
-                c.setTime(_this.a);
-                var day1=b.getDate();        //为方便调用，把天数、小时等单独定义
-                var hours1=b.getHours();
-                var minu1=b.getMinutes();
-                var seco1=b.getSeconds();
-                var day2=c.getDate();
-                var hours2=c.getHours();
-                var minu2=c.getMinutes();
-                var seco2=c.getSeconds();
-                var day=day2-day1;
-                var hours=hours2-hours1;
-                var minu=minu2-minu1;
-                var seco=seco2-seco1;
-                _this.time=hours+":"+minu+":"+seco;
+            select:function(){
+                this.isActive=!this.isActive;
             }
         },
         created:function(){
-//            this.fomtime();
-//            setTimeout(this.fomtime(),1000);
-            setInterval(this.fomtime(),1000);
+            var _this=this;
+            var timer=setInterval(function(){
+                _this.totalTime=_this.totalTime-1000;
+                if(_this.totalTime<=0){
+                    clearInterval(timer);
+                    alert("您已超时");
+                }
+
+                var b=new Date();
+                b.setTime(0);
+                var c=new Date();
+                c.setTime(_this.totalTime);
+                var hours1=b.getHours();
+                var minu1=b.getMinutes();
+                var seco1=b.getSeconds();
+                var hours2=c.getHours();
+                var minu2=c.getMinutes();
+                var seco2=c.getSeconds();
+                var hours=hours2-hours1;
+                var minu=minu2-minu1;
+                var seco=seco2-seco1;
+                if(hours<10){
+                    hours="0"+hours;
+                }
+                if(minu<10){
+                    minu="0"+minu;
+                }
+                if(seco<10){
+                    seco="0"+seco;
+                }
+                _this.remainingTime=hours+":"+minu+":"+seco;
+            },1000);
+
         }
     })
 </script>

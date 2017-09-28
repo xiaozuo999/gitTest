@@ -17,9 +17,52 @@
     <header class="header">
         <a href="profile.html" class="header-left"><i aria-hidden="true" class="fa fa-chevron-left"></i></a>
         <div class="header-center">下载</div>
-        <!--<div class="header-right fr"><i aria-hidden="true" class="fa fa-chevron-right"></i></div>-->
     </header>
+    <div class="main mt40">
+        <div class="tac p20 fz16">
+            <img src="images/elmlogo.jpeg" alt="" width="180" style="border-radius:20px;">
+            <p class="mt10">下载饿了么APP</p>
+            <button class="btn btn-success btn-block mt20" @click="download()">下载</button>
+        </div>
+    </div>
 </div>
-
 </body>
+<script>
+new Vue({
+    el:"#box",
+    data:{
+
+    },
+    methods:{
+        download:function(){
+            var isIos=false;
+            var browser={
+                versions:function(){
+                    var u = navigator.userAgent, app = navigator.appVersion;
+                    return {//移动终端浏览器版本信息
+                        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                        iPhone: u.indexOf('iPhone') > -1 , //是否为iPhone或者QQHD浏览器
+                        iPad: u.indexOf('iPad') > -1, //是否iPad
+                    };
+                }(),
+                language:(navigator.browserLanguage || navigator.language).toLowerCase()
+            }
+
+            if(browser.versions.ios || browser.versions.iPhone || browser.versions.iPad){
+               isIos=true;
+            }
+            if(isIos){
+                //ios用户打开app store链接
+                window.open("https://itunes.apple.com/cn/app/%E9%A5%BF%E4%BA%86%E4%B9%88-%E4%B8%93%E4%B8%9A%E7%9A%84%E7%BE%8E%E9%A3%9F%E5%A4%96%E5%8D%96%E8%AE%A2%E9%A4%90%E5%B9%B3%E5%8F%B0/id507161324?mt=8");
+            }
+          else{
+                //android用户直接下载
+                window.open("https://play.google.com/store/apps/details?id=me.ele&rdid=me.ele");
+          }
+        }
+    }
+})
+</script>
+
 </html>
