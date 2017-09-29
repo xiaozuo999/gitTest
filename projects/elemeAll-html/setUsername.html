@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+    <title>我的-eleme</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <script src="node_modules/vue-router/dist/vue-router.js"></script>
+    <script src="js/rem.js"></script>
+</head>
+<body>
+<div id="box">
+    <header class="header">
+        <a href="javascript:history.back()" class="header-left"><i aria-hidden="true" class="fa fa-chevron-left"></i></a>
+        <div class="header-center">我的</div>
+        <!--<div class="header-right fr"><i aria-hidden="true" class="fa fa-chevron-right"></i></div>-->
+    </header>
+    <div class="main">
+        <div class="p10">
+            <div class="df">
+                <input type="text" placeholder="输入用户名" class="fx1 p10 fz16 mb10 mt10 bg-tp bd1" v-bind:class="{'bd-color-red':!checkPass}" v-model="username">
+            </div>
+            <p class="fz10 mb20 grey" v-show="checkPass">用户名只能修改一次（5-24字符之间）</p>
+            <p class="fz10 mb20 red" v-show="!checkPass">用户名长度在5到24字符之间</p>
+            <button class="btn btn-primary btn-block fz16" v-bind:class="{color9:checkPass2}">确认修改</button>
+        </div>
+    </div>
+</div>
+<script>
+    new Vue({
+        el:"#box",
+        data:{
+            username:"",
+            checkPass2:true
+        },
+        computed:{
+            checkPass:function(){
+                var len=this.username.length;
+                if(len>4 && len<26 || len==0){
+                    if(len!=0){
+                        this.checkPass2=false;
+                    }
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

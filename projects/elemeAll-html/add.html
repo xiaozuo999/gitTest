@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+    <title>ele城市选择</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/city.css">
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <script src="js/rem.js"></script>
+    <script src="node_modules/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+<div id="box">
+    <header class="header">
+        <a href="javascript:history.back()" class="header-left"><i aria-hidden="true" class="fa fa-chevron-left"></i></a>
+        <div class="header-center" v-cloak>新增地址</div>
+    </header>
+    <div class="main mt50">
+        <form action="" onsubmit="return false" v-cloak>
+            <ul class="p10 bg-white">
+                <li class="df mb10">
+                    <input type="text"  placeholder="请填写你的姓名" class="form-control" style="background:#f2f2f2" name="name">
+                </li>
+                <li class="df mb10">
+                    <input type="text"  placeholder="小区/写字楼/学校等" class="form-control" style="background:#f2f2f2" name="type">
+                </li>
+                <li class="mb10">
+                    <div class="df">
+                        <input type="text"  placeholder="请填写详细送餐地址" class="form-control" style="background:#f2f2f2" name="address" v-model="address.value" @keyup="checkName(address)">
+                    </div>
+                    <p v-show="address.isTrue==1" class="fz10 red">送餐地址太短了，不能辨别</p>
+                    <p v-show="address.isTrue==2" class="fz10 red">请添写详细的送餐地址</p>
+                </li>
+                <li class="mb10">
+                    <div class="df">
+                        <input type="text"  placeholder="请填写能够联系到您的手机号" class="form-control" style="background:#f2f2f2" name="phone"  v-model="phone.value" @keyup="checkPhone(phone)">
+                    </div>
+                    <p v-show="phone.isTrue==1" class="fz10 red">请输入正确的手机号</p>
+                    <p v-show="phone.isTrue==2" class="fz10 red">手机号不能为空</p>
+                </li>
+                <li class="mb10">
+                    <div class="df">
+                        <input type="text"  placeholder="备用联系电话（选填）" class="form-control" style="background:#f2f2f2" name="phone2" v-model="phone2.value" @keyup="checkPhone(phone2)">
+                    </div>
+                    <p v-show="phone2.isTrue==1" class="fz10 red">请输入正确的手机号</p>
+                    <p v-show="phone2.isTrue==2" class="fz10 red">手机号不能为空</p>
+                </li>
+            </ul>
+            <div class="p10">
+                <button class="btn btn-success btn-block" type="submit" v-bind:class="{color9:allTrue}">新增地址</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+<script>
+    new Vue({
+        el:"#box",
+        data:{
+            address:{
+                value:"",
+                isTrue:0
+            },
+            phone:{
+                value:"",
+                isTrue:0
+            },
+            phone2:{
+                value:"",
+                isTrue:0
+            },
+            allTrue:true
+        },
+        methods:{
+            checkName:function(obj){
+                var a=obj.value.length;
+                if(a>5){
+                    obj.isTrue=0;
+                }
+                else if(a==0){
+                    obj.isTrue=2;
+                }
+                else{
+                    obj.isTrue=1;
+                }
+                this.allTrue2();
+            },
+            checkPhone:function(obj){
+                var str=obj.value;
+                var re = /^1[3|4|5|7|8][0-9]{9}$/;
+                var rf = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
+                if(re.test(str) || rf.test(str) ){
+                    obj.isTrue=0;
+                }
+                else if(str==""){
+                    obj.isTrue=2;
+                }
+                else{
+                    obj.isTrue=1;
+                }
+                this.allTrue2();
+            },
+            allTrue2:function(){
+                console.log(0);
+                if(this.address.isTrue==0 && this.address.value!="" && this.phone.isTrue==0 && this.phone.value!="" && this.phone2.isTrue==0 && this.phone2.value!=""){
+                    this.allTrue=false;
+                }
+                else{
+                    this.allTrue=true;
+                }
+            }
+        },
+        created:function(){
+        }
+    })
+</script>
+</html>

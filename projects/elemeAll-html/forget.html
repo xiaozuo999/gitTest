@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+    <title>重置密码-eleme</title>
+    <link rel="stylesheet" href="css/common.css">
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <script src="js/rem.js"></script>
+    <script src="node_modules/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+<div id="box">
+    <header class="header">
+        <a href="javascript:history.back()" class="header-left"><i aria-hidden="true" class="fa fa-chevron-left"></i></a>
+        <div class="header-center">重置密码</div>
+    </header>
+    <div class="main mt50">
+        <ul class="bg-white">
+            <li class="df bdb1">
+                <input type="text" class="form-control bd0 fz16" placeholder="账号">
+            </li>
+            <li class="df bdb1">
+                <input type="password" class="form-control bd0 fz16" placeholder="旧密码">
+            </li>
+            <li class="df bdb1">
+                <input type="password" class="form-control bd0 fz16" placeholder="请输入新密码">
+            </li>
+            <li class="df bdb1">
+                <input type="password" class="form-control bd0 fz16" placeholder="请确认密码">
+            </li>
+            <li class="df jcb aic">
+                <div class="fx1">
+                    <input type="password" class="form-control bd0 fz16" placeholder="验证码">
+                </div>
+                <div class="mr10">
+                    <div class="df">
+                        <a href="javascript:" @click="changeCode()" class="mr5"><img v-bind:src=src alt="" width="85" height="35"></a>
+                        <div class="fx1 aic fz10">
+                            看不清<br>
+                            <a href="javascript:" class="c-active">换一张</a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="p20">
+            <button class="btn btn-success btn-block fz16">确认修改</button>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    new Vue({
+        el:"#box",
+        data:{
+            src:"images/zhifubao.png"
+        },
+        methods:{
+            changeCode:function(){
+
+            }
+        }
+    })
+</script>
+</html>

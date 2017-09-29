@@ -14,10 +14,10 @@
 </head>
 <body>
 <div id="box">
-    <header class="space-between header">
-        <a href="index.html"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
-        <span class="fz18"><strong v-cloak>{{city.name}}</strong></span>
-        <a href="index.html">切换城市</a>
+    <header class="header">
+        <a href="search.html" class="header-left"><i aria-hidden="true" class="fa fa-chevron-left"></i></a>
+        <div class="header-center" v-cloak>{{city.name}}</div>
+        <a href="index.html" class="header-right fr">切换城市</a>
     </header>
     <div class="top">
         <div class="searchBox mb10">
@@ -29,14 +29,12 @@
     </div>
     <div class="content" v-cloak>
         <p class="history" v-show="!searchContent">搜索历史</p>
-        <ul class="content-search">
-            <li v-for="item in searchContent" @click="home(item)" v-show="searchContent">
-                <a href="home.html">
-                    <h3 class="address-title">{{item.name}}</h3>
-                    <p class="color-grey fz10">{{item.address}}</p>
-                </a>
-            </li>
-        </ul>
+        <div class="content-search" v-show="searchContent">
+            <a href="javascript:" v-for="item in searchContent" @click="home(item)">
+                <h3 class="address-title">{{item.name}}</h3>
+                <p class="color-grey fz10">{{item.address}}</p>
+            </a>
+        </div>
         <ul class="content-search" v-show="!searchContent">
             <li v-for="item in searchHistory" @click="home(this)">
                 <a href="home.html">
@@ -86,16 +84,6 @@
                 localStorage.clear();
             },
             home:function(obj){
-//                var _this=this;
-//                if(typeof(Storage)!=="undefined")
-//                {
-//                    _this.searchHistory.push(obj);
-//                    localStorage.setItem(searchHistory,_this.searchHistory);
-//                } else {
-//                    alert("浏览器不支持本地存储功能，请升级您的浏览器");
-//                }
-            },
-            searchTips:function(){
 
             }
         },

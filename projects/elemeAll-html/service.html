@@ -14,12 +14,42 @@
 </head>
 <body>
 <div id="box">
+    <div class="img-loading" v-show="imgLoading" v-bind:style="{backgroundPositionY:positionY}"></div>
     <header class="header">
-        <a href="profile.html" class="header-left"><i aria-hidden="true" class="fa fa-chevron-left"></i></a>
+        <a href="javascript:history.back()" class="header-left"><i aria-hidden="true" class="fa fa-chevron-left"></i></a>
         <div class="header-center">服务中心</div>
         <!--<div class="header-right fr"><i aria-hidden="true" class="fa fa-chevron-right"></i></div>-->
     </header>
 </div>
-
 </body>
+<script>
+    new Vue({
+        el:"#box",
+        data:{
+            imgLoading:true,
+            positionY:0
+        },
+        methods:{
+
+        },
+        created:function(){
+        },
+        beforeCreate:function(){
+            var _this=this;
+            var i=0;
+            var timer=setInterval(function(){
+                if(i>5){
+                    i--;
+                }
+                else{
+                    i++;
+                }
+                _this.positionY=-70*i+"px";
+            },1000);
+            setTimeout(function(){
+                _this.imgLoading=false;
+            },3000)
+        }
+    })
+</script>
 </html>
