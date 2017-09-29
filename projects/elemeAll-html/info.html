@@ -13,6 +13,7 @@
     <script src="js/rem.js"></script>
 </head>
 <body>
+<div id="box">
 <header class="header">
     <a href="javascript:history.back()" class="header-left"><i aria-hidden="true" class="fa fa-chevron-left"></i></a>
     <div class="header-center">账户信息</div>
@@ -20,9 +21,13 @@
 
 <div class="main mt40">
     <div class="userInfo  bg-white">
-        <a href="javascript:" class="df jcb p15 bdb1">
+        <a href="javascript:" class="df jcb p15 bdb1 aic">
+            <input type="file" class="input-file" name="avatar" v-bind:value="avatar">
             <span>头像</span>
-            <span class="grey"><i class="fa fa-chevron-right"></i></span>
+            <div class="aic df">
+                <img v-bind:src=avatar alt="" width="50" height="50" class="mr5">
+                <span class="grey"><i class="fa fa-chevron-right"></i></span>
+            </div>
         </a>
         <a href="setUsername.html" class="df jcb p15 bdb1">
             <span>用户名</span>
@@ -47,7 +52,19 @@
         <button class="btn btn-danger btn-block">退出登录</button>
     </div>
 </div>
-
-
+</div>
 </body>
+<script>
+    new Vue({
+        el:"#box",
+        data:{
+            avatar:"images/elmlogo.jpeg",
+            avatar2:""
+        },
+        methods:{
+
+        },
+
+    })
+</script>
 </html>

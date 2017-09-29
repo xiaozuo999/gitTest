@@ -295,3 +295,11 @@ btn.active, .btn:active {
     border-radius: 5px;
     flex:1;
 }
+.input-file{
+    position: absolute;
+    border: 1px solid red;
+    height: 72px;
+    width: 100%;
+    left: 0;
+    /*opacity: 0;*/
+}
