@@ -11,47 +11,62 @@
     <script src="node_modules/vue/dist/vue.js"></script>
     <script src="node_modules/vue-router/dist/vue-router.js"></script>
     <script src="js/rem.js"></script>
+    <link rel="stylesheet" href="css/animate.css">
 </head>
 <body>
 <div id="box">
-<header class="header">
-    <a href="javascript:history.back()" class="header-left"><i aria-hidden="true" class="fa fa-chevron-left"></i></a>
-    <div class="header-center">账户信息</div>
-</header>
-
-<div class="main mt40">
-    <div class="userInfo  bg-white">
-        <a href="javascript:" class="df jcb p15 bdb1 aic">
-            <input type="file" class="input-file" name="avatar" v-bind:value="avatar">
-            <span>头像</span>
-            <div class="aic df">
-                <img v-bind:src=avatar alt="" width="50" height="50" class="mr5">
+    <header class="header">
+        <a href="javascript:history.back()" class="header-left"><i aria-hidden="true" class="fa fa-chevron-left"></i></a>
+        <div class="header-center">账户信息</div>
+    </header>
+    <div class="main mt40">
+        <div class="userInfo  bg-white">
+            <a href="javascript:" class="df jcb p15 bdb1 aic">
+                <input type="file" class="input-file" name="avatar">
+                <span>头像</span>
+                <div class="aic df">
+                    <img v-bind:src=avatar alt="" width="50" height="50" class="mr5">
+                    <span class="grey"><i class="fa fa-chevron-right"></i></span>
+                </div>
+            </a>
+            <a href="setUsername.html" class="df jcb p15 bdb1">
+                <span>用户名</span>
+                <span class="grey"><em class="mr5">17899996666</em><i class="fa fa-chevron-right"></i></span>
+            </a>
+            <a href="address.html" class="df jcb p15 bdb1">
+                <span>收货地址</span>
                 <span class="grey"><i class="fa fa-chevron-right"></i></span>
-            </div>
-        </a>
-        <a href="setUsername.html" class="df jcb p15 bdb1">
-            <span>用户名</span>
-            <span class="grey"><em class="mr5">17899996666</em><i class="fa fa-chevron-right"></i></span>
-        </a>
-        <a href="address.html" class="df jcb p15 bdb1">
-            <span>收货地址</span>
+            </a>
+        </div>
+        <p class="p10 fz12">账号绑定</p>
+        <a href="javascript:" class="df jcb p15 bdb1 bdt1 bg-white">
+            <span><img src="images/bindphone.png" alt="" class="pr10"><em>手机</em></span>
             <span class="grey"><i class="fa fa-chevron-right"></i></span>
         </a>
+        <p class="p10 fz12">安全设置</p>
+        <a href="forget.html" class="df jcb p15 bdb1 bdt1 bg-white">
+            <span>登录密码</span>
+            <span class="grey"><em class="mr5">修改</em><i class="fa fa-chevron-right"></i></span>
+        </a>
+        <div class="button-box p10 mt20">
+            <button class="btn btn-danger btn-block" @click="exit()">退出登录</button>
+        </div>
     </div>
-    <p class="p10 fz12">账号绑定</p>
-    <a href="javascript:" class="df jcb p15 bdb1 bdt1 bg-white">
-        <span><img src="images/bindphone.png" alt="" class="pr10"><em>手机</em></span>
-        <span class="grey"><i class="fa fa-chevron-right"></i></span>
-    </a>
-    <p class="p10 fz12">安全设置</p>
-    <a href="forget.html" class="df jcb p15 bdb1 bdt1 bg-white">
-        <span>登录密码</span>
-        <span class="grey"><em class="mr5">修改</em><i class="fa fa-chevron-right"></i></span>
-    </a>
-    <div class="button-box p10 mt20">
-        <button class="btn btn-danger btn-block">退出登录</button>
+    <div class="modalBox" v-bind:class="{hidden:!exitButton2}" v-cloak>
+        <div class="modal animated bounce" v-bind:class="{bounceInDown:exitButton,bounceOutDown:!exitButton}">
+            <div class="modal-dialog m40">
+                <div class="modal-body">
+                    <i class="fa fa-exclamation-circle fz90 yellow mb20"></i>
+                    <p class="fz24">是否退出登录</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default mr15" @click="quit(false)"> 再等待</button>
+                    <button class="btn btn-danger " @click="quit(true)"> 退出登录</button>
+                </div>
+            </div>
+        </div>
+        <div class="modal-backdrop animated" v-bind:class="{fadeIn:exitButton,fadeOut:!exitButton}"></div>
     </div>
-</div>
 </div>
 </body>
 <script>
@@ -59,12 +74,37 @@
         el:"#box",
         data:{
             avatar:"images/elmlogo.jpeg",
-            avatar2:""
+            avatar2:"",
+            exitButton:false,
+            exitButton2:false,
+            user:""
         },
-        methods:{
+        methods: {
+            exit: function () {
+                this.exitButton = true;
+                this.exitButton2 = true;
+            },
+            quit: function (boole) {
+                var _this = this;
+                localStorage.removeItem("userId");
+                _this.exitButton = false;
+                setTimeout(function () {
+                    _this.exitButton2 = false;
+                }, 500)
 
+                if (boole) {
+                    setTimeout(function () {
+                        location.href = "profile.html";
+                    }, 500)
+                }
+            }
         },
-
+        created:function(){
+            var _this=this;
+            $.post("json/user.json",{},function(result){
+                _this.user=result;
+            });
+        }
     })
 </script>
 </html>

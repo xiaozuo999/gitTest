@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+    <title>账户信息-eleme</title>
+    <link rel="stylesheet" href="css/common.css">
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <script src="node_modules/vue-router/dist/vue-router.js"></script>
+    <script src="js/rem.js"></script>
+    <link rel="stylesheet" href="css/animate.css">
+</head>
+<body>
+<div id="box">
+    <header class="header">
+        <a href="javascript:history.back()" class="header-left"><i aria-hidden="true" class="fa fa-chevron-left"></i></a>
+        <div class="header-center">账户信息</div>
+    </header>
+    <div class="main mt50">
+        <form action="" onsubmit="return false">
+            <ul class="bg-white grey">
+                <li class="bdb1 df p5">
+                    <input type="text" placeholder="账号" class="form-control bd0 fz16" v-model="account">
+                </li>
+                <li class="bdb1 df p5 aic">
+                    <input type="password" placeholder="密码" class="form-control bd0 fz16"  v-model="password">
+                    <div>
+                        <a href="javascript:" @click="showPassword()">开关</a>
+                    </div>
+                </li>
+                <li class="bdb1 df jcb p5 aic">
+                    <input type="text" placeholder="验证码" class="form-control bd0 fz16"  v-model="checkCode">
+                    <div class="df aic">
+                        <img src="images/elmlogo.jpeg" alt="" width="80" height="35" class="mr10">
+                        <div class="fz10">
+                            <p>看不清</p>
+                            <a href="javascript:" class="c-active">换一张</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="red fz10 p10">
+                <p>温馨提示:末注册过的账号，登录时将自动注册</p>
+                <p> 注册过的用户可凭账号密码登录 </p>
+            </div>
+            <div class="p10 df mt10">
+                <button type="submit" class="btn btn-success btn-block" @click="checkLogin()">登录</button>
+            </div>
+            <div class="p10  tar">
+                <a href="forget.html" class="c-active">重置密码?</a>
+            </div>
+        </form>
+    </div>
+    <div class="modalBox" v-bind:class="{hidden:!exitButton2}" v-cloak>
+        <div class="modal animated bounce" v-bind:class="{bounceInDown:exitButton,bounceOutDown:!exitButton}">
+            <div class="modal-dialog p0 m40">
+                <div class="modal-body pt10">
+                    <i class="fa fa-exclamation-circle fz90 yellow mb20"></i>
+                    <p class="fz24">{{errorInfo}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success btn-block bdrs0 fz18" @click="quit(true)">确认</button>
+                </div>
+            </div>
+        </div>
+        <div class="modal-backdrop animated" v-bind:class="{fadeIn:exitButton,fadeOut:!exitButton}"></div>
+    </div>
+</div>
+</body>
+<script>
+    new Vue({
+        el:"#box",
+        data:{
+            showCode:false,
+            passwordType:"passwordType",
+            account:"",
+            password:"",
+            checkCode:"",
+            errorInfo:"",
+            exitButton:false,
+            exitButton2:false
+        },
+        methods:{
+            showPassword:function(){
+                if(this.passwordType=="passwordType"){
+                    this.passwordType="type";
+                }
+                else{
+                    this.passwordType="passwordType";
+                }
+            },
+            changeCode:function(){
+                
+            },
+            checkLogin:function(){
+                if(this.account==""){
+                    this.errorInfo="请输入账号";
+                    this.exit();
+                }
+                else if(this.password==""){
+                    this.errorInfo="请输入密码";
+                    this.exit();
+                }
+                else if(this.checkCode==""){
+                    this.errorInfo="验证码不正确";
+                    this.exit();
+                }
+                else{
+                    $.post("json/user.json",{"account":this.account,"password":this.password,"checkCode":this.checkCode},function(result){
+                        if(result){
+                            localStorage.setItem("userId",result.userId);
+                            location.href="profile.html";
+                        }
+                    });
+                }
+            },
+            exit: function () {
+                this.exitButton = true;
+                this.exitButton2 = true;
+            },
+            quit: function (boole) {
+                var _this = this;
+                this.exitButton = false;
+                setTimeout(function () {
+                    _this.exitButton2 = false;
+                }, 500)
+                if (boole) {
+                    setTimeout(function () {
+                    }, 500)
+                }
+            }
+        }
+    })
+</script>
+</html>

@@ -19,8 +19,9 @@
     <div class="img-loading" v-show="imgLoading" v-bind:style="{backgroundPositionY:positionY}"></div>
     <header class="header">
         <a href="search.html" class="header-left"><i aria-hidden="true" class="fa fa-search"></i></a>
-        <div class="header-center">福田区车公庙地铁站</div>
-        <a href="profile.html" class="header-right fr"><i aria-hidden="true" class="fa fa-user-o"></i></a>
+        <div class="header-center ellipsis" style="width: 180px;">福田区车公庙地铁站福田区车公庙地铁站</div>
+        <a href="profile.html" class="header-right fr" v-if="!login"><i aria-hidden="true" class="fa fa-user-o"></i></a>
+        <a href="login.html" class="header-right fr fz14" v-if="login">登录/注册</a>
     </header>
     <div class="banner bdb1" v-cloak>
         <div class="swiper-wrapper">
@@ -128,6 +129,15 @@
             methods:{
             },
             computed:{
+                login:function(){
+                    var userId=localStorage.getItem("userId");
+                    if(userId!="" && userId!=undefined){
+                        return true;
+                    }
+                    else{
+                        return false;
+                    }
+                }
             },
             created:function(){
                 var _this=this;

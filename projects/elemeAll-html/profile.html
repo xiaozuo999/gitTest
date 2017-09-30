@@ -13,114 +13,148 @@
     <script src="js/rem.js"></script>
 </head>
 <body>
-<header class="header">
-    <a href="javascript:history.back()" class="header-left"><i aria-hidden="true" class="fa fa-chevron-left"></i></a>
-    <div class="header-center">我的</div>
-    <!--<div class="header-right fr"><i aria-hidden="true" class="fa fa-chevron-right"></i></div>-->
-</header>
+<div id="box">
+    <header class="header">
+        <a href="javascript:history.back()" class="header-left"><i aria-hidden="true" class="fa fa-chevron-left"></i></a>
+        <div class="header-center">我的</div>
+        <!--<div class="header-right fr"><i aria-hidden="true" class="fa fa-chevron-right"></i></div>-->
+    </header>
 
-<section class="main">
-    <div class="profile">
-        <a href="info.html" class="db">
-            <div class="profile-phone">
-               <img src="http://images.cangdu.org/15e755d0d3e6589.png" alt="" class="img-user">
-                <div class="profile-phone-center">
-                    <b class="fz16">17688889999</b>
-                    <div class="fz12">
-                        <i class="fa fa-phone"></i>
-                        暂无绑定手机号
+    <section class="main" v-cloak>
+        <div class="profile">
+            <a v-bind:href="url" class="db">
+                <div class="profile-phone white">
+                    <div class="img-user fz30 bg-white ovf" v-if="!user.avatar">
+                        <i class="fa fa-user mt15" style="color:#dcdcdc;"></i>
                     </div>
+                   <img v-bind:src="user.avatar" alt="" class="img-user"  v-if="user.avatar">
+                    <div class="profile-phone-center">
+                        <b class="fz18 b white" v-if="!user.username">登录/注册</b>
+                        <b class="fz18 white" v-if="user.username">{{user.username}}</b>
+                        <div class="fz16">
+                            <i class="fa fa-phone"></i>
+                            <span v-if="!user.mobile">暂无绑定手机号</span>
+                            <span v-if="user.mobile">{{user.mobile}}</span>
+                        </div>
+                    </div>
+                    <span class="fz12">
+                        <i class="fa fa-chevron-right"></i>
+                    </span>
                 </div>
-                <span class="fz12">
-                    <i class="fa fa-chevron-right"></i>
-                </span>
+            </a>
+            <div class="profile-data mb10 tac">
+                <a href="balance.html" class="profile-data-item">
+                    <span class="fz26 orange b" v-if="!user.balance">0.00</span>
+                    <span class="fz26 orange b" v-if="user.balance">{{user.balance}}</span>
+                    元
+                    <p class="grey">我的余额</p>
+                </a>
+                <a href="javascript:" class="profile-data-item">
+                    <span class="fz26 red b" v-if="!user.gift_amount">0</span>
+                    <span class="fz26 red b" v-if="user.gift_amount">{{user.gift_amount}}</span>
+                    个
+                    <p class="grey">我的优惠</p>
+                </a>
+                <a href="javascript:" class="profile-data-item">
+                    <span class="fz26 green b" v-if="!user.point">0</span>
+                    <span class="fz26 green b" v-if="user.point">{{user.point}}</span>
+                    分
+                    <p class="grey">我的积分</p>
+                </a>
             </div>
-        </a>
-        <div class="profile-data mb10 tac">
-            <a href="javascript:" class="profile-data-item">
-                <span class="fz26 orange b">0.00</span>元
-                <p class="grey">我的余额</p>
+            <div class="lists">
+            <a href="order.html" class="item">
+                <aside class="color-grey"><i class="fa fa-file-text-o"></i></aside>
+                <div class="myorder-box bdb1">
+                    <span>我的订单</span>
+                    <span class="mr10 color-grey fz10">
+                        <i class="fa fa-chevron-right"></i>
+                    </span>
+                </div>
             </a>
-            <a href="javascript:" class="profile-data-item">
-                <span class="fz26 red b">3</span>个
-                <p class="grey">我的优惠</p>
+            <a href="https://home.m.duiba.com.cn/#/chome/index" class="item">
+                <aside class="color-red"><i class="fa fa-shopping-bag"></i></aside>
+                <div class="myorder-box bdb1">
+                    <span>积分商城</span>
+                    <span class="mr10 color-grey fz10">
+                        <i class="fa fa-chevron-right"></i>
+                    </span>
+                </div>
             </a>
-            <a href="javascript:" class="profile-data-item">
-                <span class="fz26 green b">0</span>分
-                <p class="grey">我的积分</p>
+            <a href="vipcard.html" class="item mb10">
+                <aside class="color-yellow"><i class="fa fa-drivers-license-o"></i></aside>
+                <div class="myorder-box bdb1">
+                    <span>饿了么会员卡</span>
+                    <span class="mr10 color-grey fz10">
+                        <i class="fa fa-chevron-right"></i>
+                    </span>
+                </div>
+            </a>
+            <a href="service.html" class="item">
+                <aside class="color-blue"><i class="fa fa-square"></i></aside>
+                <div class="myorder-box bdb1">
+                    <span>服务中心</span>
+                    <span class="mr10 color-grey fz10">
+                        <i class="fa fa-chevron-right"></i>
+                    </span>
+                </div>
+            </a>
+            <a href="download.html" class="item">
+                <aside class="color-blue"><i class="fa fa-cloud-download"></i></aside>
+                <div class="myorder-box bdb1">
+                    <span>下载饿了么APP</span>
+                    <span class="mr10 color-grey fz10">
+                        <i class="fa fa-chevron-right"></i>
+                    </span>
+                </div>
             </a>
         </div>
-    </div>
-    <div class="lists">
-        <a href="order.html" class="item">
-            <aside class="color-grey"><i class="fa fa-file-text-o"></i></aside>
-            <div class="myorder-box bdb1">
-                <span>我的订单</span>
-                <span class="mr10 color-grey fz10">
-                    <i class="fa fa-chevron-right"></i>
-                </span>
-            </div>
-        </a>
-        <a href="https://home.m.duiba.com.cn/#/chome/index" class="item">
-            <aside class="color-red"><i class="fa fa-shopping-bag"></i></aside>
-            <div class="myorder-box bdb1">
-                <span>积分商城</span>
-                <span class="mr10 color-grey fz10">
-                    <i class="fa fa-chevron-right"></i>
-                </span>
-            </div>
-        </a>
-        <a href="vipcard.html" class="item mb10">
-            <aside class="color-yellow"><i class="fa fa-drivers-license-o"></i></aside>
-            <div class="myorder-box bdb1">
-                <span>饿了么会员卡</span>
-                <span class="mr10 color-grey fz10">
-                    <i class="fa fa-chevron-right"></i>
-                </span>
-            </div>
-        </a>
-        <a href="service.html" class="item">
-            <aside class="color-blue"><i class="fa fa-square"></i></aside>
-            <div class="myorder-box bdb1">
-                <span>服务中心</span>
-                <span class="mr10 color-grey fz10">
-                    <i class="fa fa-chevron-right"></i>
-                </span>
-            </div>
-        </a>
-        <a href="download.html" class="item">
-            <aside class="color-blue"><i class="fa fa-cloud-download"></i></aside>
-            <div class="myorder-box bdb1">
-                <span>下载饿了么APP</span>
-                <span class="mr10 color-grey fz10">
-                    <i class="fa fa-chevron-right"></i>
-                </span>
-            </div>
+        </div>
+    </section>
+
+    <footer class="footer-menu df tac">
+        <a href="home.html" class="fx1">
+            <i class="fa fa-shopping-basket"></i>
+            <span>外卖</span>
         </a>
 
-    </div>
-</section>
+        <a href="search.html" class="fx1">
+            <i class="fa fa-search"></i>
+            <span>搜索</span>
+        </a>
 
-<footer class="footer-menu df tac">
-    <a href="home.html" class="fx1">
-        <i class="fa fa-shopping-basket"></i>
-        <span>外卖</span>
-    </a>
+        <a href="order.html" class="fx1">
+            <i class="fa fa-reorder "></i>
+            <span>订单</span>
+        </a>
 
-    <a href="search.html" class="fx1">
-        <i class="fa fa-search"></i>
-        <span>搜索</span>
-    </a>
-
-    <a href="order.html" class="fx1">
-        <i class="fa fa-reorder "></i>
-        <span>订单</span>
-    </a>
-
-    <a href="profile.html" class="fx1">
-        <i class="fa fa-user-o c-active"></i>
-        <span>我的</span>
-    </a>
-</footer>
+        <a href="profile.html" class="fx1">
+            <i class="fa fa-user-o c-active"></i>
+            <span>我的</span>
+        </a>
+    </footer>
+</div>
 </body>
+<script>
+    new Vue({
+        el:"#box",
+        data:{
+            user:"",
+            url:"login.html"
+        },
+        methods: {
+
+        },
+        created:function(){
+            var _this=this;
+            var userId=localStorage.getItem("userId");
+            if(userId){
+                $.post("json/user.json",{userId,userId},function(result){
+                    _this.user=result;
+                    _this.url="info.html";
+                });
+            }
+        }
+    })
+</script>
 </html>
