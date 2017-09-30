@@ -31,7 +31,7 @@
                     </div>
                 </li>
                 <li class="bdb1 df jcb p5 aic">
-                    <input type="text" placeholder="验证码" class="form-control bd0 fz16"  v-model="checkCode">
+                    <input type="text" placeholder="验证码" class="form-control bd0 fz16"  v-model="checkCode" style="margin-right:-15px;">
                     <div class="df aic">
                         <img src="images/elmlogo.jpeg" alt="" width="80" height="35" class="mr10">
                         <div class="fz10">
@@ -111,7 +111,8 @@
                     $.post("json/user.json",{"account":this.account,"password":this.password,"checkCode":this.checkCode},function(result){
                         if(result){
                             localStorage.setItem("userId",result.userId);
-                            location.href="profile.html";
+                            history.back();
+//                            location.href="profile.html";
                         }
                     });
                 }

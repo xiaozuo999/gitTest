@@ -57,10 +57,21 @@ input { border: none; outline: none; }
 
 /*flex布局相关,水平对齐，垂直对齐*/
 .fx1 { flex: 1; }
+.fx2 { flex: 2; }
+.fx3 { flex: 3; }
+.fx4 { flex: 4; }
+.fx5 { flex: 5; }
+.fx6 { flex: 6; }
+.fx7 { flex: 7; }
+.fx8 { flex: 8; }
+.fx9 { flex: 9; }
+.fx10 { flex: 10; }
 .jcc { justify-content: center; }
 .jcb { justify-content: space-between; }
 .jca { justify-content: space-around; }
-.aic{   align-items: center;  }
+.aic{   align-items: center; }
+.aifs{ align-content: flex-start;}
+.aibl{    align-items: baseline;}
 
 
 /*文本缩进*/
@@ -202,11 +213,26 @@ input { border: none; outline: none; }
 .mb90 { margin-bottom: 90px;}
 .mb100 { margin-bottom: 100px;}
 
+.mr30 { margin-right: 30px;}
+.mr40 { margin-right: 40px;}
+.mr50 { margin-right: 50px;}
+.mr60 { margin-right: 60px;}
+.mr70 { margin-right: 70px;}
+.mr80 { margin-right: 80px;}
+.mr90 { margin-right: 90px;}
+.mr100 { margin-right: 100px;}
+
 /*边框bd*/
 .bdb1 { border-bottom: 1px solid #e4e4e4; }
 .bdt1 { border-top: 1px solid #e4e4e4; }
 .bd1 { border: 1px solid #e4e4e4; }
 .bd0 { border: 0 !important;}
+.bdr1{
+    border-right: 1px solid #e4e4e4;
+}
+.bdl1{
+    border-left: 1px solid #e4e4e4;
+}
 
 /*圆角*/
 .bdrs0{
@@ -396,4 +422,9 @@ btn.active, .btn:active {
     background:#cccccc;
     color:#fff;
     border: none;
+}
+.navActive{
+    border-bottom:2px solid #3190e8;
+    padding-bottom:3px;
+    color:#3190e8;
 }

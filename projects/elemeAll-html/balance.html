@@ -56,8 +56,8 @@
         methods: {
         },
         created:function(){
-//            var userId=localStorage.getItem("userId");
-            var userId=1;
+            var userId=localStorage.getItem("userId");
+//            var userId=1;
             if(userId!="" && userId!=undefined){
                 var _this=this;
                 $.post("json/balance.json",{"userId":userId},function(result){
