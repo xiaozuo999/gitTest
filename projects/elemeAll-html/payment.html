@@ -27,19 +27,19 @@
             选择支付方式
         </p>
         <div class="lists mb10">
-            <a href="javascript:" class="p15 bdb1 df jcb aic bg-white" @click="select()">
+            <a href="javascript:" class="p15 bdb1 df jcb aic bg-white" @click="isActive=!isActive">
                 <div class="df aic">
                     <img src="images/zhifubao.png" alt="zhifubao" width="40" height="40" class="mr5"> <span>支付宝</span>
                 </div>
-                <span class="grey fz24" v-bind:class="{green:isActive}">
+                <span class="grey fz24" :class="{green:isActive}">
                     <i class="fa fa-check-circle"></i>
                 </span>
             </a>
-            <a href="javascript:" class="p15 bdb1 df jcb aic bg-white" @click="select()">
+            <a href="javascript:" class="p15 bdb1 df jcb aic bg-white" @click="isActive=!isActive">
                 <div class="df aic">
                     <img src="images/weixin.png" alt="weixin" width="40" height="40" class="mr5"> <span>微信</span>
                 </div>
-                <span class="grey fz24" v-bind:class="{green:!isActive}">
+                <span class="grey fz24" :class="{green:!isActive}">
                     <i class="fa fa-check-circle"></i>
                 </span>
             </a>
@@ -59,9 +59,6 @@
             isActive:true
         },
         methods:{
-            select:function(){
-                this.isActive=!this.isActive;
-            }
         },
         created:function(){
             var _this=this;

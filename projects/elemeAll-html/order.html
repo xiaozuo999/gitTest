@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
     <title>ele-我的订单</title>
     <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/search.css">
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/vue/dist/vue.js"></script>
     <script src="node_modules/vue-router/dist/vue-router.js"></script>
@@ -14,12 +13,30 @@
 </head>
 <body>
 <div id="box">
+    <div class="img-loading" v-show="imgLoading" :style="{backgroundPositionY:positionY}"></div>
     <header class="header">
         <a href="javascript:history.back()" class="header-left"><i aria-hidden="true" class="fa fa-chevron-left"></i></a>
         <div class="header-center">订单列表</div>
     </header>
-    <div class="main">
-        <div class="img-loading" v-show="imgLoading" v-bind:style="{backgroundPositionY:positionY}"></div>
+    <div class="main mt40">
+        <div class="bg-white" v-if="lists && userId">
+            <a href="javascript:" class="bdb1 p10  df jcb" v-for="item in lists">
+               <span>{{item.name}}</span>
+                <span>{{item.time}}</span>
+            </a>
+        </div>
+        <div class="tac mt100" v-if="!lists && userId">
+            <img src="images/empty.gif" alt="" width="200" class="mb20">
+            <p class="fz16 mb10">近三个月无外卖订单记录</p>
+            <a href="javascript:" @click="searchOldOrder()">
+                <p class="fz10 grey">查看三个月前的外卖订单 <i class="fa fa-chevron-circle-down"></i></p>
+            </a>
+        </div>
+        <div class="tac mt100" v-if="!userId">
+            <img src="images/empty.gif" alt="" width="200" class="mb20">
+            <p class="fz16 mb10">登录后查看外卖订单</p>
+            <a href="login.html" class="btn btn-success">立即登录</a>
+        </div>
     </div>
     <footer class="footer-menu df tac">
         <a href="home.html" class="fx1">
@@ -48,12 +65,37 @@ new Vue({
     el:"#box",
     data:{
         imgLoading:true,
-        positionY:0
+        positionY:0,
+        userId:""
     },
     methods:{
 
     },
+    computed:{
+      lists:function(){
+          var _this=this;
+          if(_this.userId){
+              function getData(url){
+                  var a;
+                  $.ajax({
+                      url:url,
+                      data:{userId:this.userId},
+                      async:false, //此处ajax请求只能用同步，否则就会出问题
+                      success:function(result){
+                          a = result;
+                      }
+                  });
+                  return a;
+              }
+            return getData("json/order.json");
+          }
+      }
+    },
     created:function(){
+        var userId=localStorage.getItem("userId");
+        if(userId){
+            this.userId=userId;
+        }
     },
     beforeCreate:function(){
         var _this=this;

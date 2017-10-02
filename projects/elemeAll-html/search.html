@@ -21,7 +21,7 @@
     <div class="main mt40">
         <div class="top">
             <form  class="searhBox df" method="post" onsubmit="return false">
-                <input type="search" class="fx1 mr5" placeholder="请输入商家或美食名称" v-model="keyword" v-bind:class="{'bd-active':keyword==''}" autocomplete="on" required>
+                <input type="search" class="fx1 mr5" placeholder="请输入商家或美食名称" v-model="keyword" :class="{'bd-active':keyword==''}" autocomplete="on" required>
                 <button class="btn btn-primary" @click="search(keyword)">提交</button>
             </form>
         </div>

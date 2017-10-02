@@ -12,6 +12,45 @@
     <script src="js/rem.js"></script>
     <link rel="stylesheet" href="css/animate.css">
 </head>
+<style>
+    .mint-switch {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        position: relative;
+    }
+    .mint-switch-core {
+        display: inline-block;
+        position: relative;
+        width: 52px;
+        height: 32px;
+        border: 1px solid #d9d9d9;
+        border-radius: 16px;
+        box-sizing: border-box;
+        background: #d9d9d9;
+    }
+    .mint-switch-core:before {
+        width: 50px;
+        height: 30px;
+        background-color: #fdfdfd;
+    }
+    .mint-switch-core:after {
+        width: 30px;
+        height: 30px;
+        background-color: #fff;
+        box-shadow: 0 1px 3px rgba(0,0,0,.4);
+    }
+    .mint-switch-label {
+        margin-left: 10px;
+        display: inline-block;
+    }
+    .mint-switch * {
+        pointer-events: none;
+    }
+</style>
 <body>
 <div id="box">
     <header class="header">
@@ -19,24 +58,26 @@
         <div class="header-center">账户信息</div>
     </header>
     <div class="main mt50">
-        <form action="" onsubmit="return false">
+        <form action="" onsubmit="return false" v-cloak>
             <ul class="bg-white grey">
                 <li class="bdb1 df p5">
                     <input type="text" placeholder="账号" class="form-control bd0 fz16" v-model="account">
                 </li>
                 <li class="bdb1 df p5 aic">
-                    <input type="password" placeholder="密码" class="form-control bd0 fz16"  v-model="password">
+                    <input :type="passwordType" placeholder="密码" class="form-control bd0 fz16"  v-model="password">
                     <div>
-                        <a href="javascript:" @click="showPassword()">开关</a>
+                        <label class="switch-box" @click="showPassword()" :class="{'bg-active':onOff}">
+                            <span class="switch-circle" :class="{'switch-active':onOff,'switch-active2':!onOff}"></span>
+                        </label>
                     </div>
                 </li>
                 <li class="bdb1 df jcb p5 aic">
                     <input type="text" placeholder="验证码" class="form-control bd0 fz16"  v-model="checkCode" style="margin-right:-15px;">
                     <div class="df aic">
-                        <img src="images/elmlogo.jpeg" alt="" width="80" height="35" class="mr10">
+                        <a href="javascript:" @click="changeCode()" class="mr5"><img :src=src alt="" width="85" height="35"></a>
                         <div class="fz10">
                             <p>看不清</p>
-                            <a href="javascript:" class="c-active">换一张</a>
+                            <a href="javascript:" class="c-active" @click="changeCode()">换一张</a>
                         </div>
                     </div>
                 </li>
@@ -53,19 +94,18 @@
             </div>
         </form>
     </div>
-    <div class="modalBox" v-bind:class="{hidden:!exitButton2}" v-cloak>
-        <div class="modal animated bounce" v-bind:class="{bounceInDown:exitButton,bounceOutDown:!exitButton}">
+    <div class="modalBox" :class="{hidden:!exitButton2}" v-cloak>
+        <div class="modal animated bounce" :class="{bounceInDown:exitButton,bounceOutDown:!exitButton}">
             <div class="modal-dialog p0 m40">
                 <div class="modal-body pt10">
                     <i class="fa fa-exclamation-circle fz90 yellow mb20"></i>
                     <p class="fz24">{{errorInfo}}</p>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-success btn-block bdrs0 fz18" @click="quit(true)">确认</button>
-                </div>
+                </div> <button class="btn btn-success btn-block bdrs0 fz18" @click="quit(true)">确认</button>
             </div>
         </div>
-        <div class="modal-backdrop animated" v-bind:class="{fadeIn:exitButton,fadeOut:!exitButton}"></div>
+        <div class="modal-backdrop animated" :class="{fadeIn:exitButton,fadeOut:!exitButton}"></div>
     </div>
 </div>
 </body>
@@ -74,25 +114,31 @@
         el:"#box",
         data:{
             showCode:false,
-            passwordType:"passwordType",
+            passwordType:"password",
             account:"",
             password:"",
             checkCode:"",
             errorInfo:"",
             exitButton:false,
-            exitButton2:false
+            exitButton2:false,
+            onOff:false,
+            src:"images/code.png"
         },
         methods:{
             showPassword:function(){
-                if(this.passwordType=="passwordType"){
-                    this.passwordType="type";
+                this.onOff=!this.onOff;
+                if(this.onOff==true){
+                    this.passwordType="text";
                 }
                 else{
-                    this.passwordType="passwordType";
+                    this.passwordType="password";
                 }
             },
             changeCode:function(){
-                
+                var _this=this;
+                $.post("json/code.json",{},function(result){
+                    _this.src=result.codesrc;
+                });
             },
             checkLogin:function(){
                 if(this.account==""){

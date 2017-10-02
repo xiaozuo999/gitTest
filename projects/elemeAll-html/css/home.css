@@ -15,7 +15,7 @@
 }
 .bannerOne {
     overflow: hidden;
-    float: left;
+    display: flex;
 }
 .banner{
     background: #fff;
@@ -25,9 +25,10 @@
     margin-bottom: 0.1rem;
 }
 .banner a{
-    width: 25%;
-    float: left;
+    /* width: 25%; */
+    /* float: left; */
     padding: 0.06rem 0;
+    flex: 1;
 }
 .banner a img{
     width: 0.36rem;
@@ -59,8 +60,8 @@
     background: #007aff;
 }
 .swiper-wrapper {
-    width: 8.92rem;
-    overflow: hidden;
+    /* width: 8.92rem; */
+    /* overflow: hidden; */
 }
 .container{
     /* padding:0 0.1rem; */

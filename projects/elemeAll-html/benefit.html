@@ -20,8 +20,8 @@
     </header>
     <div class="main mt40">
         <div class="nav p10 df jcc bg-white fz16">
-            <a  href="javascript:" class="mr60" v-bind:class="{navActive:show}" @click="change()">红包</a>
-            <a href="javascript:" v-bind:class="{navActive:!show}" @click="change()">商家代金券</a>
+            <a  href="javascript:" class="mr60" :class="{navActive:show}" @click="change()">红包</a>
+            <a href="javascript:" :class="{navActive:!show}" @click="change()">商家代金券</a>
         </div>
         <div class="p10" v-if="show">
             <div class="mb10">

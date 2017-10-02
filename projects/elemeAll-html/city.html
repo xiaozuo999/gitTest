@@ -30,7 +30,7 @@
     <div class="content" v-cloak>
         <p class="history" v-show="!searchContent">搜索历史</p>
         <div class="content-search" v-show="searchContent">
-            <a href="javascript:" v-for="item in searchContent" @click="home(item)">
+            <a href="home.html" v-for="item in searchContent">
                 <h3 class="address-title">{{item.name}}</h3>
                 <p class="color-grey fz10">{{item.address}}</p>
             </a>
@@ -53,16 +53,7 @@
 </html>
 
 <script>
-//    if(localStorage.getItem(searchHistory)){
-//        VM.searchHistory=localStorage.getItem(searchHistory);
-//    }
-//    else{
-//        VM.searchHistory="";
-//    }
-//
-
-
-    var VM=new Vue({
+    new Vue({
         el:"#box",
         data:{
             keyword:"",
@@ -82,9 +73,6 @@
             empty:function(){
                 this.searchHistory="";
                 localStorage.clear();
-            },
-            home:function(obj){
-
             }
         },
         computed:{

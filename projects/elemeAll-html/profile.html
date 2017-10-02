@@ -22,12 +22,12 @@
 
     <section class="main" v-cloak>
         <div class="profile">
-            <a v-bind:href="url" class="db">
+            <a :href="url" class="db">
                 <div class="profile-phone white">
                     <div class="img-user fz30 bg-white ovf" v-if="!user.avatar">
                         <i class="fa fa-user mt15" style="color:#dcdcdc;"></i>
                     </div>
-                   <img v-bind:src="user.avatar" alt="" class="img-user"  v-if="user.avatar">
+                   <img :src="user.avatar" alt="" class="img-user"  v-if="user.avatar">
                     <div class="profile-phone-center">
                         <b class="fz18 b white" v-if="!user.username">登录/注册</b>
                         <b class="fz18 white" v-if="user.username">{{user.username}}</b>

@@ -37,10 +37,10 @@
                 </div>
                 <div class="mr10">
                     <div class="df">
-                        <a href="javascript:" @click="changeCode()" class="mr5"><img v-bind:src=src alt="" width="85" height="35"></a>
+                        <a href="javascript:" @click="changeCode()" class="mr5"><img :src=src alt="" width="85" height="35"></a>
                         <div class="fx1 aic fz10">
                             看不清<br>
-                            <a href="javascript:" class="c-active">换一张</a>
+                            <a href="javascript:" class="c-active" @click="changeCode()">换一张</a>
                         </div>
                     </div>
                 </div>
@@ -56,11 +56,14 @@
     new Vue({
         el:"#box",
         data:{
-            src:"images/zhifubao.png"
+            src:"images/code.png"
         },
         methods:{
             changeCode:function(){
-
+                var _this=this;
+                $.post("json/code.json",{},function(result){
+                    _this.src=result.codesrc;
+                });
             }
         }
     })

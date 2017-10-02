@@ -26,7 +26,7 @@
                 <span>当前定位城市</span>
                 <span class="color-gray">定位不准时，请在城市列表中选择</span>
             </div>
-            <a v-bind:href='"city.html?type="+address.pinyin' class="bdb1 p10 df jcb bg-white">
+            <a :href='"city.html?type="+address.pinyin' class="bdb1 p10 df jcb bg-white">
                 <span class="fz18 c-active" v-cloak>{{address.name}}</span>
                 <i class="fa fa-chevron-right" aria-hidden="true"></i>
             </a>
@@ -37,7 +37,7 @@
             </div>
             <div class="content" v-cloak>
                 <template  v-for="(item,index) in cityHot" >
-                    <a  v-bind:href='"city.html?type="+item.pinyin+"|"+index+"|hot"' data-area_code="item.area_code" @click="city(item)" class="col-xs-3 c-active">{{item.name}} </a>
+                    <a  :href='"city.html?type="+item.pinyin+"|"+index+"|hot"' data-area_code="item.area_code" @click="city(item)" class="col-xs-3 c-active">{{item.name}} </a>
                 </template>
             </div>
         </div>
@@ -48,7 +48,7 @@
                 </div>
                 <div class="content">
                     <template v-for="(item2,index2) in item">
-                        <a v-bind:href='"city.html?type="+item2.pinyin+"|"+index2' data-area_code="item2.area_code" class="col-xs-3 ellipsis">{{item2.name}} </a>
+                        <a :href='"city.html?type="+item2.pinyin+"|"+index2' data-area_code="item2.area_code" class="col-xs-3 ellipsis">{{item2.name}} </a>
                     </template>
                 </div>
             </div>

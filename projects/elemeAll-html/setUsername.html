@@ -22,11 +22,11 @@
     <div class="main">
         <div class="p10">
             <div class="df">
-                <input type="text" placeholder="输入用户名" class="fx1 p10 fz16 mb10 mt10 bg-tp bd1" v-bind:class="{'bd-color-red':!checkPass}" v-model="username">
+                <input type="text" placeholder="输入用户名" class="fx1 p10 fz16 mb10 mt10 bg-tp bd1" :class="{'bd-color-red':!checkPass}" v-model="username">
             </div>
             <p class="fz10 mb20 grey" v-show="checkPass">用户名只能修改一次（5-24字符之间）</p>
             <p class="fz10 mb20 red" v-show="!checkPass">用户名长度在5到24字符之间</p>
-            <button class="btn btn-primary btn-block fz16" v-bind:class="{color9:checkPass2}">确认修改</button>
+            <button class="btn btn-primary btn-block fz16" :class="{color9:checkPass2}">确认修改</button>
         </div>
     </div>
 </div>

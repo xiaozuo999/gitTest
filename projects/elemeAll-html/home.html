@@ -16,19 +16,22 @@
 </head>
 <body>
 <div id="box">
-    <div class="img-loading" v-show="imgLoading" v-bind:style="{backgroundPositionY:positionY}"></div>
+    <div class="img-loading" v-show="imgLoading" :style="{backgroundPositionY:positionY}"></div>
     <header class="header">
         <a href="search.html" class="header-left"><i aria-hidden="true" class="fa fa-search"></i></a>
         <div class="header-center ellipsis" style="width: 180px;">福田区车公庙地铁站福田区车公庙地铁站</div>
         <a href="profile.html" class="header-right fr" v-if="!login"><i aria-hidden="true" class="fa fa-user-o"></i></a>
         <a href="login.html" class="header-right fr fz14" v-if="login">登录/注册</a>
     </header>
+    <div class="goTop fz50 grey fix op8" style="right:30px;bottom:70px;" @click="goTop()" v-show="toTopIcon">
+        <i  class="fa fa-arrow-circle-o-up"></i>
+    </div>
     <div class="banner bdb1" v-cloak>
         <div class="swiper-wrapper">
             <div class="bannerOne" v-for="(item,index) in filteredItems">
                 <a href="javascript:"  v-for="(item2,index2) in item">
                     <figure>
-                        <img v-bind:src='"https://fuss10.elemecdn.com/"+item2.image_url' alt="">
+                        <img :src='"https://fuss10.elemecdn.com/"+item2.image_url' alt="">
                         <figcaption>{{item2.title}}</figcaption>
                     </figure>
                 </a>
@@ -47,7 +50,7 @@
         <div class="items" v-cloak>
             <div class="item" v-for="item in restaurants">
                 <div class="item-left">
-                    <img v-bind:src='"http://images.cangdu.org/"+item.image_path' alt="" class="img-shop">
+                    <img :src='"http://images.cangdu.org/"+item.image_path' alt="" class="img-shop">
                 </div>
                 <div class="item-right">
                     <h4 class="item-right-1">
@@ -124,9 +127,14 @@
                 filteredItems:"",
                 restaurants:"",
                 imgLoading:true,
-                positionY:0
+                positionY:0,
+                toTopIcon:false
             },
             methods:{
+                goTop:function () {
+                    document.body.scrollTop = 0;
+                    document.documentElement.scrollTop = 0;
+                }
             },
             computed:{
                 login:function(){
@@ -144,15 +152,23 @@
                 $.post("json/group-type.json",{},function(result){
                     _this.dataBanner=result;
                     var arr=[];
-                    var len=Math.ceil(_this.dataBanner.length/8);
+                    var len=Math.ceil(_this.dataBanner.length/4);
                     for(var i=0;i<len;i++){
-                        arr.push(_this.dataBanner.slice(8*i, 8*(i+1)));
+                        arr.push(_this.dataBanner.slice(4*i, 4*(i+1)));
                     }
                     _this.filteredItems=arr;
                 })
                 $.post("json/restaurants.json",{},function(result){
                     _this.restaurants=result;
                 })
+
+                window.onscroll = function() {
+                    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                        _this.toTopIcon=true;
+                    } else {
+                        _this.toTopIcon=false;
+                    }
+                };
             },
             beforeCreate:function(){
                 var _this=this;
