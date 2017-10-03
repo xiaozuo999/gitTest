@@ -121,9 +121,11 @@
     height: 0.13rem;
     position: relative;
 }
-span.starBox1 {
+.starBox>span {
     position: absolute;
     word-spacing: -0.06rem;
+    top: 0;
+    left: 0;
 }
 .fa-star{
     font-size: 0.1rem;

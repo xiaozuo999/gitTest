@@ -28,11 +28,13 @@
         <div class="content" v-cloak>
             <div class="content-box1" v-show="!searchLists">
                 <h4 class="title" v-show="searchHistory.length!=0">搜索历史</h4>
-                <div class="items">
-                    <div class="item df bdb1" v-for="(item,index) in searchHistory">
-                        <a href="javascript:" class="fx1" @click="search(item)">{{item}}</a>
-                        <a href="javascript:" class="p5" @click="remove(index)"><i class="fa fa-close"></i></a>
-                    </div>
+                <div class="bg-white">
+                    <ul>
+                        <li class="df bdb1 p10" v-for="(item,index) in searchHistory">
+                            <a href="javascript:"  @click="search(item)" class="fx1">{{item}}</a>
+                            <a href="javascript:"  @click="remove(index)"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
                 </div>
                 <a  href="javascript:" class="empty-box color-active text-center db" v-show="searchHistory.length!=0" @click="empty()">
                     清空搜索历史
@@ -42,10 +44,12 @@
                 </div>
             </div>
 
-            <div class="items2" v-show="searchLists">
-                <div class="item df bdb1" v-for="(item,index) in searchLists">
-                    <a href="javascript:" class="fx1" @click="search(item.name)">{{item.name}}</a>
-                </div>
+            <div class="bg-white" v-show="searchLists">
+                <ul>
+                    <li class="df bdb1 p10" v-for="(item,index) in searchLists">
+                        <a href="home.html" class="fx1" @click="search(item.name)">{{item.name}}</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
@@ -91,18 +95,22 @@
                 localStorage.setItem("history",JSON.stringify(this.searchHistory));
             },
             search:function(kw){
+                this.keyword=kw;
                 if(kw){
                     //本地存储
-                    this.searchHistory.push(kw);
+                    var len= this.searchHistory.length;
+                    if(len>4){
+                        this.searchHistory.pop();
+                    }
+                    this.searchHistory.unshift(kw);
                     localStorage.setItem("history",JSON.stringify(this.searchHistory));
-                    console.log("storage赋值后"+JSON.parse(localStorage.getItem("history")));
                     this.searchLists=[
                         {
-                            "name":"a",
+                            "name":"结果一",
                             "id":1
                         },
                         {
-                            "name":"c",
+                            "name":"结果二",
                             "id":3
                         }
                     ];

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+    <title>我的积分-eleme</title>
+    <link rel="stylesheet" href="css/common.css">
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <script src="js/rem.js"></script>
+    <script src="node_modules/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+    <div id="box">
+        <header class="header">
+            <a href="search.html" class="header-left"><i aria-hidden="true" class="fa fa-chevron-left"></i></a>
+            <div class="header-center">我的积分</div>
+        </header>
+        <div class="main mt40" v-cloak>
+            <div class="box p10" style="background:#3190e8;">
+                <div class="bg-white bdrs5 p10">
+                    <div>当前积分<a href="detail.html" class="c-active fr"> <i class="fa fa-question-circle mr5 fz16"></i>积分说明</a></div>
+                    <div class="mt10">
+                        <span class="fz40 b green">0</span> <span class="fz16">元</span>
+                    </div>
+                    <button class="btn btn-default btn-block btn-success fz16" :class="{'btn-grey':balance==0.00}">积分兑换商品</button>
+                </div>
+            </div>
+
+            <p class="grey fz10 p10">最近30天积分记录</p>
+            <div class="lists bg-white grey">
+                <ul v-for="item in transactionRecord">
+                    <li class="p10 bdb1 df jcb">
+                        <span>{{item.name}}</span>
+                        <span>{{item.time}}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="tac mt40">
+                <img src="images/no-log.png" alt="" width="180">
+                <p class="mt10 grey fz16">最近30天无积分记录</p>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+<script>
+    new Vue({
+        el:"#box",
+        data:{
+            balance:0.00,
+            transactionRecord:""
+        },
+        methods: {
+        },
+        created:function(){
+            var userId=localStorage.getItem("userId");
+//            var userId=1;
+            if(userId!="" && userId!=undefined){
+                var _this=this;
+                $.post("json/balance.json",{"userId":userId},function(result){
+                    _this.balance=result.balance;
+                    _this.transactionRecord=result.transactionRecord;
+                })
+            }
+        },
+        computed:{
+        }
+    })
+</script>
+</html>

@@ -15,13 +15,13 @@ input[type=search]{
 }
 .items{
 }
-.item{
-    background: #fff;
-    text-indent: 8px;
-    justify-content: space-between;
-    font-size: 14px;
-    line-height: 34px;
-}
+/*.item{*/
+    /*background: #fff;*/
+    /*text-indent: 8px;*/
+    /*justify-content: space-between;*/
+    /*font-size: 14px;*/
+    /*line-height: 34px;*/
+/*}*/
 .empty-box{
     padding: 8px;
     background: #fff;
