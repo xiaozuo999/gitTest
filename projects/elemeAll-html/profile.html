@@ -45,7 +45,7 @@
             <div class="profile-data mb10 tac">
                 <a href="balance.html" class="profile-data-item">
                     <span class="fz26 orange b" v-if="!user.balance">0.00</span>
-                    <span class="fz26 orange b" v-if="user.balance">{{user.balance}}</span>
+                    <span class="fz26 orange b" v-if="user.balance">{{user.balance | money}}</span>
                     元
                     <p class="grey">我的余额</p>
                 </a>
@@ -153,6 +153,26 @@
                     _this.user=result;
                     _this.url="info.html";
                 });
+            }
+        },
+        filters: {
+            money: function (value) {
+                value=value+"";
+                if(value.indexOf(".")<0){
+                   return value+".00"
+                }
+                else{
+                    var b=value.split(".")[1];
+                    if(b.length==1){
+                        return value+"0";
+                    }
+                    else if(b.length==2){
+                        return value;
+                    }
+                    else{
+                        return value.split(".")[0]+ "."+b.slice(0,2);
+                    }
+                }
             }
         }
     })
