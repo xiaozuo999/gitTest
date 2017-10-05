@@ -156,7 +156,8 @@
                 else{
                     $.post("json/user.json",{"account":this.account,"password":this.password,"checkCode":this.checkCode},function(result){
                         if(result){
-                            localStorage.setItem("userId",result.userId);
+//                            console.log(result.user_id);
+                            localStorage.setItem("userId",result.user_id);
                             history.back();
 //                            location.href="profile.html";
                         }

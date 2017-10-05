@@ -4,51 +4,84 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
-    <title>下载-eleme</title>
+    <title>服务中心-eleme</title>
     <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/vipcard.css">
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/vue/dist/vue.js"></script>
     <script src="node_modules/vue-router/dist/vue-router.js"></script>
     <script src="js/rem.js"></script>
 </head>
 <body>
-<div id="box">
-    <div class="img-loading" v-show="imgLoading" :style="{backgroundPositionY:positionY}"></div>
-    <header class="header">
-        <a href="javascript:history.back()" class="header-left"><i aria-hidden="true" class="fa fa-chevron-left"></i></a>
-        <div class="header-center">服务中心</div>
-        <!--<div class="header-right fr"><i aria-hidden="true" class="fa fa-chevron-right"></i></div>-->
-    </header>
-</div>
+    <div id="box" class="bg-white">
+        <header class="header">
+            <a href="javascript:history.back()" class="header-left"><i aria-hidden="true" class="fa fa-chevron-left"></i></a>
+            <div class="header-center">服务中心</div>
+        </header>
+        <div class="mt40">
+            <div class="df tac bdb1">
+                <a href="javascript:" class="fx1 tac p20 bdr1">
+                    <span class="fz30 red">
+                        <i class="fa fa-user-circle-o"></i>
+                    </span>
+                    <p class="grey">在线客服</p>
+                </a>
+                <a href="javascript:" class="fx1 tac p20">
+                    <span class="fz30 green">
+                        <i class="fa fa-phone-square"></i>
+                    </span>
+                    <p class="grey">在线客服</p>
+                </a>
+            </div>
+            <div class="question">
+                <div class="title p10 bdb1">
+                    <p class="pt10 pb10 fz16">
+                        热门问题
+                    </p>
+                </div>
+                <div class="lists">
+                    <template v-for="(item,key,index) in result">
+                        <a :href='"questionDetail.html?id="+index' class="df p10 grey jcb bdb1" v-if="key.indexOf('Caption')>0">
+                            <span>
+                                {{item}}
+                            </span>
+                           <span>
+                                <i class="fa fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 <script>
     new Vue({
         el:"#box",
         data:{
-            imgLoading:true,
-            positionY:0
         },
         methods:{
-
+        },
+        computed:{
+            result:function(){
+                var _this=this;
+                function getResult(url){
+                    var a;
+                    $.ajax({
+                        url:url,
+                        data:{},
+                        async:false, //此处ajax请求只能用同步，否则就会出问题
+                        success:function(data){
+                            console.log(data);
+                            a = data;
+                        }
+                    });
+                    return a;
+                }
+                return getResult("json/service.json");
+            }
         },
         created:function(){
-        },
-        beforeCreate:function(){
-            var _this=this;
-            var i=0;
-            var timer=setInterval(function(){
-                if(i>5){
-                    i--;
-                }
-                else{
-                    i++;
-                }
-                _this.positionY=-70*i+"px";
-            },1000);
-            setTimeout(function(){
-                _this.imgLoading=false;
-            },3000)
+
         }
     })
 </script>

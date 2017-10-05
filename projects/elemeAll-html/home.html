@@ -20,8 +20,8 @@
     <header class="header">
         <a href="search.html" class="header-left"><i aria-hidden="true" class="fa fa-search"></i></a>
         <a href="index.html" class="header-center ellipsis" style="width: 180px;">南山科技园金融基地大厦</a>
-        <a href="profile.html" class="header-right fr" v-if="!login"><i aria-hidden="true" class="fa fa-user-o"></i></a>
-        <a href="login.html" class="header-right fr fz14" v-if="login">登录/注册</a>
+        <a href="profile.html" class="header-right fr" v-if="login"><i aria-hidden="true" class="fa fa-user-o"></i></a>
+        <a href="login.html" class="header-right fr fz14" v-else>登录/注册</a>
     </header>
     <div class="goTop fz50 grey fix op8" style="right:30px;bottom:70px;" @click="goTop()" v-show="toTopIcon">
         <i  class="fa fa-arrow-circle-o-up"></i>

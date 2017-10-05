@@ -149,7 +149,7 @@
             var _this=this;
             var userId=localStorage.getItem("userId");
             if(userId){
-                $.post("json/user.json",{userId,userId},function(result){
+                $.post("json/user.json",{"userId":userId},function(result){
                     _this.user=result;
                     _this.url="info.html";
                 });

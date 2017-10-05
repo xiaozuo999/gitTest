@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+    <title>服务中心-eleme</title>
+    <link rel="stylesheet" href="css/common.css">
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <script src="node_modules/vue-router/dist/vue-router.js"></script>
+    <script src="js/rem.js"></script>
+</head>
+<body>
+<div id="box" class="bg-white">
+    <header class="header">
+        <a href="javascript:history.back()" class="header-left"><i aria-hidden="true" class="fa fa-chevron-left"></i></a>
+        <div class="header-center">{{title}}</div>
+    </header>
+    <div class="mt40">
+        <p class="p15">
+            {{content}}
+        </p>
+    </div>
+</div>
+
+</body>
+<script>
+    new Vue({
+        el:"#box",
+        data:{
+            "title":"",
+            "content":""
+        },
+        methods:{
+        },
+        computed:{
+            result:function(){
+                var _this=this;
+                function getResult(url){
+                    var a;
+                    $.ajax({
+                        url:url,
+                        data:{},
+                        async:false, //此处ajax请求只能用同步，否则就会出问题
+                        success:function(data){
+                            a = data;
+                        }
+                    });
+                    return a;
+                }
+                return getResult("json/service.json");
+            }
+        },
+        created:function(){
+
+        }
+    })
+</script>
+</html>
