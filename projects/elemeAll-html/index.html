@@ -90,8 +90,8 @@ new Vue({
         this.$http.get('json/city-hot.json',{
         }).then(function(res){
             this.cityHot=res.data;
-        },function(){
-            console.log("请求失败");
+        },function(res){
+            console.log(res.status);
         })
 
         this.$http.get('json/city-group.json',{

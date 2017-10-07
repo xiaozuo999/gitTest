@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-resource跨域取数据</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <script src="js/vue.js"></script>
+    <script src="js/vue-resource.js"></script>
+</head>
+<body>
+<div id="box">
+    <input type="text" v-model="kw" @keyup="search()" placeholder="请输入关键字">
+    <ul>
+        <li v-for="item in items">{{item}}</li>
+    </ul>
+</div>
+
+<script>
+    new Vue({
+        el:"#box",
+        data:{
+            kw:"",
+            items:""
+        },
+        methods:{
+            search:function(){
+                //https://www.ele.me/restapi/v2/pois?extras%5B%5D=count&geohash=ws105rz9smwm&keyword=a&limit=20&type=nearby
+                this.$http.jsonp("https://www.ele.me/restapi/v2/pois",{
+                    keyword:this.kw,   //关键字
+                    geohash:"ws105rz9smwm",   //城市,
+                    limit:5,
+                    type:"nearby"
+                },{
+                    jsonp:'callback'   //怎么判断jsonp是否改名了，如何找到改名后的callback名呢？？？？
+            }).then(function(res){
+                   this.items=res.data.s;
+                   console.log(res.data.s);
+                },function(res){
+                    console.log(res.status);
+                });
+            }
+        }
+    })
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-resource跨域取数据</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <script src="js/vue.js"></script>
+    <script src="js/vue-resource.js"></script>
+</head>
+
+<body>
+<div id="box">
+    <input type="text" v-model="kw" @keyup="search()" placeholder="请输入关键字">
+    <ul>
+        <li v-for="item in items">{{item}}</li>
+    </ul>
+</div>
+
+<script>
+    new Vue({
+        el:"#box",
+        data:{
+            kw:"",
+            items:""
+        },
+        methods:{
+            search:function(){
+                //https://sug.so.360.cn/suggest?callback=jQuery18306664889150769138_1507386648055&encodein=utf-8&encodeout=utf-8&format=json&info=%7B%22q%22%3A%5B%22%25E9%25A6%2599%25E6%25B8%25AF%25E9%25B8%25BD%25E7%25AC%25BC%22%2C%22hanguo%2520%25E9%25B8%25BD%25E7%25AC%25BC%22%5D%2C%22id%22%3A%5B%2201506994852669%22%2C%2201506994838087%22%5D%7D&_=1507386655892
+                this.$http.jsonp("https://sug.so.360.cn/suggest",{word:this.kw}).then(function(res){
+                   this.items=res.data.s;
+                   console.log(res.data.s);
+                },function(res){
+                    console.log(res.status);
+                });
+            }
+        },
+        components:{
+        },
+    })
+</script>
+
+
+</body>
+</html>

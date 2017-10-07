@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-resource跨域取数据</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <script src="js/vue.js"></script>
+    <script src="js/vue-resource.js"></script>
+</head>
+
+<body>
+<div id="box">
+    <input type="text" v-model="kw" @keyup="search()" placeholder="请输入关键字">
+    <ul>
+        <li v-for="item in items">{{item}}</li>
+    </ul>
+</div>
+
+<script>
+    new Vue({
+        el:"#box",
+        data:{
+            kw:"",
+            items:""
+        },
+        methods:{
+            search:function(){
+                //https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=a&json=1&p=3&sid=&csor=1&cb=jQuery110209546341864469152_1507385323426&_=1507385323429
+                this.$http.jsonp("https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su",{
+                    wd:this.kw
+                },{
+                    jsonp:'cb'  //jsonp中默认的callback等于"callback"
+                }).then(function(res){
+                   this.items=res.data.s;
+                   console.log(res.data.s);
+                },function(res){
+                    console.log(res.status);
+                });
+            }
+        },
+        components:{
+        },
+    })
+</script>
+
+
+</body>
+</html>

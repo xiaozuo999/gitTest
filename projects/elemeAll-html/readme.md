@@ -1,6 +1,6 @@
 #eleme web app项目介绍
 
-vue.js + vue-router + vue-router
+vue.js + vue-resource + vue-router
 
 ##使用的技术：
 1. vue.js渲染数据，控制页面
