@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
     <title>账户信息-eleme</title>
     <link rel="stylesheet" href="css/common.css">
-    <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/vue/dist/vue.js"></script>
+    <script src="node_modules/vue-resource/dist/vue-resource.js"></script>
     <script src="node_modules/vue-router/dist/vue-router.js"></script>
     <script src="js/rem.js"></script>
     <link rel="stylesheet" href="css/animate.css">
@@ -136,7 +136,7 @@
             },
             changeCode:function(){
                 var _this=this;
-                $.post("json/code.json",{},function(result){
+                this.$http.post("json/code.json",{},function(result){
                     _this.src=result.codesrc;
                 });
             },
@@ -154,7 +154,7 @@
                     this.exit();
                 }
                 else{
-                    $.post("json/user.json",{"account":this.account,"password":this.password,"checkCode":this.checkCode},function(result){
+                    this.$http.post("json/user.json",{"account":this.account,"password":this.password,"checkCode":this.checkCode},function(result){
                         if(result){
 //                            console.log(result.user_id);
                             localStorage.setItem("userId",result.user_id);

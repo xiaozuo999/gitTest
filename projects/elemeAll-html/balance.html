@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
     <title>我的余额-eleme</title>
     <link rel="stylesheet" href="css/common.css">
-    <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/vue/dist/vue.js"></script>
+    <script src="node_modules/vue-resource/dist/vue-resource.js"></script>
     <script src="js/rem.js"></script>
     <script src="node_modules/vue-router/dist/vue-router.js"></script>
 </head>
@@ -60,7 +60,7 @@
 //            var userId=1;
             if(userId!="" && userId!=undefined){
                 var _this=this;
-                $.post("json/balance.json",{"userId":userId},function(result){
+                this.$http.post("json/balance.json",{"userId":userId},function(result){
                     _this.balance=result.balance;
                     _this.transactionRecord=result.transactionRecord;
                 })

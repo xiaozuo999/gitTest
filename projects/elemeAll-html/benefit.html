@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
     <title>账户信息-eleme</title>
     <link rel="stylesheet" href="css/common.css">
-    <script src="node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="node_modules/vue/dist/vue.js"></script>
+
+    <script src="node_modules/vue/dist/vue.js"></script>  <script src="node_modules/vue-resource/dist/vue-resource.js"></script>
     <script src="node_modules/vue-router/dist/vue-router.js"></script>
     <script src="js/rem.js"></script>
     <link rel="stylesheet" href="css/animate.css">
@@ -69,7 +69,7 @@
             var _this=this;
             var userId=localStorage.getItem("userId");
             if(userId!="" && userId!=undefined){
-                $.post("json/benefit.json",{"userId":userId},function(result){
+                this.$http.post("json/benefit.json",{"userId":userId},function(result){
                     _this.result=result;
                 });
             }

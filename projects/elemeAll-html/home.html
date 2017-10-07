@@ -7,8 +7,8 @@
     <title>ele城市选择</title>
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/home.css">
-    <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/vue/dist/vue.js"></script>
+    <script src="node_modules/vue-resource/dist/vue-resource.js"></script>
     <script src="node_modules/vue-router/dist/vue-router.js"></script>
     <link href="node_modules/c-swipe/dist/swipe.css" rel="stylesheet"></head>
     <script type="text/javascript" src="node_modules/c-swipe/dist/swipe.js"></script>
@@ -169,7 +169,7 @@
             },
             created:function(){
                 var _this=this;
-                $.post("json/group-type.json",{},function(result){
+                this.$http.get("json/group-type.json",{},function(result){
                     _this.loading=true;
                     _this.dataBanner=result;
                     var arr=[];
@@ -180,7 +180,7 @@
                     _this.filteredItems=arr;
                     _this.loading=false;
                 })
-                $.post("json/restaurants.json",{},function(result){
+                this.$http.get("json/restaurants.json",{},function(result){
                     _this.restaurants=result;
                 })
 

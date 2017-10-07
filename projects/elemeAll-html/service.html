@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
     <title>服务中心-eleme</title>
     <link rel="stylesheet" href="css/common.css">
-    <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/vue/dist/vue.js"></script>
+    <script src="node_modules/vue-resource/dist/vue-resource.js"></script>
     <script src="node_modules/vue-router/dist/vue-router.js"></script>
     <script src="js/rem.js"></script>
 </head>
@@ -58,30 +58,17 @@
     new Vue({
         el:"#box",
         data:{
+            result:""
         },
         methods:{
         },
         computed:{
-            result:function(){
-                var _this=this;
-                function getResult(url){
-                    var a;
-                    $.ajax({
-                        url:url,
-                        data:{},
-                        async:false, //此处ajax请求只能用同步，否则就会出问题
-                        success:function(data){
-                            console.log(data);
-                            a = data;
-                        }
-                    });
-                    return a;
-                }
-                return getResult("json/service.json");
-            }
         },
         created:function(){
-
+            var _this=this;
+            this.$http.post("json/service.json",function(result){
+                this.result=result;
+            })
         }
     })
 </script>

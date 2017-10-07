@@ -7,10 +7,11 @@
     <title>ele城市选择</title>
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/index.css">
-    <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/vue/dist/vue.js"></script>
+    <script src="node_modules/vue-resource/dist/vue-resource.js"></script>
     <script src="js/rem.js"></script>
     <script src="node_modules/vue-router/dist/vue-router.js"></script>
+
 </head>
 <body>
 <div id="box">
@@ -42,7 +43,7 @@
             </div>
         </div>
         <div class="city-wrap city-group">
-            <div class="city-group-one" v-for="(item,index) in cityGroup2" v-cloak>
+            <div class="city-group-one" v-for="(item,index) in cityGroup" v-cloak>
                 <div class="content-title">
                     {{softRule[index]}}<span v-show="index=='A'" class="fz10 color-grey">(按字母排序)</span>
                 </div>
@@ -53,7 +54,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 
@@ -61,42 +61,49 @@
 </html>
 
 <script>
-    $.post("json/city-hot.json",{},function(result){
-        $.post("json/city-group.json",{},function(result2){
-            new Vue({
-                el:"#box",
-                data:{
-                    cityHot:result,
-                    cityGroup:result2,
-                    softRule:["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"],
-                    cityGroup2B:[]
-                },
-                methods:{
+new Vue({
+    el:"#box",
+    data:{
+        cityHot:"",
+        cityGroup:[],
+        softRule:["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+    },
+    methods:{
 
-                },
-                computed:{
-                    cityGroup2:function(){
-                        for(var i=0;i<this.softRule.length;i++){
-                           var one=this.cityGroup[this.softRule[i]];
-                           this.cityGroup2B.push(one);
-                        }
-                        return this.cityGroup2B;
-                    },
-                    address:function(){
-                        return  {
-                            "pinyin": "shanghai",
-                            "is_map": true,
-                            "longitude": 121.473701,
-                            "latitude": 31.23037,
-                            "sort": 1,
-                            "area_code": "021",
-                            "abbr": "SH",
-                            "name": "上海",
-                            "id": 1
-                        }
-                    }
-                }
-            })
+    },
+    computed:{
+        address:function(){
+            return  {
+                "pinyin": "shanghai",
+                "is_map": true,
+                "longitude": 121.473701,
+                "latitude": 31.23037,
+                "sort": 1,
+                "area_code": "021",
+                "abbr": "SH",
+                "name": "上海",
+                "id": 1
+            }
+        }
+    },
+    created:function(){
+        this.$http.get('json/city-hot.json',{
+        }).then(function(res){
+            this.cityHot=res.data;
+        },function(){
+            console.log("请求失败");
         })
-    })
+
+        this.$http.get('json/city-group.json',{
+        }).then(function(res){
+            var a=res.data;
+            for(var i=0;i<this.softRule.length;i++){
+                var one=a[this.softRule[i]];
+                this.cityGroup.push(one);
+            }
+        },function(){
+            console.log("请求失败");
+        })
+    }
+})
 </script>
