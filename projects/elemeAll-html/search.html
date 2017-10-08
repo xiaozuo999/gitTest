@@ -21,7 +21,7 @@
     <div class="main mt40">
         <div class="top">
             <form  class="searhBox df" method="post" onsubmit="return false">
-                <input type="search" class="fx1 mr5" placeholder="请输入商家或美食名称" v-model="keyword" :class="{'bd-active':keyword==''}" autocomplete="on" required @keyup.enter="search(keyword)">
+                <input type="search" class="fx1 mr5" placeholder="请输入商家或美食名称" v-model="keyword" :class="{'bd-active':keyword==''}" autocomplete="on" required @keyup="search(keyword)">
                 <button class="btn btn-primary" @click="search(keyword)">提交</button>
             </form>
         </div>
@@ -47,7 +47,7 @@
             <div class="bg-white" v-show="searchLists">
                 <ul>
                     <li class="df bdb1 p10" v-for="(item,index) in searchLists">
-                        <a href="home.html" class="fx1" @click="search(item.name)">{{item}}</a>
+                        <a href="home.html" class="fx1">{{item.name}}</a>
                     </li>
                 </ul>
             </div>
@@ -87,7 +87,7 @@
         },
         methods:{
             empty:function(){
-                this.searchHistory="";
+                this.searchHistory=[];
                 localStorage.clear();
             },
             remove:function(index){
@@ -113,22 +113,18 @@
                     }
                 }
             },
-            get:function(ev){
-//                if(ev.keyCode==38 || ev.keyCode==40)return;
-//
-//                if(ev.keyCode==13){
-//                    window.open('https://www.baidu.com/s?wd='+this.keyword);
-//                    this.keyword='';
-//                }
-
-                this.$http.jsonp('json/search.json',{
-                    wd:this.keyword
+            get:function(){
+                //https://www.ele.me/restapi/v2/pois?extras%5B%5D=count&geohash=ws105rz9smwm&keyword=a&limit=20&type=nearby
+                this.$http.get("https://www.ele.me/restapi/v2/pois",{
+                    keyword:this.keyword,   //关键字
+                    geohash:"ws105rz9smwm",   //城市,
+                    limit:10,  //限制条数
+                    type:"nearby" //附近
                 }).then(function(res){
-                    console.log(res.data);
                     this.searchLists=res.data;
-                },function(){
-                    console.log("请求失败");
-                })
+                },function(res){
+                    console.log(res.status);
+                });
             }
         },
         created:function(){

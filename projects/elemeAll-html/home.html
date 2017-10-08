@@ -180,7 +180,20 @@
                     _this.filteredItems=arr;
                     _this.loading=false;
                 })
-                this.$http.get("json/restaurants.json",{},function(result){
+
+                //https://www.ele.me/restapi/shopping/restaurants?extras%5B%5D=activities&geohash=ws104swhexj&latitude=22.52553&limit=24&longitude=114.02451&offset=120&terminal=web
+                this.$http.jsonp("https://www.ele.me/restapi/shopping/restaurants",{
+                    "extras%5B%5D":"activities",
+                    "geohash":"ws104swhexj",
+                    "latitude":22.52553,
+                    "limit":24,
+                    "longitude":114.02451,
+                    "offset":120,
+                    "terminal":"web"
+                },{
+                    "jsonp":"get"
+                }).then(function(result){
+                    console.log(result);
                     _this.restaurants=result;
                 })
 
