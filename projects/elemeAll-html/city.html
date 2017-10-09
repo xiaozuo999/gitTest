@@ -4,96 +4,138 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
-    <title>ele城市选择</title>
+    <title>搜索页面-eleme</title>
     <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/city.css">
-
-    <script src="node_modules/vue/dist/vue.js"></script>  <script src="node_modules/vue-resource/dist/vue-resource.js"></script>
-    <script src="js/rem.js"></script>
+    <link rel="stylesheet" href="css/search.css">
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <script src="node_modules/vue-resource/dist/vue-resource.js"></script>
     <script src="node_modules/vue-router/dist/vue-router.js"></script>
+    <script src="js/rem.js"></script>
 </head>
 <body>
 <div id="box">
     <header class="header">
         <a href="search.html" class="header-left"><i aria-hidden="true" class="fa fa-chevron-left"></i></a>
-        <div class="header-center" v-cloak>{{city.name}}</div>
+        <div class="header-center" v-cloak>深圳</div>
         <a href="index.html" class="header-right fr">切换城市</a>
     </header>
-    <div class="top">
-        <div class="searchBox mb10">
-            <input type="search" placeholder="输入学校、商务楼、地址"  v-model="keyword" @keyup.enter="search()"  @key.up="searchUp()" @key.down="searchDown()">
+    <div class="main mt40 mb50">
+        <div class="top">
+            <form  class="searhBox" method="post" onsubmit="return false">
+                <div class="df">
+                    <input type="search" class="fx1 p5 mb10" placeholder="输入学校、商务楼、地址" v-model="keyword" :class="{'bd-active':keyword==''}" autocomplete="on" required @keyup="search(keyword)">
+                </div>
+                <button class="btn btn-primary btn-block" @click="search(keyword)">提交</button>
+            </form>
         </div>
-        <div class="buttonBox">
-            <button type="button"  class="btn btn-primary btn-block" @click="search()">提交</button>
+        <div class="content" v-cloak>
+            <div class="content-box1" v-show="!searchLists">
+                <h4 class="title" v-show="searchHistory.length!=0">搜索历史</h4>
+                <div class="bg-white">
+                    <ul>
+                        <li class="bdb1 p10" v-for="(item,index) in searchHistory" @click="search(item)">
+                            <p>{{item.name}}11</p>
+                            <p class="fz10 grey">{{item.address}}22</p>
+                        </li>
+                    </ul>
+                </div>
+                <p class="bg-white p10 grey tac fz16" v-show="searchHistory.length!=0" @click="empty()">
+                    清空所有
+                </p>
+            </div>
+
+            <div class="bg-white">
+                <ul v-show="searchLists">
+                    <li class="df bdb1 p10" v-for="(item,index) in searchLists">
+                        <a href="javascript:" class="fx1" @click="open(item)">
+                            <p>{{item.name}}</p>
+                            <p class="fz10 grey">{{item.address}}</p>
+                        </a>
+                    </li>
+                </ul>
+                <div class="empty-box color-active text-center db" v-show="searchLists=='' && keyword">
+                    很抱歉！无搜索结果
+                </div>
+            </div>
         </div>
     </div>
-    <div class="content" v-cloak>
-        <p class="history" v-show="!searchContent">搜索历史</p>
-        <div class="content-search" v-show="searchContent">
-            <a href="home.html" v-for="item in searchContent">
-                <h3 class="address-title">{{item.name}}</h3>
-                <p class="color-grey fz10">{{item.address}}</p>
-            </a>
-        </div>
-        <ul class="content-search" v-show="!searchContent">
-            <li v-for="item in searchHistory" @click="home(this)">
-                <a href="home.html">
-                    <h3 class="address-title" >{{item.name}}</h3>
-                    <p class="color-grey fz10">{{item.address}}</p>
-                </a>
-            </li>
-        </ul>
-        <div class="clearBox" v-show="searchHistory && !searchContent" @click="empty()">
-            清空所有
-        </div>
-    </div>
+    <footer class="footer-menu df tac">
+        <a href="home.html" class="fx1">
+            <i class="fa fa-shopping-basket"></i>
+            <span>外卖</span>
+        </a>
+
+        <a href="search.html" class="fx1">
+            <i class="fa fa-search c-active"></i>
+            <span>搜索</span>
+        </a>
+
+        <a href="order.html" class="fx1">
+            <i class="fa fa-reorder "></i>
+            <span>订单</span>
+        </a>
+
+        <a href="profile.html" class="fx1">
+            <i class="fa fa-user-o"></i>
+            <span>我的</span>
+        </a>
+    </footer>
 </div>
-
 </body>
-</html>
-
 <script>
     new Vue({
         el:"#box",
         data:{
             keyword:"",
-            searchContent:"",
-            searchHistory:"",
-            city2:""
+            searchHistory:[],
+            searchLists:"",
+            keywordTips:false
         },
         methods:{
+            empty:function(){
+                this.searchHistory=[];
+                localStorage.clear("history2");
+            },
+            remove:function(index){
+                this.searchHistory.splice(index,1);
+                localStorage.setItem("history2",JSON.stringify(this.searchHistory));
+            },
             search:function(){
-                var _this=this;
-                if(_this.keyword){
-                    this.$http.post("json/city-search.json",{"keyword":_this.keyword},function(result){
-                        _this.searchContent=result;
+                //https://www.ele.me/restapi/v2/pois?extras%5B%5D=count&geohash=ws105rz9smwm&keyword=a&limit=20&type=nearby
+                if(this.keyword){
+                    this.$http.get("https://www.ele.me/restapi/v2/pois",{
+                        keyword:this.keyword,   //关键字
+                        geohash:"ws105rz9smwm",   //城市,
+                        limit:10,  //限制条数
+                        type:"nearby" //附近
+                    }).then(function(res){
+                        this.searchLists=res.data;
+                    },function(res){
+                        console.log(res.status);
                     });
                 }
+                else{
+                    this.searchLists="";
+                }
+
             },
-            empty:function(){
-                this.searchHistory="";
-                localStorage.clear();
+            open:function(item){
+                //最多保存5条历史记录
+                if(this.searchHistory.length>4){
+                    this.searchHistory.pop();
+                }
+                this.searchHistory.unshift(item.name);
+                localStorage.setItem("history2",JSON.stringify(this.searchHistory));
+                location.href="home.html";
             }
         },
-        computed:{
-            city:function(){
-                var _this=this;
-                var url = location.href;
-                var sc = url.split("type=")[1].split("|");
-                sc[0] = sc[0].split("")[0].toUpperCase();
-                if(sc.length==3){
-                    this.$http.post("json/city-hot.json",{},function(result) {
-                        _this.city2 = result[sc[1]];
-                    })
-                }
-                else{
-                    this.$http.post("json/city-group.json",{},function(result) {
-                        _this.city2 = result[sc[0]][sc[1]];
-                    })
-                }
-                return _this.city2;
+        created:function(){
+            var history2=JSON.parse(localStorage.getItem("history2"));
+            if(history2){
+                this.searchHistory=history2;
             }
         }
     })
-
 </script>
+
+</html>
