@@ -91,32 +91,35 @@
             <i class="fa fa-question-circle"></i>  <span>加载更多</span>
         </p>
     </div>
-    <footer class="footer-menu df tac">
-        <a href="home.html" class="fx1">
-            <i class="fa fa-shopping-basket c-active"></i>
-            <span>外卖</span>
-        </a>
-
-        <a href="search.html" class="fx1">
-            <i class="fa fa-search"></i>
-            <span>搜索</span>
-        </a>
-
-        <a href="order.html" class="fx1">
-            <i class="fa fa-reorder "></i>
-            <span>订单</span>
-        </a>
-
-        <a href="profile.html" class="fx1">
-            <i class="fa fa-user-o"></i>
-            <span>我的</span>
-        </a>
-    </footer>
+    <foot-guide></foot-guide>
 </div>
 </body>
 </html>
 
+<template id="foot">
+    <footer class="footer-menu df tac">
+        <a href="home.html" class="fx1">
+            <i class="fa fa-shopping-basket" :class="{'c-active':url.indexOf('home')>0 ? true:false}"></i>
+            <span>外卖</span>
+        </a>
+        <a href="search.html" class="fx1">
+            <i class="fa fa-search" :class="{'c-active':url.indexOf('search')>0 ? true:false}"></i>
+            <span>搜索</span>
+        </a>
+        <a href="order.html" class="fx1">
+            <i class="fa fa-reorder " :class="{'c-active':url.indexOf('order')>0 ? true:false}"></i>
+            <span>订单</span>
+        </a>
+        <a href="profile.html" class="fx1">
+            <i class="fa fa-user-o" :class="{'c-active':url.indexOf('profile')>0 ? true:false}"></i>
+            <span>我的</span>
+        </a>
+    </footer>
+</template>
+
 <script>
+//        import footGuide from 'components/foot.html'
+
         new Vue({
             el:"#box",
             data:{
@@ -127,10 +130,11 @@
                 positionY:0,
                 toTopIcon:false,
                 rating:[],
-                loading:true
+                loading:true,
+                home:"home"
             },
             methods:{
-                goTop:function () {
+                goTop:function() {
                     document.body.scrollTop = 0;
                     document.documentElement.scrollTop = 0;
                 },
@@ -154,6 +158,16 @@
                         }
                     }
                     return a*1;
+                },
+                footActive:function(value){
+                    console.log(value);
+                    var url=location.href;
+                    if(url.indexOf(value)>0){
+                        return true;
+                    }
+                    else{
+                        return false;
+                    }
                 }
             },
             computed:{
@@ -168,6 +182,7 @@
                 }
             },
             created:function(){
+//                footActive();
                 var _this=this;
                 this.$http.get("json/group-type.json",{},function(result){
                     _this.loading=true;
@@ -180,22 +195,25 @@
                     _this.filteredItems=arr;
                     _this.loading=false;
                 })
-
-                //https://www.ele.me/restapi/shopping/restaurants?extras%5B%5D=activities&geohash=ws104swhexj&latitude=22.52553&limit=24&longitude=114.02451&offset=120&terminal=web
-                this.$http.jsonp("https://www.ele.me/restapi/shopping/restaurants",{
-                    "extras%5B%5D":"activities",
-                    "geohash":"ws104swhexj",
-                    "latitude":22.52553,
-                    "limit":24,
-                    "longitude":114.02451,
-                    "offset":120,
-                    "terminal":"web"
-                },{
-                    "jsonp":"get"
-                }).then(function(result){
-                    console.log(result);
+                this.$http.get("json/restaurants.json",{},function(result){
                     _this.restaurants=result;
                 })
+
+                //https://www.ele.me/restapi/shopping/restaurants?extras%5B%5D=activities&geohash=ws104swhexj&latitude=22.52553&limit=24&longitude=114.02451&offset=120&terminal=web
+//                this.$http.jsonp("https://www.ele.me/restapi/shopping/restaurants",{
+//                    "extras%5B%5D":"activities",
+//                    "geohash":"ws104swhexj",
+//                    "latitude":22.52553,
+//                    "limit":24,
+//                    "longitude":114.02451,
+//                    "offset":120,
+//                    "terminal":"web"
+//                },{
+//                    "jsonp":"get"
+//                }).then(function(result){
+//                    console.log(result);
+//                    _this.restaurants=result;
+//                })
 
                 window.onscroll = function() {
                     if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
@@ -220,6 +238,16 @@
                 setTimeout(function(){
                     _this.imgLoading=false;
                 },3000);
+            },
+            components:{
+                footGuide:{
+                    data:function(){
+                       return{
+                            url:location.href
+                       }
+                    },
+                    template:'#foot'
+                }
             }
         })
 </script>

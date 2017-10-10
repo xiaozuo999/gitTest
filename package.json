@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "font-awesome": "v4.7.0",
+    "vue":"v2.1.10",
+    "vue":"v1.0.21",
+    "vue-router":"",
+    "vue-resource":"v0.7.0",
+    "jquery":"v2.1.1",
+    "c-swipe":"",
+    "bootstrap":"v3.3.7"
+  }
+}

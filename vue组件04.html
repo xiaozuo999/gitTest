@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue父子组件传值</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <!-- <script src="node_modules/vue/dist/vue.js"></script> -->
+    <script src="node_modules/_vue@1.0.21@vue/dist/vue.js"></script>
+</head>
+<style>
+    .active{
+        color:red;
+    }
+</style>
+
+<body>
+<div id="box">
+    <foot></foot>
+    <h3>测试内容</h3>
+</div>
+</body>
+
+<template  id="drapMeum">
+    <div class="box">
+        <p v-bind:class="{active:f0('vue')}">首页</p>
+        <p v-bind:class="{active:f0(04)}" @click="f1()">案例</p>
+        <p v-bind:class="{active:f0('组件')}" @click="f2()">钉峰会</p>
+    </div>
+</template>
+
+
+<script>
+    var vm=new Vue({
+        el:"#box",
+        methods:{
+            fun1(){
+                console.log(100);
+            }
+        },
+        components:{
+            'foot':{
+                data(){
+                    return {
+                        msg:'welcome vue'
+                    }
+                },
+                methods:{
+                    f0(val){
+                       var url=location.href;
+                        if(url.indexOf(val)>0){
+                            return true;
+                        }
+                        else{
+                            return false;
+                        }
+                    },
+                    f1(){
+                        console.log(2);
+                    },
+                    f2(){
+                        console.log(3);
+                    }
+                },
+                template:'#drapMeum'
+            }
+        }
+    })
+</script>
+</html>

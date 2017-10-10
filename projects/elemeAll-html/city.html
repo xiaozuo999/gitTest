@@ -34,8 +34,10 @@
                 <div class="bg-white">
                     <ul>
                         <li class="bdb1 p10" v-for="(item,index) in searchHistory" @click="search(item)">
-                            <p>{{item.name}}11</p>
-                            <p class="fz10 grey">{{item.address}}22</p>
+                            <a :href='"home.html?geohash="+item.geohash'>
+                                <p>{{item.name}}</p>
+                                <p class="fz10 grey">{{item.address}}</p>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -124,9 +126,15 @@
                 if(this.searchHistory.length>4){
                     this.searchHistory.pop();
                 }
-                this.searchHistory.unshift(item.name);
+                var one={
+                    name:item.name,
+                    address:item.address,
+                    geohash:item.geohash
+                }
+                this.searchHistory.unshift(one);
+                console.log(this.searchHistory);
                 localStorage.setItem("history2",JSON.stringify(this.searchHistory));
-                location.href="home.html";
+                location.href="home.html?geohash="+item.geohash;
             }
         },
         created:function(){
