@@ -11,7 +11,7 @@
   "dependencies": {
     "vue": "^2.4.4",
     "font-awesome": "v4.7.0",
-    "vue-router":"",
+    "vue-router":"v0.7.13",
     "vue-resource":"v0.7.0",
     "jquery":"v2.1.1",
     "c-swipe":"",

@@ -40,7 +40,7 @@
     export default {
         data () {
             return {
-                cityHot:"",
+                cityHot:77,
                 cityGroup:[],
                 softRule:["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
             }
@@ -61,7 +61,6 @@
             }
         },
         created:function(){
-            console.log(123);
             this.$http.get('/json/city-hot.json',{
             }).then(function(res){
                 this.cityHot=res.data;
@@ -69,16 +68,16 @@
                 console.log(res.status);
             })
 
-            this.$http.get('/json/city-group.json',{
-            }).then(function(res){
-                var a=res.data;
-                for(var i=0;i<this.softRule.length;i++){
-                    var one=a[this.softRule[i]];
-                    this.cityGroup.push(one);
-                }
-            },function(){
-                console.log("请求失败");
-            })
+//            this.$http.get('/json/city-group.json',{
+//            }).then(function(res){
+//                var a=res.data;
+//                for(var i=0;i<this.softRule.length;i++){
+//                    var one=a[this.softRule[i]];
+//                    this.cityGroup.push(one);
+//                }
+//            },function(){
+//                console.log("请求失败");
+//            })
         },
         components:{
         }

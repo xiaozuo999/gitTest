@@ -2,6 +2,8 @@
   <div id="app">
     <head-top></head-top>
     <page-home></page-home>
+    <a v-link="{path:'./components/header'}">header页面</a>
+    <a v-link="{path:'./components/footer'}">footer页面</a>
   </div>
 </template>
 
