@@ -182,7 +182,6 @@
                 }
             },
             created:function(){
-//                footActive();
                 var _this=this;
                 this.$http.get("json/group-type.json",{},function(result){
                     _this.loading=true;
@@ -198,23 +197,6 @@
                 this.$http.get("json/restaurants.json",{},function(result){
                     _this.restaurants=result;
                 })
-
-                //https://www.ele.me/restapi/shopping/restaurants?extras%5B%5D=activities&geohash=ws104swhexj&latitude=22.52553&limit=24&longitude=114.02451&offset=120&terminal=web
-//                this.$http.jsonp("https://www.ele.me/restapi/shopping/restaurants",{
-//                    "extras%5B%5D":"activities",
-//                    "geohash":"ws104swhexj",
-//                    "latitude":22.52553,
-//                    "limit":24,
-//                    "longitude":114.02451,
-//                    "offset":120,
-//                    "terminal":"web"
-//                },{
-//                    "jsonp":"get"
-//                }).then(function(result){
-//                    console.log(result);
-//                    _this.restaurants=result;
-//                })
-
                 window.onscroll = function() {
                     if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
                         _this.toTopIcon=true;
