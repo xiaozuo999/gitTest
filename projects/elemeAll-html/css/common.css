@@ -41,8 +41,6 @@ input { border: none; outline: none; }
     font-size: 0.18rem;
 }
 
-
-
 /*布局*/
 .abs { position: absolute; }
 .rel { position: relative; }
@@ -101,8 +99,6 @@ input { border: none; outline: none; }
 .op9{
     opacity:0.9;
 }
-
-
 
 /*文本缩进*/
 .ls1- { letter-spacing: -1px; }
@@ -402,21 +398,33 @@ btn.active, .btn:active {
 }
 
 /*---------分割线-----------*/
-[v-cloak] { display: none; }
+
+/*头部部分*/
+.header { background: #3190e8; color: #fff; height: 0.4rem; line-height: 0.4rem; position: fixed; width: 100%; font-size: 0.16rem; top: 0; }
+.header-left { font-size: 0.16rem; font-weight: 500; color: #fff; padding: 0 0.1rem; }
+.header-center { font-weight: 600; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%); }
+.header-right { position: absolute; top: 0; right: 0.15rem; }
+.header a {
+    color: #fff;
+}
+
+
+/*尾部部分*/
 .footer-menu {
     background: #ffffff;
     position: fixed;
     width: 100%;
     bottom: 0;
     overflow: hidden;
-    -webkit-box-shadow: 0 -0.02667rem 0.05333rem rgba(0, 0, 0, 0.1); box-shadow: 0 -0.02667rem 0.05333rem rgba(0, 0, 0, 0.1); z-index: 50; }
+    -webkit-box-shadow: 0 -0.02667rem 0.05333rem rgba(0, 0, 0, 0.1); box-shadow: 0 -0.02667rem 0.05333rem rgba(0, 0, 0, 0.1); z-index: 50;
+    padding: 0.05rem 0;
+}
 .footer-menu span { display: block; }
 .footer-menu a { color: #666; }
+
+
+[v-cloak] { display: none; }
 .img-loading { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%); width: 0.7rem; height: 0.7rem; background: url(/images/icon_loading.png) no-repeat; background-size: 0.7rem auto; animation: loading 3s ease 0s infinite alternate; animation-play-state: running; z-index: 10; }
-.header { background: #3190e8; color: #fff; height: 0.4rem; line-height: 0.4rem; position: fixed; width: 100%; font-size: 0.16rem; top: 0; }
-.header-left { font-size: 0.16rem; font-weight: 500; color: #fff; padding: 0 0.1rem; }
-.header-center { font-weight: 600; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%); }
-.header-right { position: absolute; top: 0; right: 0.15rem; }
 @keyframes loading {
     0% { top: 40%; opacity: 1; }
     20% { top: 50%; opacity: 0.1; }
@@ -424,10 +432,6 @@ btn.active, .btn:active {
     60% { top: 50%; opacity: 0.1; }
     80% { top: 40%; opacity: 1; }
     100% { top: 50%; opacity: 0.1; }
-}
-.footer-menu { padding: 0.05rem 0; }
-.header a {
-    color: #fff;
 }
 .color9{
     color:#98ccf4;
