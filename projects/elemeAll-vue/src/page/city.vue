@@ -1,6 +1,6 @@
 <template>
   <div>
-    我是新闻页
+    <h1>我是城市详情页</h1>
   </div>
 </template>
 

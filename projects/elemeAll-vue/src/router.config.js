@@ -1,9 +1,9 @@
 import Home from './page/home.vue'
-import News from './page/news.vue'
+import City from './page/city.vue'
 
 export default {
     routes:[
         {path:'/home',component:Home},
-        {path:'/news',component:News}
+        {path:'/city',component:City}
     ]
 }
