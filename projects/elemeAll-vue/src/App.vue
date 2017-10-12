@@ -1,27 +1,23 @@
 <template>
   <div id="app">
-    <head-top></head-top>
-    <page-home></page-home>
-    <a v-link="{path:'./components/header'}">header页面</a>
-    <a v-link="{path:'./components/footer'}">footer页面</a>
+    <div>
+      <ul>
+        <li> <router-link to="/home">主页</router-link></li>
+        <li> <router-link to="/news">新闻页</router-link></li>
+      </ul>
+    </div>
+    <div>
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
-    import headTop from './components/header.vue'
-    import footGuide from './components/footer.vue'
-    import pageHome from './page/home.vue'
-
     export default {
         data () {
             return {
                 msg: 'Welcome to Your Vue.js App'
             }
-        },
-        components:{
-            headTop,
-            footGuide,
-            pageHome
         }
     }
 </script>

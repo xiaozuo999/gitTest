@@ -9,9 +9,9 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
-    "vue": "^2.4.4",
+    "vue": "v2.4.4",
     "font-awesome": "v4.7.0",
-    "vue-router":"v0.7.13",
+    "vue-router":"v2.7.0",
     "vue-resource":"v0.7.0",
     "jquery":"v2.1.1",
     "c-swipe":"",
