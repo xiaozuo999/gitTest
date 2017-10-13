@@ -1,15 +1,10 @@
 <template>
   <div id="app">
-    <headBox></headBox>
-    <div>
       <router-view></router-view>
-    </div>
   </div>
 </template>
 
 <script>
-import headBox from './components/head.vue'
-import homeBox from './page/home.vue'
 export default {
   name: 'app',
   data () {
@@ -18,8 +13,6 @@ export default {
     }
   },
   components:{
-      headBox,
-      homeBox
   }
 }
 </script>
