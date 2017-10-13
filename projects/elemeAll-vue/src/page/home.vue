@@ -5,7 +5,6 @@
         <span>当前定位城市</span>
         <span class="color-gray">定位不准时，请在城市列表中选择</span>
       </div>
-      <!--<a :href='"city.html?type="+address.pinyin' class="bdb1 p10 df jcb bg-white">-->
       <router-link :to='/city/' class="bdb1 p10 df jcb bg-white">
         <span class="fz18 c-active" v-cloak>{{address.name}}</span>
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
@@ -16,9 +15,9 @@
         热门城市
       </div>
       <div class="content" v-cloak>
-        <template  v-for="(item,index) in cityHot" >
-          <a  :href='"city.html?type="+item.pinyin+"|"+index+"|hot"' data-area_code="item.area_code" @click="city(item)" class="col-xs-3 c-active">{{item.name}} </a>
-        </template>
+        <router-link tag="a" v-for="item in cityHot"  :to="'/city/'+item.id" :key="item.id" class="col-xs-3 c-active">
+          {{item.name}}
+        </router-link>
       </div>
     </div>
     <div class="city-wrap city-group">
