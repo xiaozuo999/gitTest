@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue测试</title>
+    <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+</head>
+<body>
+    <div id="box">
+        <button @click="show(0)">按钮一</button>
+        <button @click="show(1)">按钮二</button>
+        <button @click="show(2)">按钮三</button>
+
+        <ul>
+            <li v-show="arr[0]">11</li>
+            <li v-show="arr[1]">22</li>
+            <li v-show="arr[2]">33</li>
+        </ul>
+    </div>
+
+<script type="text/javascript">
+    var vm=new Vue({
+        el:"#box",
+        data:{
+            arr:[true,true,true]
+        },
+        methods:{
+            show:function(num){
+                this.$set(this.arr,num,!this.arr[num]);
+            }
+        }
+    })
+</script>
+
+</body>
+</html>
