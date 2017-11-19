@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+</head>
+
+<style type="text/css">
+    li{
+        background: #d0d0d0;
+        width: 300px;
+        margin-bottom: 10px;
+        padding: 10px;
+    }
+</style>
+<body>
+<div id="box">
+      {{messageArr}}
+   <ul>
+       <li v-for="(item, index) in items" @click="editMessageFun(index)">
+           {{item.name}}
+
+           <span v-if="messageArr[index]">
+             笔记：
+               {{messageArr[index]}}
+           </span>
+
+       </li>
+   </ul>
+   <hr>
+   <div>
+       <input type="text" name=""  v-model="editMessage" placeholder="修改内容" style="padding:5px;width: 300px;">
+        <button @click="affirmFun()">确认修改</button>
+    </div>
+</div>
+
+<script>
+    new Vue({
+        el:"#box",
+        data:{
+            items:[
+                {
+                  "name":"AA",
+                   "message":"1"
+                },
+                   {
+                  "name":"BB",
+                   "message":""
+                },
+                   {
+                  "name":"CC",
+                  "message":"1"
+                },
+                   {
+                  "name":"DD",
+                  "message":""
+                }
+            ],
+            messageArr2:["","笔记内容1一","","笔记内容1二"],
+            editMessage:"",
+            tempIndex:""
+        },
+        methods:{
+            editMessageFun:function(index){
+               this.editMessage=this.messageArr[index];
+               this.tempIndex=index;
+            },
+            affirmFun:function(){
+               this.$set(this.messageArr,this.tempIndex,this.editMessage);
+               this.editMessageFun();  //说明：如果是要更新计算属性的值，要再让修改后的计算属性值生效要再让页面有更新一次；
+            }
+        },
+        computed:{
+            messageArr:function(){
+                var arr=["","笔记内容一","","笔记内容二"];
+                return arr;
+            }
+        }
+    })
+
+</script>
+</body>
+</html>
