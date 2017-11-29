@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>js实现禁止文本复制、禁止选中文本</title>
+    </head>
+    <body>
+        <div oncopy="return false" onselectstart = "return false">
+            <p>这是一段普通的文本文字，你可以选中并且复制。</p>
+            <p onselectstart = "return false">onselectstart = "return false"：这是一段文本内容，但是你不能选中</p>
+            <p oncopy = "return false">oncopy = "return false"，这段文字你可以选中，但是不能复制</p>
+            <p oncopy = "return false" onselectstart = "return false">这是一段文字，你不能选中也不能复制。</p>
+        </div>
+    </body>
+</html>

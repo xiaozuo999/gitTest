@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue自定义属性</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.3/vue.js"></script>
+</head>
+<style type="text/css">
+    span{
+        display: inline-block;
+        padding: 10px;
+        border: 1px solid #333;
+        margin-right: 10px;
+    }
+    .active{
+        background-color: red;
+    }
+</style>
+
+<body>
+    <div id="box">
+        <template v-for="item in items">
+            <span @click="select(item)" :class="{active:item.checked}">{{item.name}}</span>
+        </template>
+    </div>
+</body>
+
+<script type="text/javascript">
+    new Vue({
+        el:"#box",
+        data:{
+            items:[
+                {
+                    "name":"AA",
+                    "id":1
+                },
+                {
+                    "name":"BB",
+                    "id":2
+                },
+                {
+                    "name":"CC",
+                    "id":3
+                }
+            ]
+        },
+        methods:{
+            select:function(item){
+                if(!item.checked){
+                    // this.$set(item,"checked",true);
+                    Vue.set(item,"checked",true);
+                }
+                else{
+                    item.checked=!item.checked;
+                }
+            }
+        }
+    })
+
+</script>
+
+</html>

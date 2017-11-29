@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue自定义属性</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.3/vue.js"></script>
+    <!-- <script type="text/javascript" src="https://cdn.bootcss.com/vue/1.0.28/vue.js"></script> -->
+</head>
+<style type="text/css">
+    span{
+        display: inline-block;
+        padding: 10px;
+        border: 1px solid #333;
+        margin-right: 10px;
+    }
+    .active{
+        background-color: red;
+    }
+</style>
+
+<body>
+    <div id="box">
+            <button type="text" @click="edit()">修改</button>
+
+            <p v-once>
+            {{message}}
+            </p>
+    </div>
+</body>
+
+<script type="text/javascript">
+    new Vue({
+        el:"#box",
+        data:{
+            message:"0"
+        },
+        created:function(){
+            // this.message=1;
+            this.init();
+        },
+        methods:{
+            edit:function(){
+                this.message=10;
+            },
+            init:function(){
+                this.message=2;
+            }
+        }
+    })
+
+</script>
+
+</html>
