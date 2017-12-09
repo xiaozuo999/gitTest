@@ -1,64 +1,47 @@
 <!DOCTYPE html>
-   <html lang="en">
-   <head>
-       <meta charset="UTF-8">
-       <title>替换测试</title>
-   </head>
-   <body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Document</title>
+  <script src="https://cdn.bootcss.com/vue/2.5.3/vue.js"></script>
 
-<style>
-body{
-    background: #000;
-}
+</head>
+<body>
 
-</style>
-
-<div>
-  <p style="text-align:center;font-size:20px;color:#fff;margin-bottom:20px;">
-        国际合作与监管科技分论坛
-    </p>
-<table class="mod-agenda" cellspacing=0 cellpadding=0 width="950px" style="margin:0 auto;">
-    <colgroup>
-        <col style="width: 35%;">
-        <col style="width: 25%;">
-        <!-- <col style="width: 40%;"> -->
-    </colgroup>
-    <thead>
-        <tr>
-            <td style="border:1px solid #304a75; border-left:0; font-size: 16px; color: #00c8dc; letter-spacing: 1px;line-height: 1.5;padding: 9px 20px 9px 30px">议题方向 </td>
-            <td style="border-bottom:1px solid #304a75;border-top:1px solid #304a75;font-size: 16px; color: #00c8dc; letter-spacing: 1px;line-height: 1.5;padding: 9px 20px 9px 30px">演讲嘉宾</td>
-            <td style="border-bottom:1px solid #304a75;border-top:1px solid #304a75; font-size: 16px; color: #00c8dc; letter-spacing: 1px;line-height: 1.5;padding: 9px 20px 9px 30px"></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-        <td style=" border-right:1px solid #304a75;  border-bottom:1px solid #304a75;font-size: 14px; color: #fff; letter-spacing: 1px;line-height: 1.5;padding: 9px 20px 9px 30px">用金融科技手段推动监管能力升级</td>
-        <td style="border-bottom:1px solid #304a75;font-size: 14px; color: #fff; letter-spacing: 1px;line-height: 1.5;padding: 9px 20px 9px 30px">宰承峰</td>
-        <td style="border-bottom:1px solid #304a75;font-size: 14px; color: #fff; letter-spacing: 1px;line-height: 1.5;padding: 9px 20px 9px 30px">英国 Cocoon Networks 首席执行官与创始人，中英青年创业协会（BCYEA）主席</td>
-        </tr>
-          <tr>
-        <td style=" border-right:1px solid #304a75;  border-bottom:1px solid #304a75;font-size: 14px; color: #fff; letter-spacing: 1px;line-height: 1.5;padding: 9px 20px 9px 30px">鉴监管沙盒机制，引导中国金融科技健康发展</td>
-        <td style="border-bottom:1px solid #304a75;font-size: 14px; color: #fff; letter-spacing: 1px;line-height: 1.5;padding: 9px 20px 9px 30px">邢毓静</td>
-        <td style="border-bottom:1px solid #304a75;font-size: 14px; color: #fff; letter-spacing: 1px;line-height: 1.5;padding: 9px 20px 9px 30px">中国人民银行深圳市中心支行行长</td>
-        </tr>
-
-             <tr>
-        <td style=" border-right:1px solid #304a75;  border-bottom:1px solid #304a75;font-size: 14px; color: #fff; letter-spacing: 1px;line-height: 1.5;padding: 9px 20px 9px 30px">
-            关于港深河套科技创新合作（待定）
-        </td>
-        <td style="border-bottom:1px solid #304a75;font-size: 14px; color: #fff; letter-spacing: 1px;line-height: 1.5;padding: 9px 20px 9px 30px">樊建平</td>
-        <td style="border-bottom:1px solid #304a75;font-size: 14px; color: #fff; letter-spacing: 1px;line-height: 1.5;padding: 9px 20px 9px 30px">中科院先进研究院院长</td>
-        </tr>
-
-             <tr>
-        <td style=" border-right:1px solid #304a75;  border-bottom:1px solid #304a75;font-size: 14px; color: #fff; letter-spacing: 1px;line-height: 1.5;padding: 9px 20px 9px 30px">（待定）</td>
-        <td style="border-bottom:1px solid #304a75;font-size: 14px; color: #fff; letter-spacing: 1px;line-height: 1.5;padding: 9px 20px 9px 30px">湛家扬</td>
-        <td style="border-bottom:1px solid #304a75;font-size: 14px; color: #fff; letter-spacing: 1px;line-height: 1.5;padding: 9px 20px 9px 30px">香港数码港请公共使命总监</td>
-        </tr>
-    </tbody>
-</table>
+<div id="box">
+  <li v-for="item in items">
+      {{item.content}}
+  </li>
 
 </div>
 
-   </body>
-   </html>
+
+<script>
+
+new Vue({
+  el:"#box",
+  data:{
+    items:[
+    {
+        content:"中国1122中国"
+      },
+      {
+        content:"33中国66"
+      }
+    ]
+  },
+  created:function(){
+    if(this.items){
+        var itemsLen=this.items.length;
+        var companyUrl="<img src='http://www.valueonline.cn/lawimg/1/02181-4.png'>"; //图片前缀
+        for(var i=0;i<itemsLen;i++){
+          this.items[i].content=this.items[i].content.replace('/中国/g','中'+companyUrl+'国');
+        }
+    }
+  }
+})
+
+</script>
+
+</body>
+</html>

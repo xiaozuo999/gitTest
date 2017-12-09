@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>vue数据接口测试</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.3/vue.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/axios/0.17.1/axios.js"></script>
+
+</head>
+<body>
+
+<div id="box">
+    <ul>
+        <li v-for="item in items" v-html="item.content"></li>
+
+    </ul>
+</div>
+
+
+<script>
+
+var typeId="";
+
+    new Vue({
+        el:"#box",
+        data:{
+            items:[],
+        },
+        methods:{
+
+        },
+        created:function(){
+            var itemsTemp=[
+                {
+                'content':'<h1>这是是我的<strong>内容</strong></h1><img src="/lawimg/1/02181-4.png">'
+                },
+                {
+                'content':'<h1>这是是我的<strong>内容22</strong><img src="/lawimg/1/02182-4.png"></h1>'
+                }
+            ]
+
+            var len=itemsTemp.length;
+            var companyUrl="http://www.valueonline.cn";
+            for(var i=0;i<len;i++){
+                console.log(i);
+                 itemsTemp[i].content=itemsTemp[i].content.replace('src="/lawimg/','src="'+companyUrl+'/lawimg/');
+            }
+            this.items=itemsTemp;
+        }
+    })
+
+</script>
+
+</body>
+</html>

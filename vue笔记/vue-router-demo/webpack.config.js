@@ -2,9 +2,6 @@ var path = require('path')
 var webpack = require('webpack')
 
 module.exports = {
-  externals: {
-    'testJs2': './src/assets/test.js'
-  },
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, './dist'),
@@ -33,29 +30,13 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/
       },
-      // {
-      //   test: /\.(png|jpg|gif|svg)$/,
-      //   loader: 'file-loader',
-      //   options: {
-      //     name: '[name].[ext]?[hash]'
-      //   },
-      // },
       {
-        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        loader: 'url-loader',
-        query: {
-          limit: 10000
-          // name: utils.assetsPath('img/[name].[hash:7].[ext]')
+        test: /\.(png|jpg|gif|svg)$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]?[hash]'
         }
       }
-      // {
-      //   test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-      //   loader: 'url-loader',
-      //   query: {
-      //     limit: 10000,
-      //     name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
-      //   }
-      // }
     ]
   },
   resolve: {

@@ -1,5 +1,10 @@
-// export default function testJs(){
-//   console.log(100);
-// }
-console.log(200);
+const testjs={
+  routes:[
+    {
+      path:"/",
+      redirect:'/letters'
+    }
+  ]
+}
 
+export default testjs

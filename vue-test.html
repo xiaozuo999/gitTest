@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>vue数据接口测试</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.3/vue.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/axios/0.17.1/axios.js"></script>
+
+</head>
+<body>
+
+<div id="box">
+    <ul>
+        <li v-for="item in items" v-html="item.content"></li>
+    </ul>
+</div>
+
+
+<script>
+
+var typeId="";
+
+    new Vue({
+        el:"#box",
+        data:{
+            items:"",
+            typeId:typeId
+        },
+        methods:{
+            get:function(){
+                var url="http://api-test-sz.valueonline.cn/capital-cloud-api/laws_manage/lawViewRead";
+                var _this=this;
+                var arr={
+                    appStatus:"ios",
+                    id:"96386890663967297",
+                    companyCode:999000,
+                    userName:"999000-745450744779768123",
+                    typeId:_this.typeId,
+                    isLogin:"y"
+                };
+
+                axios.get(url, {
+                    params: arr
+                })
+                .then(function (response) {
+                    console.log(response);
+                    _this.items=response.data.result.lawXmlStructureDetailList;
+                    console.log(_this.items);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            }
+        },
+        created:function(){
+            this.typeId="96219074211635261";
+            this.get();
+        }
+    })
+
+</script>
+
+</body>
+</html>

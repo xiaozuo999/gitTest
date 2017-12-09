@@ -1,8 +1,6 @@
 <template>
   <div id="app">
-    <img src="src/assets/logo.png" alt="">
-    <p>这是APP页面</p>
-
+   <h1>我是路由页面</h1>
     <keep-alive>
       <router-view></router-view>
     </keep-alive>
@@ -16,13 +14,18 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+  created:function(){
+      var router="letters";
+        if(router=="lawsDetail"){
+          location.href="./laws/test.html";
+        }
+        else{
+          location.href="/#/"+router;
+        }
   }
 }
 </script>
 
 <style>
-  *{
-    padding: 0;
-    margin: 0;
-  }
 </style>

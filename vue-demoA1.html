@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.3/vue.js"></script>
+</head>
+<body>
+<div id="box">
+<p>来自： {{items.state}}</p>
+    <ul>
+        <li v-for="item in items.tools">{{item.softName}}  &nbsp;&nbsp; {{item.type}}</li>
+    </ul>
+
+    <div v-if="tools.length>0">
+        数组长度是：{{tools.length}}
+    </div>
+</div>
+
+<script>
+
+new Vue({
+    el:"#box",
+    data:{
+        items2:{
+                "state":"china",
+                "tools":[
+                    {
+                        "softName":"chrome",
+                        "type":"浏览器"
+                    },
+                     {
+                        "softName":"sublime",
+                        "type":"代码编辑器"
+                    }
+                ]
+            },
+        items:{},
+        tools:[]
+    },
+    methods:{
+    },
+    created:function(){
+        var _this=this;
+        setTimeout(function(){
+                _this.items=_this.items2;
+                _this.items.tools=_this.items2.tools;
+        },2000)
+    }
+})
+
+</script>
+
+
+</body>
+</html>

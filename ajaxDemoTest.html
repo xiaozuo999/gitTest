@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>ajax demo test</title>
+</head>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+
+<body>
+
+<script>
+var url="http://idm-test-sz.valueonline.cn/capital-idm/api/user/loginByType";
+var arr={
+        companyCode:"601500",
+          deviceToken:"9e0880bf4a1acd4c2766a1ae7c4cf589e9dcc78234ddbf5aa69e14b75ec5e4ed",
+          clientType:"2",
+          appId:"capital",
+          password:"sdk123456",
+          userName:"zhuqiao",
+          type:"2",
+          loginImei:"425DA37A-5F46-474B-A26E-5876BD621E1B"
+}
+$.post(url,arr,function(result){
+    console.log(result);
+    var token=result.result.bindCompanyInfo.accessToken;
+    console.log(token);
+});
+
+</script>
+
+</body>
+</html>
