@@ -5,8 +5,8 @@ import  VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 import app from '../App.vue'
-import letters from '../views/letters.vue'
-import lettersDetail from '../views/lettersDetail.vue'
+import letters from '../views/letters/letters.vue'
+import lettersDetail from '../views/letters/lettersDetail.vue'
 
 
 const router=new VueRouter({

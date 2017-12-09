@@ -1,6 +1,11 @@
 <template>
   <div id="app">
-   <h1>数据列表</h1>
+   <h1>数据列表1</h1>
+    <!--图片一：-->
+    <!--<img src="./../../../static/images/logo-vue.png" alt="" style="width: 50px;">-->
+    <!--<hr>-->
+    <!--图片二：-->
+    <!--<img src="././static/images/logo-vue.png" alt="" style="width: 100px;">-->
     <ul>
       <router-link v-for="item in items" tag="li" to="/lettersDetail">{{item.name}}</router-link>
     </ul>
@@ -8,6 +13,10 @@
 </template>
 
 <script>
+
+  import "../../../static/css/public.css"
+  import "../../../static/js/common.js"
+
 export default {
   name: 'app',
   data () {

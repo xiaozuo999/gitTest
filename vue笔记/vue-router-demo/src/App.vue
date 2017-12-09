@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-   <h1>我是路由页面</h1>
+   <h1>我是路由页面2</h1>
     <keep-alive>
       <router-view></router-view>
     </keep-alive>
@@ -21,7 +21,7 @@ export default {
           location.href="./laws/test.html";
         }
         else{
-          location.href="/#/"+router;
+          location.href="./#/"+router;
         }
   }
 }
