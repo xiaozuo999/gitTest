@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript" src="https://cdn.bootcss.com/vue/2.3.0/vue.js"></script>
+
+</head>
+<body>
+<template id="aa">
+    <div>
+        <hr>
+       我是子组件2
+        <input type="text" v-model="text2b">
+        <button @click="close()">关闭</button>
+        <button @click="affirm()">确认</button>
+    </div>
+</template>
+
+<div id="box">
+    <p>
+        我是父组件:{{text}}
+        <button @click="showChild()">显示子组件</button>
+    </p>
+    <child-page  v-show="pageswitch" :pageswitch2="pageswitch" :text2="text" v-on:close2="close()" v-on:affirm2="affirm()" ref="childpage"></child-page>
+</div>
+<script>
+    new Vue({
+        el:"#box",
+        data:{
+            text:"hello",
+            pageswitch:false
+        },
+        methods:{
+            showChild:function(){
+                this.pageswitch=true;
+            },
+            close:function(){
+                this.pageswitch=false;
+            },
+            affirm:function(){
+                this.text=this.$refs.childpage.text2b;  //父组件获取子组件的值，使用this.$refs
+            }
+        },
+        components:{
+            "child-page":{
+                template:"#aa",
+                data:function(){
+                    return{
+                        childmsg:"子组件信息",
+                        text2b:""
+                    }
+                },
+                props:['pageswitch2',"text2"],  //子组件获取父组件的值，使用props
+                methods:{
+                    close:function(){
+                        this.$emit("close2");   //子组件事件触发父组件的事件，使用 this.$emit
+                    },
+                    affirm:function(){
+                        this.$emit("affirm2");
+                    }
+                },
+                created:function(){
+                    this.text2b=this.text2;
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

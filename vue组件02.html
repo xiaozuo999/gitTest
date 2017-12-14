@@ -4,18 +4,12 @@
     <meta charset="UTF-8">
     <title>vue父子组件</title>
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
-    <script src="node_modules/vue/dist/vue.js"></script>
+    <!-- <script src="node_modules/vue/dist/vue.js"></script> -->
+    <script type="text/javascript" src="https://cdn.bootcss.com/vue/2.3.0/vue.js"></script>
 </head>
 
 <body>
-<div id="box">
-<div id="box">
-    <my-aaa></my-aaa>
-</div>
-
-<script type="x-template" id="aaa">
+<template id="aaa">
     <div class="container">
       <h2 @click="change">标题二-> {{msg}}</h2>
         <ul>
@@ -24,7 +18,14 @@
             <li>333</li>
         </ul>
     </div>
-</script>
+</template>
+
+
+<div id="box">
+    <p>我是父组件</p>
+    <my-aaa></my-aaa>
+</div>
+
 
 <script>
     var vm=new Vue({

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+</head>
+
+<style type="text/css">
+    li{
+        background: #d0d0d0;
+        width: 300px;
+        margin-bottom: 10px;
+        padding: 10px;
+    }
+</style>
+<body>
+<div id="box">
+    {{messageArr}}
+   <ul>
+       <li v-for="(item, index) in items" @click="editMessageFun(index)">
+           {{item.name}}
+           <span v-if="messageArr[index]">
+             --笔记：
+               {{messageArr[index]}}
+           </span>
+
+       </li>
+   </ul>
+   <hr>
+   <input type="text" name=""  v-module="editMessage" placeholder="修改内容" style="padding:5px;width: 300px;" v-show="editMessage">
+</div>
+
+<script>
+    new Vue({
+        el:"#box",
+        data:{
+            items:[
+                {
+                  "id":"0",
+                  "level":"1",
+                  "name":"AA",
+                   "message":""
+                },
+                {
+                    "id":"1",
+                    "level":"2",
+                    "name":"BB",
+                    "message":"这是一条笔记信息1"
+                },
+                {
+                    "id":"2",
+                    "level":"3",
+                    "name":"CC",
+                    "message":""
+                },
+                {
+                    "id":"3",
+                    "level":"1",
+                    "name":"AA",
+                    "message":""
+                },
+                {
+                    "id":"4",
+                    "level":"2",
+                    "name":"BB",
+                    "message":"这是一条笔记信息2"
+                },
+                {
+                    "id":"5",
+                    "level":"3",
+                    "name":"CC",
+                    "message":""
+                }
+            ],
+            a:-1,
+            editMessage:""
+        },
+        methods:{
+            editMessageFun:function(index){
+                console.log(this.messageArr);
+                this.editMessage=this.messageArr[index];
+            }
+        },
+        computed:{
+            messageArr:function(){
+                var arr=[];
+                for(var i=0;i<this.items.length-1;i++){
+                    this.a++;
+                    if(this.a>i){
+                        i++;
+                    }
+                    if(this.items[i].message==""){
+                        arr[i]=this.items[i].message;
+                    }
+                    else{
+                        arr[i]="";
+                        arr[i+1]=this.items[i].message;
+                        this.a++;
+                    }
+                }
+                return arr;
+            }
+        }
+    })
+
+</script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript" src="https://cdn.bootcss.com/vue/2.3.0/vue.js"></script>
+</head>
+<style>
+    .reply{
+        font-size: 12px;
+        background: #d0d0d0;
+        width: 300px;
+        padding: 5px;
+    }
+</style>
+
+<body>
+<template id="notepage">
+    <div>
+        <hr>
+        <input type="text" v-model="reply2b" placeholder="请输入评论内容">
+        <button @click="close()">关闭</button>
+        <button @click="affirm()">确认</button>
+    </div>
+</template>
+
+<div id="box">
+    <ul>
+        <li  v-for="item in items" @click="showChild(item)">
+            {{item.title}}
+            <p class="reply" v-show="item.reply">{{item.reply}}</p>
+        </li>
+    </ul>
+
+    <child-page  v-show="pageswitch" :pageswitch2="pageswitch"  v-on:close2="close()" v-on:affirm2="affirm()" ref="childpage"></child-page>
+</div>
+<script>
+    new Vue({
+        el:"#box",
+        data:{
+            pageswitch:false,
+            item:"",
+            items:[
+                {
+                    "title":"标题一",
+                    "reply":"我是评论一"
+                },
+                {
+                    "title":"标题二",
+                    "reply":""
+                }
+            ]
+        },
+        methods:{
+            showChild:function(item){
+                this.pageswitch=true;
+                this.$refs.childpage.init(item);   //父组件触发子组件的事件this.$refs；
+                this.item=item;
+            },
+            close:function(){
+                this.pageswitch=false;
+            },
+            affirm:function(val){
+                console.log(val);
+                this.item.reply=this.$refs.childpage.reply2b;  //父组件获取子组件的值，使用this.$refs
+            }
+        },
+        components:{
+            "child-page":{
+                template:"#notepage",
+                data:function(){
+                    return{
+                        reply2b:""
+                    }
+                },
+                props:['pageswitch2'],  //子组件获取父组件的值，使用props
+                methods:{
+                    close:function(){
+                        this.$emit("close2");   //子组件事件触发父组件的方法，使用 this.$emit
+                    },
+                    affirm:function(){
+                        this.$emit("affirm2",123);
+                        this.close();
+                    },
+                    init:function(item){
+                        this.reply2b=item.reply;
+                    }
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

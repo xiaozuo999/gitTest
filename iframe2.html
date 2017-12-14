@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+    <title>子页面</title>
+    <style type="text/css">
+    a{
+        padding: 5px;
+        border: 1px solid #f00;
+        float: left;
+        display: block;
+        margin-right: 5px;
+    }
+    div{
+        width: 80%;
+        margin: 10px auto;
+        height: 500px;
+        border: 1px solid #f00;
+        font-size: 30px;
+    }
+    </style>
+    <script type="text/javascript" src="jquery-1.8.2.min.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        //如果是iframe则需要在网络中访问，因为js里有域限制
+        //如果没有iframe则不进行处理，
+        if(window!==window.top){
+            //获取top窗口中的iframe，如果有iframe嵌套过多，请自行修改
+            var iframeList=window.top.document.getElementsByTagName('iframe');
+            for(var i=0;i<iframeList.length;i++){
+                //判断当前窗口是否循环中的iframe
+                if(window.location.toString().indexOf(iframeList[i].getAttribute('src').toString())!=-1){
+
+                    //等自己的所在iframe加载完成给a锚点加事件
+                    window.top.document.getElementsByTagName('iframe')[i].onload=function(){
+                        //确定iframe在父窗体的距顶部距离
+                        var top = window.top.document.getElementsByTagName('iframe')[i].offsetTop;
+                        $('a').each(function(){
+                            var href = $(this).attr('href');
+                            if(href.indexOf('#')!=-1){//判断是否是锚点而不是链接
+                                var name = href.substring(href.indexOf('#')+1);
+                                $(this).bind('click',function(){
+                                    $('a').each(function(){
+                                        if($(this).attr('name')==name){
+                                            //父窗口滚动
+                                            $(window.parent).scrollTop($(this).offset().top+top);
+                                        }
+                                    });
+                                });
+                            }
+                        });
+                    }
+                }
+            }
+        }
+
+    });
+
+    </script>
+</head>
+<body>
+<a href="#a">a</a>
+<a href="#b">b</a>
+<a href="#c">c</a>
+<a href="#d">d</a>
+<div><a href="" name="a">A</a></div>
+<div><a href="" name="b">B</a></div>
+<div><a href="" name="c">C</a></div>
+<div><a href="" name="d">D</a></div>
+
+</body>
+</html>
