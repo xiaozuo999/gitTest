@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <script src="https://cdn.bootcss.com/vue/2.5.3/vue.js"></script>
+    <link rel="stylesheet" href="common.css">
+    <!--<script src="common.js"></script>-->
+    <script>
+        // 预创建二级页面
+        var preate={};
+        function preateWebivew(id){
+            if(!preate[id]){
+                var w=plus.webview.create(id,id,{scrollIndicator:'none',scalable:false,popGesture:'hide'},{preate:true});
+                preate[id]=w;
+                w.addEventListener('close',function(){//页面关闭后可再次打开
+                    _openw=null;
+                    preate[id]&&(preate[id]=null);//兼容窗口的关闭
+                },false);
+            }
+        }
+        // 判断预载打开
+        var _openw=null;
+
+        // H5 plus事件处理
+        var as='pop-in';// 默认动画类型
+    </script>
+
+
+</head>
+<style>
+    body{
+        font-size: 18px;
+    }
+    .m20{
+        margin: 20px;
+    }
+    li{
+        line-height: 30px;
+        border-bottom: 1px solid #333;
+    }
+</style>
+<body>
+<div id="app">
+    <header class="tac bg-red white" style="line-height: 40px;">
+    <span class="abs t10" style="left: 20px;">返回</span>
+        <span>首页11123224</span>
+    </header>
+
+    <div class="m20">
+        开始时间11223
+        <input type="text"  placeholder="开始时间" @click="pickDate(1)" v-model="startTime">
+    </div>
+
+    <div class="m20">
+        结束时间
+        <input type="text"  placeholder="结束时间" @click="pickDate(2)" v-model="endTime">
+    </div>
+
+    <button @click="search()">开始查询</button>
+
+    <button @click="openUrl('detail.html?id=999',true,true)">打开新笔记页面</button>
+
+    <div @click="open(note)" style="background: #999;padding: 10px;">
+        {{note}}
+    </div>
+    
+
+    
+</div>
+
+
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            startTime:"",
+            endTime:"",
+            note:"我是很长的笔记信息"
+        },
+        methods:{
+            open:function(content){
+                localStorage.setItem("note",content);  //存储
+                this.openUrl("detail.html");
+            },
+            //选择日期
+            pickDate:function(val){
+                var _this=this;
+                function fun1(){
+                    plus.nativeUI.pickDate( function(e){
+                        var d=e.date;
+                        if(val==1){
+                            _this.startTime=d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
+                        }
+                        else{
+                            _this.endTime=d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
+                        }
+
+                    },function(e){
+                        console.log( "未选择日期："+e.message );
+                    });
+                }
+                if(window.plus){
+                    fun1();
+                }
+                else{
+                    document.addEventListener("plusready",fun1,false);
+                }
+            },
+            search:function(){
+                var start = this.startTime.replace(/-/g,"/");//替换字符，变成标准格式
+                var end = this.endTime.replace(/-/g,"/");//替换字符，变成标准格式
+                var d1 = new Date(Date.parse(start));
+                var d2 = new Date(Date.parse(end));
+                if(d1>d2){
+                    plus.nativeUI.alert("开始时间不能大于结束时间",function(){
+                    },"提示信息","确认");
+                 }
+                 else{
+                    plus.nativeUI.toast("正在查询");
+                }
+            },
+            back:function(){
+            },
+            openUrl:function(id){
+                if(_openw){return;}
+                _openw=preate[id];
+                if(_openw){
+                    if(_openw.showded){
+                        _openw.show('auto');
+                    }else{
+                        _openw.show(as);
+                        _openw.showded=true;
+                    }
+                    _openw=null;
+                }else{
+                    _openw=plus.webview.create(id,id,{scrollIndicator:'none',scalable:false,popGesture:'hide'});
+                    preate[id]=_openw;
+                    _openw.addEventListener('loaded',function(){//叶面加载完成后才显示
+//			setTimeout(function(){
+                        _openw.show(as);
+                        _openw.showded=true;
+                        _openw=null;
+//			},10);
+                    },false);
+                    _openw.addEventListener('close',function(){//页面关闭后可再次打开
+                        _openw=null;
+                        preate[id]&&(preate[id]=null);//兼容窗口的关闭
+                    },false);
+                }
+            }
+        },
+        created:function(){
+
+        }
+    })
+
+
+
+
+</script>
+
+
+
+
+</body>
+</html>
