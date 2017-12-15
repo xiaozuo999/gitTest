@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>axios 测试</title>
+</head>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+
+<script src="https://cdn.bootcss.com/vue/2.5.3/vue.js"></script>
+<script type="text/javascript" src="js/axios.js"></script>
+<body>
+
+
+<script>
+//函件列表
+var arr={
+    "letterId":"745869613812937038",
+    "accessToken":"432777a82377207b21250487ef4d692693f4f7f3"
+}
+
+var url="http://601500-dev.valueonline.cn/api/letter/getLetterInfo";
+
+axios.post(url, arr)
+.then(function (response) {
+console.log(response);
+})
+.catch(function (error) {
+console.log(error);
+});
+
+
+ $.post(url,arr,function(result){
+     console.log(result);
+ })
+
+</script>
+
+</body>
+</html>

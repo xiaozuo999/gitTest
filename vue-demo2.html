@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>vue 方法处理器</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.3/vue.js"></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+</head>
+
+<style>
+    .red{
+        color:red;
+    }
+</style>
+
+<body>
+<div id="app">
+<input type="search" name="" placeholder="请输入关键字" v-model:value="keyword"> <button type="button" @click="searchFun()">搜索</button>
+    <ul>
+        <li v-for="item in list" v-html="fun1(item.value)"></li>
+    </ul>
+</div>
+
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            keyword:"",
+            keyword2:"",
+            list:[
+                 {
+                    value:"这是关键字12"
+                 },
+                 {
+                    value:"我也是关键字这里还有一个关键12字"
+                 }
+            ]
+        },
+        methods:{
+            fun1:function(val){
+                if(this.keyword2){
+                     val=val.replace(this.keyword2,'<span class="red">'+this.keyword2+'</span>');
+                }
+                return val;
+            },
+            searchFun:function(){
+                this.keyword2=this.keyword;
+            }
+        }
+    })
+
+</script>
+
+
+</body>
+</html>

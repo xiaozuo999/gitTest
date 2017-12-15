@@ -10,14 +10,16 @@
 
 
 <script>
-    var url="http://601500-dev.valueonline.cn/api/letter/getLetterInfo";
-    var arr={
+    var url="http://601500-dev.valueonline.cn/api/meeting/getTrackInfoDetail";
+    var param={
     }
-    this.arr.accessToken="c21e10774f2517a9738c720ca7c2638ab37db485";
-    this.arr.letterId="745869613811923570";
+    this.param.accessToken="f4b93f3074d6df6eb0ed0180f214f22389653853";
+    this.param.id="745869613812923296";
 
-     $.post(url,arr,function (result) {
-            console.log(result);
+
+     $.post(url,param,function (result) {
+         console.log(1);
+         console.log(result);
       },"json")
 </script>
 </body>
