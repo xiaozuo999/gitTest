@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>滚动穿透</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+
+</head>
+<style>
+body{
+    padding: 0;
+    margin: 0;
+}
+    li{
+        padding: 20px;
+    }
+    .model{
+        background: #fff;
+        padding: 20px 20px;
+        border: 1px solid #ddd;
+        position: fixed;
+        top: 30%;
+        left: 20%;
+        width: 200px;
+        z-index: 2;
+    }
+    .black{
+        background: black;
+        opacity:0.2;
+        width: 100%;
+        height: 100%;
+        position: fixed;
+
+    }
+.modal-open {
+height: 100%;
+overflow: hidden;
+}
+.modelBox{
+    display: none;
+}
+.btn{
+    width: 100px;
+    height: 30px;
+}
+.placeholder{
+    width: 100%;
+}
+
+</style>
+<body>
+<div class="wrap modal-open">
+
+    <div class="modelBox">
+        <div class="model">
+            <h1>我是标题</h1>
+            <div>
+            我是内容
+            </div>
+        </div>
+        <div class="black"></div>
+    </div>
+
+    <div class="container">
+    <div class="placeholder">
+
+    </div>
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+            <li>8</li>
+            <li>9</li>
+            <li>10</li>
+            <li>11</li>
+                <button type="text" class="btn">按钮</button>
+            <li>12</li>
+            <li>13</li>
+            <li>14</li>
+            <li>15</li>
+            <li>16</li>
+            <li>17</li>
+                <button type="text" class="btn">按钮</button>
+        </ul>
+
+</div>
+</div>
+
+<script type="text/javascript">
+
+$(".btn").click(function(){
+    $(".modelBox").show();
+    var h=-$(window).scrollTop();
+   $(".container").css("position","fixed");
+    $(window).scrollTop(h);
+    $(".container").css("margin-top",h);
+})
+
+$(".black").click(function(){
+    $(".modelBox").hide();
+    $(".container").css("position","relative");
+})
+
+</script>
+
+
+</body>
+</html>

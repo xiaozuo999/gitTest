@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>手机端效测试</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+</head>
+<script type="text/javascript">
+//自适应屏幕改变html的font-size大小
+    (function (doc, win) {
+      var docEl = doc.documentElement,
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+        recalc = function () {
+          var clientWidth = docEl.clientWidth;
+          if (!clientWidth) return;
+          docEl.style.fontSize = 100 * (clientWidth / 375) + 'px';
+        };
+
+      if (!doc.addEventListener) return;
+      win.addEventListener(resizeEvt, recalc, false);
+      doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);
+</script>
+
+
+<style>
+
+*{
+    padding: 0;
+    margin: 0;
+}
+ul,li{
+    text-decoration: none;
+}
+li{
+    text-decoration: none;
+    list-style:none;
+}
+    body{
+        font-size: 0.18rem;
+        background: #f3f3f3;
+    }
+    .box{
+        background: white;
+        border-top: 1px solid #333;
+        border-bottom: 1px solid #333;
+        background: white;
+       overflow: hidden;
+        padding: 0.2rem 0;
+    }
+    ul{
+    }
+    li{
+        width: 33.3%;
+        text-align: center;
+        line-height: 0.6rem;
+        height: 0.6rem;
+        float: left;
+        border-right: 1px solid red;
+        box-sizing:border-box;
+-moz-box-sizing:border-box; /* Firefox */
+-webkit-box-sizing:border-box; /* Safari */
+    }
+</style>
+<body>
+<div class="box">
+    <ul>
+        <li>
+             <span>分类一</span>
+            <img src="images/iconFXR.png" alt="" style="width: 0.08rem;"/>
+        </li>
+         <li>
+             <span>分类一</span>
+            <img src="images/iconFXR.png" alt="" style="width: 0.08rem;"/>
+        </li>
+         <li style="border: 0;">
+             <span>分类一</span>
+            <img src="images/iconFXR.png" alt="" style="width: 0.08rem;"/>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>

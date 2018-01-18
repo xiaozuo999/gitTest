@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-demo</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.3/vue.js"></script>
+
+</head>
+<body>
+<div id="app">
+    <button type="button" @click="msg=1;fun();fun1()">改变</button> <br>
+    {{msg}}
+</div>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            msg:10
+        },
+        methods:{
+            fun:function(){
+                console.log(100);
+            },
+             fun1:function(){
+                console.log(200);
+            }
+        },
+        created:function(){
+        }
+    })
+</script>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>音乐test</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.3/vue.js"></script>
+
+</head>
+<body>
+<div id="app">
+    <button type="button" @click="player">{{msg}}</button>
+    <button type="button" @click="load">重新播放</button>
+    <audio controls="" id="player">
+        <source :src="musicSrc"  type="" media="">
+        您的浏览器不支持audio元素
+    </audio>
+</div>
+
+
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            msg:"播放",
+            isPlayer:"",
+            musicSrc:"music/music1.mp3"
+        },
+        methods:{
+            player:function(){
+                var player;
+                player=document.getElementById("player");
+                if(this.msg=="播放"){
+                    this.msg="暂停";
+                     player.pause();
+                }
+                else{
+                     this.msg="播放";
+                      player.play();
+                }
+            },
+            load:function(){
+                var player;
+                player=document.getElementById("player");
+                player.load();
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>setInterver  测试</title>
+</head>
+<body>
+<button onclick="start()">开始</button>
+<button onclick="stop()">停止</button>
+
+
+
+<div id="box"></div>
+<script>
+    var timer;
+    var a=0;
+    function start(){
+        timer=setInterval(function(){
+            a++;
+            console.log(a);
+            document.getElementById("box").innerHTML=a;
+        },500)
+    }
+    function stop(){
+        clearInterval(timer);
+    }
+</script>
+</body>
+</html>

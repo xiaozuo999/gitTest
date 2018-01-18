@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>setInterver  测试</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.3/vue.js"></script>
+
+</head>
+<body>
+
+<div id="app">
+<button @click="fun()">{{msg}}</button>
+    <div>
+        {{progress}}
+    </div>
+</div>
+
+
+<div id="box"></div>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            msg:"开始",
+            progress:0,
+            timer:""
+        },
+        methods:{
+            fun:function(){
+                var _this=this;
+                if(_this.msg=="开始"){
+                    _this.msg="暂停";
+                    _this.timer=setInterval(function(){
+                        _this.progress++;
+                    },500)
+                }
+                else{
+                    _this.msg="开始";
+                    clearInterval(_this.timer);
+                }
+            },
+            start:function(){
+
+            },
+            stop:function(){
+
+            }
+        }
+    })
+
+    var timer;
+    var a=0;
+    function start(){
+        timer=setInterval(function(){
+            a++;
+            console.log(a);
+            document.getElementById("box").innerHTML=a;
+        },500)
+    }
+    function stop(){
+        clearInterval(timer);
+    }
+</script>
+</body>
+</html>

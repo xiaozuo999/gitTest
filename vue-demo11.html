@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-demo</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.3/vue.js"></script>
+
+</head>
+<body>
+<div id="app">
+    <button type="button" @click="clearAll()">清空</button> <br>
+    {{msg}}<br>
+    {{msg2}}
+</div>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            msg:10
+        },
+        methods:{
+            clearAll:function(){
+                this.msg=1;
+            }
+        },
+        computed:{
+            msg2:function(){
+                return this.msg*10;
+            }
+        },
+        created:function(){
+            var arr=[100,200,300];
+            console.log(arr[0]);
+            console.log(arr[arr.length-1]);
+        }
+    })
+</script>
+
+</body>
+</html>

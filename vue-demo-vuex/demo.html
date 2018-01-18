@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>setInterver  测试</title>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+
+
+</head>
+<body>
+
+<div id="app">
+</div>
+
+
+<div id="box"></div>
+<script>
+    var url = "http://ai.easy-board.com.cn/api/search/searchrank";
+    $.post(url,{id:12},function(result){
+        console.log(result);
+    });
+
+</script>
+</body>
+</html>

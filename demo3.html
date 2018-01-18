@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>判断某个对象是否在数组array中</title>
+</head>
+<body>
+<script>
+    var arr=[
+        {
+            a:100
+        },
+        {
+            a:200
+        }
+    ];
+    var obj={
+        a:300
+    };
+    var isTrue=false;
+    for(var i=0;i<arr.length;i++){
+        if(arr[i].a==obj.a){
+               isTrue=true;
+        }
+    }
+    document.write(isTrue);
+</script>
+</body>
+</html>
