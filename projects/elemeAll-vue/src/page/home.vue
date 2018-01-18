@@ -10,6 +10,30 @@
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </router-link>
     </div>
+<<<<<<< HEAD
+    <!--<div class="city-wrap city-hot">-->
+      <!--<div class="content-title">-->
+        <!--热门城市-->
+      <!--</div>-->
+      <!--<div class="content" v-cloak>-->
+        <!--<template  v-for="(item,index) in cityHot" >-->
+          <!--<a  :href='"city.html?type="+item.pinyin+"|"+index+"|hot"' data-area_code="item.area_code" @click="city(item)" class="col-xs-3 c-active">{{item.name}} </a>-->
+        <!--</template>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="city-wrap city-group">-->
+      <!--<div class="city-group-one" v-for="(item,index) in cityGroup" v-cloak>-->
+        <!--<div class="content-title">-->
+          <!--{{softRule[index]}}<span v-show="index=='A'" class="fz10 color-grey">(按字母排序)</span>-->
+        <!--</div>-->
+        <!--<div class="content">-->
+          <!--<template v-for="(item2,index2) in item">-->
+            <!--<a :href='"city.html?type="+item2.pinyin+"|"+index2' data-area_code="item2.area_code" class="col-xs-3 ellipsis">{{item2.name}} </a>-->
+          <!--</template>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+=======
     <div class="city-wrap city-hot">
       <div class="content-title">
         热门城市
@@ -32,6 +56,7 @@
         </div>
       </div>
     </div>
+>>>>>>> 99beec19c51ad4f7ef49aa170955fc419b9d6104
   </div>
 </template>
 
@@ -82,6 +107,6 @@
     }
 </script>
 
-<style lang="scss">
+<style>
   @import '/src/assets/css/index.css';
 </style>

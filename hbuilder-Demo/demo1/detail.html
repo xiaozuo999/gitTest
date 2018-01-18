@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>详情页</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <script src="https://cdn.bootcss.com/vue/2.5.3/vue.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.3/vue.js"></script>
+    <link rel="stylesheet" href="common.css">
+    <script src="common.js"></script>
+<script>
+    // H5 plus事件处理
+    function plusReady(){
+    }
+    if(window.plus){
+        plusReady();
+    }else{
+        document.addEventListener('plusready', plusReady, false);
+    }
+</script>
+</head>
+<body>
+<style>
+    body{
+        background: #3c3f41;
+        font-size: 18px;
+        padding: 0;
+        margin: 0;
+        color:white;
+    }
+    button{
+        padding: 20px;
+        font-size: 20px;
+        margin: 20px;
+    }
+</style>
+
+
+<div id="app">
+    <header class="tac bg-red white" style="line-height: 40px;">
+        <span class="abs t10" style="left: 20px;" @click="back()">返回</span>
+        <span>笔记页面11</span>
+    </header>
+    <div class="container white" style="font-size: 30px;">
+        <div class="m20">
+            {{text}}
+        </div>
+        <div>
+            <textarea cols="70" rows="4" v-model="content">
+            </textarea>
+            <button @click="save()">保存</button>
+        </div>
+    </div>
+</div>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            startTime:"",
+            endTime:"",
+            text:"",
+            content:""
+        },
+        methods:{
+            back:function(){
+                if(localStorage.getItem("note")==this.content){
+                    var ws=plus.webview.currentWebview();
+                    plus.webview.close(ws);
+                }
+                else{
+                    plus.nativeUI.confirm("内容没有保持,退出将丢失",function(e){
+                        //e.index=0 为点击确认按钮
+                        if(!e.index){
+                            var ws=plus.webview.currentWebview();
+                            plus.webview.close(ws);
+                        }
+                        else{
+                        }
+                    });
+                }
+            },
+            getUrlData:function(){
+                var val=location.href;
+                val=val.split("?id=")[1];
+                this.text=val;
+            },
+            getItem:function(){
+                this.content=localStorage.getItem("note");
+            },
+            save:function(){
+                plus.native.UI("保存成功");
+            }
+
+        },
+        created:function(){
+         this.getUrlData();
+         this.getItem();
+        }
+    })
+
+
+
+
+</script>
+
+</body>
+</html>
