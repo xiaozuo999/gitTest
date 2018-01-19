@@ -5,6 +5,7 @@
     <button type="text" @click="add(4)">+</button>
     <button type="text" @click="reset()">reset</button>
     <p>{{count2}}</p>
+    <!--<p>{{count3}}</p>-->
     <p>{{limitNum}}</p>
   </div>
 </template>

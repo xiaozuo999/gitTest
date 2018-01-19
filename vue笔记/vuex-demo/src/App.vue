@@ -2,8 +2,9 @@
   <div id="app">
     <div class="header">
       <ul>
-        <router-link to="/" tag="li">首页</router-link>
-        <router-link to="/test" tag="li">页面一</router-link>
+        <li><router-link to="/">首页</router-link></li>
+        <li><router-link to="/test">页面一</router-link></li>
+        <li><router-link to="/test2">页面二</router-link></li>
       </ul>
     </div>
 
@@ -20,7 +21,7 @@
   export default {
     name: 'app',
     data () {
-        return 100;
+        return {};
     },
     computed:{
     },
