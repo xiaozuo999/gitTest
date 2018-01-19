@@ -8,6 +8,9 @@
         <li>
           <router-link to="/test">页面一</router-link>
         </li>
+        <li>
+          <router-link to="/select">搜索页面</router-link>
+        </li>
       </ul>
     </div>
     <!--<h1>我是首页</h1>-->

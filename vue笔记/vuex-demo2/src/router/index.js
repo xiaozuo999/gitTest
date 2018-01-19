@@ -8,6 +8,7 @@ Vue.use(Router)
 
 import App from  "../App.vue"
 import test from "../test.vue"
+import select from "../select.vue"
 
 var routers=new Router({
   routes:[
@@ -18,6 +19,10 @@ var routers=new Router({
     {
       path:"/test",
       component:test
+    },
+    {
+      path:"/select",
+      component:select
     }
   ]
 })
