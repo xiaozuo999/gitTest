@@ -15,8 +15,9 @@ export default {
   computed:{
     ...mapState(
         {
-          //"keyword":"count"    //count可以显示
-          "keyword":"selectModule.keyword"  //selectModule.keyword 显示不出来？？？
+          keyword:function(state){
+              return  state.selectModule.keyword;
+          }
         }
       )
   },

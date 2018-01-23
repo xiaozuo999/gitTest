@@ -44,6 +44,23 @@ var selectModule={
     }
 }
 
+var playMusic={
+  state:{
+      isPlaying:false
+  },
+  getters:{
+    isPlayingMsg:function(state){
+      var aa=state.isPlaying?"播放":"暂停";
+      return  aa;
+    }
+  },
+  mutations:{
+    toggleMusic:function(state){
+      state.isPlaying=!state.isPlaying;
+    }
+  }
+}
+
 var store =new Vuex.Store({  //注意这里的Store是大写
   state:{
     count:100,
@@ -90,7 +107,8 @@ var store =new Vuex.Store({  //注意这里的Store是大写
     }
   },
   modules:{
-    selectModule
+    selectModule,
+    playMusic
   }
 })
 

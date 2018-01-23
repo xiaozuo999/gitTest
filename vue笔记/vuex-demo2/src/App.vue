@@ -11,8 +11,12 @@
         <li>
           <router-link to="/select">搜索页面</router-link>
         </li>
+        <li>
+          <router-link to="/playMusic">音乐播放页</router-link>
+        </li>
       </ul>
     </div>
+
     <!--<h1>我是首页</h1>-->
     <!--<transition>-->
       <keep-alive>
@@ -34,4 +38,9 @@ export default {
 </script>
 
 <style>
+  .header li{
+    list-style:none;
+    display: inline-block;
+    padding: 10px;
+  }
 </style>

@@ -9,6 +9,7 @@ Vue.use(Router)
 import App from  "../App.vue"
 import test from "../test.vue"
 import select from "../select.vue"
+import playMusic from "../playMusic.vue"
 
 var routers=new Router({
   routes:[
@@ -19,6 +20,10 @@ var routers=new Router({
     {
       path:"/test",
       component:test
+    },
+    {
+      path:"/playMusic",
+      component:playMusic
     },
     {
       path:"/select",
