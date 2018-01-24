@@ -19,15 +19,23 @@ export default {
       musicListAll:[
         {
             name:"歌曲一",
-            src:"/src/assets/a.mp3"
+            src:"/src/assets/a.mp3",
+            id:1
         },
         {
           name:"歌曲二",
-          src:"/src/assets/b.mp3"
+          src:"/src/assets/b.mp3",
+          id:2
         },
         {
           name:"歌曲三",
-          src:"/src/assets/c.mp3"
+          src:"/src/assets/c.mp3",
+          id:3
+        },
+        {
+          name:"一首链接出错的歌曲",
+          src:"/src/assets/d.mp34",
+          id:4
         }
       ]
     }

@@ -4,11 +4,12 @@
        <div>
          <p>选中的歌曲列表</p>
          <ul>
-           <li v-for="item in musicList" @click="playListMusic()">{{item.name}}</li>
+           <li v-for="(item,index) in musicList" @click="playListMusic()" :class="{red:currentIndex==index}">{{item.name}}</li>
          </ul>
        </div>
        <button @click="turnMusic"><span>{{isPlayingMsg}}</span></button>
-       <audio :src=currentMusic.src autoplay id="musicId"></audio>
+       <button @click="next()">下一首</button>
+       <audio :src=currentMusic.src autoplay  @error="errorFun()" @ended="next()" id="musicId"></audio>
       当前播放音乐是：{{currentMusic.name}}
       当前播放进度：{{musicProgress}}
      </div>
@@ -26,7 +27,8 @@ export default {
       musicProgress:"",
       currentMusic:{
           name:"",
-          src:""
+          src:"",
+          id:""
       },
       currentIndex:0,
       isPlaying:false
@@ -47,7 +49,27 @@ export default {
       this.isPlaying=true;
       this.playMusic();
 
-      this.musicList.push(item);
+      //判断是否有重复
+      var _this=this;
+      function isRepeat(){
+        var repeat=false;
+        var len=_this.musicList.length;
+        for(var i=0;i<len;i++){
+            if(item.id==_this.musicList[i].id){
+              repeat=true;
+              _this.currentIndex=i;
+//              break;
+            }
+        }
+        return  repeat;
+      }
+      console.log(isRepeat());
+      //如果重复了
+      //没有重复就直接添加到最后
+      if(!isRepeat()){
+        this.musicList.push(item);
+        this.currentIndex=this.musicList.length?this.musicList.length-1:0;
+      }
     },
     playListMusic:function(){
 
@@ -70,6 +92,21 @@ export default {
       else{
         audioPlay.pause();
       }
+    },
+    errorFun:function(){
+       //判断是否是第一次默认加载
+      if(this.musicList.length>0){
+//        alert("歌曲出错了");
+        console.log("歌曲出错了");
+      }
+    },
+    //播放下一曲
+    next:function(){
+        ++this.currentIndex;
+        if(this.currentIndex>=this.musicList.length){
+            this.currentIndex=0;
+        }
+        this.currentMusic=this.musicList[this.currentIndex]
     }
   },
   route:{
@@ -77,9 +114,11 @@ export default {
           console.log(100);
       }
   }
-
 }
 </script>
 
 <style>
+  .red{
+    color: red;
+  }
 </style>
