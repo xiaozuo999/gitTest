@@ -76,7 +76,8 @@ var playMusic= {
     musicProgress: "",
     currentTime:"",
     currentIndex: 0,
-    isPlaying: false
+    isPlaying: false,
+    timer:""
   },
   getters: {
     isPlayingMsg:function (state) {
@@ -97,6 +98,9 @@ var playMusic= {
     },
     currentIndex:function(state){
       return state.currentIndex;
+    },
+    timer:function(state){
+      return state.timer;
     },
     isPlaying:function(state){
       return state.isPlaying;
@@ -147,7 +151,12 @@ var playMusic= {
       state.currentMusic = state.musicList[state.currentIndex]
     },
     updateTime:function(){
-
+    },
+    setTimer:function(state,timer){
+      state.timer=timer;
+    },
+    clearTime:function(state){
+      clearInterval(state.timer);
     }
   }
 }

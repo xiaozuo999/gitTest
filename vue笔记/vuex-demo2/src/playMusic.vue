@@ -53,11 +53,19 @@ export default {
   },
   created:function(){
   },
-  route:{
-    data:function(transition){
-      console.log(transition);
-      console.log(101);
-    }
+  //在进入路由前
+  beforeRouteEnter:function(to,from,next){
+    next(function(vm){     //参数vm代表vue这个实例
+      vm.$refs.musicBar.updateTime();
+    });
+    //父级触发子组件的事件
+  },
+  //路由离开
+  beforeRouteLeave:(to,from,next)=>{
+      //在路由离开时就关闭定时器
+    this.$refs.musicBar.clearTime();
+    console.log(11);
+      next();
   }
 }
 </script>

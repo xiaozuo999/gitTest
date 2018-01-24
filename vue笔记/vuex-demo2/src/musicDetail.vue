@@ -45,18 +45,18 @@ export default {
     musicBar
   },
   created:function(){
-  },
-  //在进入路由前
-  beforeRouteEnter:function(to,from,next){
-    next(function(vm){     //参数vm代表vue这个实例
-       vm.$refs.musicBar.updateTime();
-    });
-    //父级触发子组件的事件
-  },
-  //路由离开
-  beforeRouteLeave:(to,from,next)=>{
-      next();
   }
+//  //在进入路由前
+//  beforeRouteEnter:function(to,from,next){
+//    next(function(vm){     //参数vm代表vue这个实例
+//       vm.$refs.musicBar.updateTime();
+//    });
+//    //父级触发子组件的事件
+//  },
+//  //路由离开
+//  beforeRouteLeave:(to,from,next)=>{
+//      next();
+//  }
 }
 </script>
 
