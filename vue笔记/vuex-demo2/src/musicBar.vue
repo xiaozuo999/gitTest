@@ -9,9 +9,11 @@
        </div>
        <button @click="turnMusic"><span>{{isPlayingMsg}}</span></button>
        <button @click="next()">下一首</button>
+       <button @click="updateTime()">跳转到上一次位置</button>
        <audio :src=currentMusic.src autoplay  @error="errorFun()" @ended="next()" id="musicId"></audio>
       当前播放音乐是：{{currentMusic.name}}
-      当前播放进度：{{musicProgress}}
+      <!--当前播放进度：{{musicProgress}}-->
+      当前播放的时间：{{currentTime}}s
      </div>
    </div>
 </template>
@@ -23,100 +25,69 @@ export default {
   name: 'app',
   data () {
     return {
-      musicList:[],
-      musicProgress:"",
-      currentMusic:{
-          name:"",
-          src:"",
-          id:""
-      },
-      currentIndex:0,
-      isPlaying:false
+      timer:""
     }
   },
-  computed:{
-    isPlayingMsg:function(){
-      var aa=this.isPlaying?"播放中":"已暂停";
-      return  aa;
-    }
+  computed: {
+    ...mapGetters(["currentMusic","musicList","musicProgress","currentTime","currentIndex","isPlaying","isPlayingMsg"])
   },
-  methods:{
-    addMusic:function(item){
-      this.currentMusic.name=item.name;
-      this.currentMusic.src=item.src;
-      //重置当前播放的进度
-      this.musicProgress=0;
-      this.isPlaying=true;
+  methods: {
+    addMusic: function (item) {
       this.playMusic();
-
-      //判断是否有重复
-      var _this=this;
-      function isRepeat(){
-        var repeat=false;
-        var len=_this.musicList.length;
-        for(var i=0;i<len;i++){
-            if(item.id==_this.musicList[i].id){
-              repeat=true;
-              _this.currentIndex=i;
-//              break;
-            }
-        }
-        return  repeat;
+      this.$store.commit("addMusic",item);
+    },
+    playMusic: function () {
+      var audioPlay = document.getElementById("musicId");
+      var _this = this;
+      var palam={
+        musicProgress:"",
+        currentTime:""
       }
-      console.log(isRepeat());
-      //如果重复了
-      //没有重复就直接添加到最后
-      if(!isRepeat()){
-        this.musicList.push(item);
-        this.currentIndex=this.musicList.length?this.musicList.length-1:0;
-      }
-    },
-    playListMusic:function(){
-
-    },
-    playMusic:function(){
-        var audioPlay=document.getElementById("musicId");
-        var _this=this;
-        setInterval(function(){
-          _this.musicProgress=audioPlay.currentTime/audioPlay.duration*100+"%";
-        },500)
-    },
-    pauseMusic:function(){
-    },
-    turnMusic:function(){
-      var audioPlay=document.getElementById("musicId");
-      this.isPlaying=!this.isPlaying;
-      if(this.isPlaying){
+      var musicProgress;
+      _this.timer=setInterval(function () {
+          console.log(8);
+        palam.musicProgress = audioPlay.currentTime / audioPlay.duration * 100 + "%";
+        palam.currentTime = audioPlay.currentTime;
+        _this.$store.commit("playMusic",palam);
+      }, 500)
+      if(audioPlay.currentTime){
         audioPlay.play();
       }
-      else{
+    },
+    turnMusic:function () {
+      var audioPlay = document.getElementById("musicId");
+      this.$store.commit("turnMusic");
+      if (this.isPlaying) {
+        audioPlay.play();
+      }
+      else {
         audioPlay.pause();
       }
     },
-    errorFun:function(){
-       //判断是否是第一次默认加载
-      if(this.musicList.length>0){
-//        alert("歌曲出错了");
+    errorFun: function () {
+      //判断是否是第一次默认加载
+      if (this.musicList.length > 0) {
         console.log("歌曲出错了");
       }
     },
     //播放下一曲
-    next:function(){
-        ++this.currentIndex;
-        if(this.currentIndex>=this.musicList.length){
-            this.currentIndex=0;
-        }
-        this.currentMusic=this.musicList[this.currentIndex]
+    next: function () {
+        this.$store.commit("next");
+    },
+    //更新进度条
+    updateTime(){
+        console.log("开始更新进度条");
+      //清除之前的定时器
+      clearInterval(this.timer);  //跳转到musicDetail后调用这个方法，为什么不起作用？
+//      var audioPlay = document.getElementById("musicId");
+//      audioPlay.currentTime=this.$store.getters.currentTime;  //每次路由跳转后音乐都会重头开始播放，所以这里我重置音乐开始时间等于上次记录时间；
+      this.playMusic();  //如果不加这句，跳转路由后，音乐就停了；加了之后播放时间会不停跳动
     }
   },
-  route:{
-      data(){
-          console.log(100);
-      }
+  created:function(){
   }
 }
 </script>
-
 <style>
   .red{
     color: red;

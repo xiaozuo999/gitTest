@@ -5,7 +5,6 @@
       <inputA v-on:isShowFun2="isShowFun()"></inputA>
       <listsA v-show="isShow"></listsA>
     </div>
-    <musicBar></musicBar>
   </div>
 </template>
 
@@ -32,8 +31,7 @@ export default {
   },
   components:{
     inputA,
-    listsA,
-    musicBar
+    listsA
   }
 }
 </script>
