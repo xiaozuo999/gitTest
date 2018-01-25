@@ -6,7 +6,7 @@ import Router from "vue-router"
 
 Vue.use(Router)
 
-import App from  "../App.vue"
+import index from  "../index.vue"
 import test from "../test.vue"
 import select from "../select.vue"
 import playMusic from "../playMusic.vue"
@@ -17,8 +17,8 @@ var routers=new Router({
   routes:[
     {
       path:"/",
-      component:App
-    } ,
+      component:index
+    },
     {
       path:"/test",
       component:test
@@ -41,9 +41,5 @@ var routers=new Router({
     }
   ]
 })
-// routers.beforeEach((to,from,next)=>function(){
-//   console.log(11);
-//   next();  //跳转到下一个页面；
-// })
 export default  routers;
 

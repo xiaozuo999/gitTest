@@ -110,12 +110,13 @@ var playMusic= {
     toggleMusic: function (state) {
       state.isPlaying = !state.isPlaying;
     },
+    //主要功能： 向currentMusic,musicLists中赋值；
     addMusic: function (state,item) {
       state.currentMusic.name = item.name;
       state.currentMusic.src = item.src;
       state.currentMusic.id = item.id;
       //重置当前播放的进度
-      state.musicProgress = 0;
+      // state.musicProgress = 0;
       state.isPlaying = true;
       //判断是否有重复
       function isRepeat() {
@@ -129,7 +130,7 @@ var playMusic= {
         }
         return repeat;
       }
-      //如果重复了
+      //如果重复了,更改currentIndex的值，已经在for循环中处理了；
       //没有重复就直接添加到最后
       if (!isRepeat()) {
         state.musicList.push(item);
@@ -149,13 +150,12 @@ var playMusic= {
         state.currentIndex = 0;
       }
       state.currentMusic = state.musicList[state.currentIndex]
+      state.isPlaying=true;
     },
     updateTime:function(){
     },
-    setTimer:function(state,timer){
-      state.timer=timer;
-    },
     clearTime:function(state){
+      console.log("在store中清除timer");
       clearInterval(state.timer);
     }
   }

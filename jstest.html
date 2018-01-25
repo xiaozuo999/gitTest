@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.3/vue.js"></script>
+
+</head>
+<body>
+<div id="app">
+   <ul>
+       <li v-for="item in value">{{item.title}}</li>
+   </ul>
+</div>
+<script type="text/javascript">
+     new Vue({
+        el:"#app",
+        data:{},
+        computed:{
+            value:function(){
+                var url="https://easy-mock.com/mock/5a61abf341d8910ea886ec50/searchLists";
+                var a= $.get(url,{},function(result){
+                })
+
+                var b=a.done(function(){
+                    // console.log(a.responseJSON.lists);
+                    return a.responseJSON.lists;
+                })
+                console.log(b);
+                return a.status;
+            }
+        }
+     })
+</script>
+</body>
+</html>
