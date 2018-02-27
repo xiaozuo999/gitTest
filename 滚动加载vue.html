@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>vue-infinite-scroll</title>
+</head>
+<body>
+<div id="app"
+     style="height: 1200px;background-color: #ccc;width: 400px;margin: 0 auto;">
+</div>
+<script src="https://cdn.css.net/libs/vue/2.0.3/vue.js"></script>
+<!-- <script src="js/vue-infinite-scroll.js"></script> -->
+<script>
+//new 滚动加载----
+new Vue({
+    el: "#app",
+    data: function () {
+        return {
+            busy: false,
+        };
+    },
+    methods: {
+        loadMore: function () {
+            console.log(2);
+            var _self = this;
+
+            // 或ajax请求
+            setTimeout(function () {
+                console.log("has loaded");
+
+                _self.busy = false;
+            }, 1500)
+        }
+    },
+    created: function () {
+        console.log(1);
+        var _self = this;
+
+        window.addEventListener("scroll", function (e) {
+            if (window.scrollY >= document.body.scrollHeight - document.body.clientHeight - 20) {
+                if (!_self.busy) {
+                    _self.busy = true;
+
+                    _self.loadMore();
+                }
+            }
+        });
+    }
+});
+</script>
+</body>
+</html>

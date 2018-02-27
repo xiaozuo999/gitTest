@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>fetch demo 测试</title>
+</head>
+<body>
+<script>
+    var url="https://easy-mock.com/mock/5a6ee6924c02fb3139acf189/searchContent_copy/user"
+    var result=fetch(url).then(function(res){
+        console.log(res);
+//        return res.json();
+    }).then(function(data){
+        console.log(data);
+    }).catch(function(e){
+        console.log(e);
+    })
+</script>
+
+</body>
+</html>

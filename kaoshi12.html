@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>数组增改查</title>
+</head>
+<body>
+
+
+<div id="box"></div>
+<script type="text/javascript">
+// var arr=["a","b","c","d"]
+
+// //添加的方法
+// //添加单/多个元素
+// arr.push("e");
+// arr.push({
+//     "name":"xiaoming"
+// })
+// arr.push(["h","i","j"])
+// arr.push("f","g");
+
+// //合拼数组
+// var arr2=[1,2,3]
+// var arr3=[7,8,9]
+
+// var arr4  =[1,2,3]
+
+// arr=arr.concat(arr2,arr3);  //不会改变现有数组，会返回一个新的
+
+// console.log(arr);
+// console.log(arr[5].name);
+
+
+//数组删除
+var arr=["a","b","c","d"]
+
+var arr2=["d","e","f"]
+//forEach的使用
+// arr.forEach(function(value,index,arr){
+//    document.getElementById("box").innerHTML+="index["+index+"]"+value+"<br>";
+// })
+//
+// for(var i=0;i<arr.length;i++){
+//     document.getElementById("box").innerHTML+="index["+i+"]"+arr[i]+"<br>";
+// }
+
+//把arr2中的新数组放在arr 中
+arr.forEach(function(value,index){
+    arr2.forEach(function(value2,index2){
+            if(value==value2){
+                arr2.splice(index2,1);
+            }
+    })
+})
+
+arr=arr.concat(arr2);
+console.log(arr);
+
+
+
+
+
+</script>
+</body>
+</html>

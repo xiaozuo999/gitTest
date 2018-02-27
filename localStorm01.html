@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>locaStorm 测试</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.3/vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+<button type="text" @click="clear()">清空存储</button>
+    <p>存储列表：</p>
+    <div id="lists">
+    <ul>
+        <li v-for="item in lists" @click="select(item)">{{item.name}}  , {{item.age}}</li>
+    </ul>
+    </div>
+
+    <hr>
+    <div>
+        <ul>
+            <li v-for="item in localLists">{{item}}</li>
+        </ul>
+    </div>
+
+
+</div>
+<script type="text/javascript">
+     new Vue({
+        el:"#app",
+        data:{
+            lists:[
+                {
+                    name:"lilei",
+                    age:10
+                },
+                {
+                    name:"hanmeimei",
+                    age:15
+                },
+                {
+                    name:"zhangshan",
+                    age:20
+                }
+            ],
+            localLists:[]
+        },
+        methods:{
+            select:function(item){
+                //includes判断数组中是否有某个对象；
+                if(!this.localLists.includes(item)){
+                    this.localLists.push(item);
+                }
+                else{
+                    console.log("不能重复添加");
+                }
+                //存的时候就把object转为json数据格式；
+                localStorage.setItem("localLists",JSON.stringify(this.localLists));
+                var a=localStorage.getItem("localLists");
+                console.log(a);
+            },
+            clear:function(){
+                this.localLists=[];
+                localStorage.clear();
+            }
+        },
+        created:function(){
+            //取的时候把json数据格式转为object格式；
+            var a=localStorage.getItem("localLists");
+            if(a){
+               this.localLists=JSON.parse(a);
+            }
+            console.log(this.localLists);
+        }
+     })
+
+
+</script>
+
+</body>
+</html>

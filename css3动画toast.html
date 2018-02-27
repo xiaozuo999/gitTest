@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>css3动画</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <script src="https://cdn.bootcss.com/vue/2.5.3/vue.js"></script>
+
+</head>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+    background: #ddd;
+}
+body{
+    height: 1500px;
+}
+
+    .box{
+        width: 300px;
+        height: 600px;
+        background: #ddd;
+        position: relative;
+
+    }
+    .toastBox{
+        position: fixed;
+        text-align: center;
+        margin:auto;
+        left: 0;
+        right: 0;
+        animation:toast 2s;
+    }
+    .toast{
+        background: white;
+        border: 1px solid #ccc;
+        padding: 5px 10px;
+        font-size: 14px;
+    }
+    @keyframes toast{
+        0%{
+            bottom:-30px;
+        }
+        20%{
+            bottom:100px;
+        }
+        80%{
+            bottom:100px;
+        }
+        100%{
+            bottom:-30px;
+        }
+    }
+</style>
+
+<body>
+<div id="app">
+    <div class="box">
+        <button type="text" @click="showToast()">出现提示</button>
+        <div class="toastBox" v-show="msg">
+            <span class="toast">{{msg}}</span>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            msg:"",
+            timer:""
+        },
+        methods:{
+            showToast:function(){
+                if(this.msg){
+                    this.msg="";
+                }
+                this.msg="加载失败";
+                var _this=this;
+                this.timer=setTimeout(function(){
+                    _this.msg="";
+                },2000)
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

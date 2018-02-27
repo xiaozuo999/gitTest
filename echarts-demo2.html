@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>echarts demo
+    </title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.0.2/echarts.min.js"></script>
+</head>
+<body>
+
+<div id="main" style="width: 600px;height: 400px;"></div>
+
+<script>
+  var tempCategory = new Array();
+    var index = 0;
+    graph.categories.forEach(function (catetgory) {
+        tempCategory[index] = {"name": "" + catetgory.name, "color": catetgory.color};
+        index += 1;
+    });
+
+    graph.nodes.forEach(function (node) {
+
+        node.itemStyle = null;
+        node.symbolSize = node.size;
+
+
+        node.value = node.id;
+
+        // Use random x, y
+        node.x = node.y = null;
+        node.draggable = true;
+        // node.itemStyle.normal.color = node.color;
+
+    });
+
+    var graph = {
+        "links": [],
+        "categories": [
+            {
+                "name": "0",
+                "color": "#787A7E"
+            },
+            {
+                "name": "1",
+                "color": "#D1B1A8"
+            },
+            {
+                "name": "2",
+                "color": "#CF8535"
+            },
+            {
+                "name": "3",
+                "color": "#5FAEB6"
+            },
+            {
+                "name": "4",
+                "color": "#DB9732"
+            }
+        ],
+        "nodes": []
+    }
+
+    var categories = [];
+    for (var i = 0; i < 9; i++) {
+        categories[i] = {
+            name: '类目' + i
+        };
+    }
+
+
+    var obj=document.getElementById("main")
+    //实例化一个mychart对象
+    var mychart=echarts.init(obj);
+
+    //配置图型选项
+   option = {
+        title: {
+            text: 'Les Miserables',
+            subtext: 'Default layout',
+            top: 'bottom',
+            left: 'right'
+        },
+        tooltip: {},
+        legend: [{
+            // selectedMode: 'single',
+            data: categories.map(function (a) {
+                return a.name;
+            })
+        }],
+        animation: false,
+        series : [
+            {
+                name: 'Les Miserables',
+                type: 'graph',
+                layout: 'force',
+                data: graph.nodes,
+                links: graph.links,
+                categories: categories,
+                roam: true,
+                label: {
+                    normal: {
+                        position: 'right'
+                    }
+                },
+                force: {
+                    repulsion: 100
+                }
+            }
+        ]
+    };
+
+    //把数据渲染到页面
+    mychart.setOption(option);
+
+</script>
+
+</body>
+</html>

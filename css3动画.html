@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>css3动画</title>
+</head>
+<style>
+    /*定位对象绑定的动画名称，定义动画的加载次数，运行时间，弧度*/
+    .box{
+        width: 60px;
+        height: 60px;
+        background: red;
+        animation:myfirst 1s infinite;
+    }
+
+    /*定义关键帧*/
+    @keyframes myfirst{
+        0% {transform:rotate(0deg)}
+      100% {transform:rotate(180deg)}
+    }
+</style>
+
+<body>
+
+<div class="box"></div>
+
+
+<script type="text/javascript">
+
+</script>
+
+</body>
+</html>

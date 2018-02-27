@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+
+<html style="height: 100%" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" href="img/bitbug_favicon.ico" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/zui/1.7.0/css/zui.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zui/1.7.0/lib/jquery/jquery.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/zui/1.7.0/js/zui.min.js"></script>
+
+
+    <script type="text/javascript" src="http://172.16.20.227:8081/dist/js/echarts.min.js"></script>
+    <script type="text/javascript" src="http://172.16.20.227:8081/dist/js/dataTool.min.js"></script>
+</head>
+
+<body style="height: 100%;margin: 0">
+<!--<script src="http://echarts.baidu.com/build/dist/echarts-all.js"></script>-->
+
+<nav class="navbar navbar-expand-md navbar-inverse  fixed-top bg-info">
+    <!--<a class="navbar-brand">AI应用</a>-->
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">AI</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="nav-item">
+                <a href="/keyword">关键词模块</a>
+            </li>
+            <li class="nav-item">
+                <a href="/misword">错别字模块</a>
+            </li>
+            <li class="nav-item">
+                <a href="/splitsentence">分词模块</a>
+            </li>
+            <li class="nav-item">
+                <a href="/splitlaw">拆分法律模块</a>
+            </li>
+            <li class="nav-item dropdown active">
+                <a class="dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown">更多
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                    <li><a class=" dropdown-item" href="/similarword">相似词模块</a></li>
+                    <li><a class=" dropdown-item" href="/display">图谱关系</a></li>
+                    <li> <a class=" dropdown-item" href="/graphshow">图谱动态展示</a></li>
+                    <li> <a class=" dropdown-item" href="/searchCore">搜索引擎</a></li>
+                    <li><a class=" dropdown-item" href="/answers">问答模块</a></li>
+                    <li> <a class=" dropdown-item" href="/doc.html">API文档</a></li>
+                </ul>
+            </li>
+        </ul>
+        <form class="form-inline mt-2 mt-md-0">
+            <input class="form-control mr-sm-2" size="100" type="text" id="search_input" placeholder="法律内容" aria-label="查询法律内容" />
+            <span class="btn btn-outline-danger my-2 my-sm-0" type="submit" onclick="showFunction()">搜索</span>
+        </form>
+    </div>
+    <script>
+        $("form").submit(function (event) {
+            event.preventDefault();
+        });
+    </script>
+</nav>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <main class="col-sm-9 mx-sm-auto my-auto col-md-10 pt-3" role="main">
+            <h1>图谱动态展示</h1>
+            <div class="table-responsive" id="section_title">
+                <table class="table table-striped">
+
+                    <tbody id="section_tbody">
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</div>
+<script src="http://172.16.20.227:8081/dist/js/graphShow.js"></script>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+
+
+<div id="container" style="height: 100%"></div>
+<script type="text/javascript">
+
+</script>
+
+
+
+</body>
+</html>

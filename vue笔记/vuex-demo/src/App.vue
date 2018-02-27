@@ -5,6 +5,7 @@
         <li><router-link to="/">首页</router-link></li>
         <li><router-link to="/test">页面一</router-link></li>
         <li><router-link to="/test2">页面二</router-link></li>
+        <li><router-link to="/urlRouter">url-router测试页面</router-link></li>
       </ul>
     </div>
 

@@ -8,10 +8,11 @@
 </head>
 <body>
 <script type="text/javascript">
-var url="https://easy-mock.com/mock/5a54dfa16d45ed1694e1d073/searchContent/searchConcent";
- $.post(url,{},function(result){
-    // console.log(result);
-    document.write(result);
+// var url="https://easy-mock.com/mock/5a54dfa16d45ed1694e1d073/searchContent/searchConcent";
+var url="http://172.16.20.227:8081/api/splitsentence/split";
+ $.post(url,{"inputSentence":"中国上市公司法规,深圳证券交易法"},function(result){
+    console.log(result);
+    // document.write(result);
  })
 </script>
 </body>

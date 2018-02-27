@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+    <script type="text/javascript" src="./js/test.js" id="test"></script>
+
+</head>
+<body>
+
+<button type="text" onclick="addScript()">添加script标签</button>
+<button type="text" onclick="removeScript()">删除script标签</button>
+
+<button type="text" onclick="alertFun()">弹出提示</button>
+
+
+<script type="text/javascript">
+var url=""
+function addScript(){
+    console.log(1);
+}
+
+function removeScript(){
+    $("#test").remove();
+}
+
+</script>
+</body>
+</html>

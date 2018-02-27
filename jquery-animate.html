@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>animate jquery</title>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+
+</head>
+<style type="text/css">
+    #box{
+        width:200px;
+        height:200px;
+        background:red;
+        opacity: 0;
+        margin-top:200px;
+    }
+
+      #box2{
+        width:10px;
+        height:10px;
+        background:blue;
+        top:200px;
+        opacity:0;
+        position: absolute;
+    }
+</style>
+
+<body>
+      <li class="bdb1" :class="{'bg-active':isActive=='keyword'}" onclick="window.open('/keyword.html')">关键字提取</li>
+<div id="box">
+</div>
+
+<div id="box2">
+</div>
+
+<div class="textBox">
+
+</div>
+
+
+<script type="text/javascript">
+
+$("#box").animate({
+    opacity: 1,
+    marginTop: 0},
+    1000, function() {
+
+     $("#box2").animate({
+       top: 0,
+       opacity: 1,
+       height: 100,
+       width: 100},
+       1000, function() {
+            $(".textBox").html("全部结束");
+   });
+
+
+});
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>echarts demo
+    </title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.0.2/echarts.min.js"></script>
+</head>
+<body>
+
+<div id="main" style="width: 600px;height: 400px;"></div>
+
+<script>
+    var obj=document.getElementById("main")
+    //实例化一个mychart对象
+    var mychart=echarts.init(obj);
+
+    //配置图型选项
+    var option={
+        //大标题
+        title:{
+            text:"Echarts入门示例"
+        },
+        tooltip:{},
+        legend:{
+            data:["销量"]
+        },
+        //横坐标
+        xAxis:{
+            data:["chrome","firefox","IE"]
+        },
+        yAxis:{},
+        //图形类型，数量
+        series:[{
+            name:"使用量",
+            type:"bar",
+            data:[100,200,50]
+        }]
+    }
+
+    //把数据渲染到页面
+    mychart.setOption(option);
+
+</script>
+
+</body>
+</html>
