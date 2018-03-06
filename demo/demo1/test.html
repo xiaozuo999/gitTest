@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>动态添加js</title>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+function change(){
+     var h=$(window).height();
+     var cssLink='<link rel="stylesheet" type="text/css" href="css/1.css" class="css2">';
+    if(h<700){
+        if($(".css2").length==0){
+              $("body").append(cssLink);
+          }
+    }
+    else{
+      $(".css2").remove();
+
+    }
+}
+change();
+
+window.addEventListener("resize",function(){
+   change();
+})
+
+
+
+</script>
+</body>
+</html>

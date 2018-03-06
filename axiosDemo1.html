@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.3/vue.js"></script>
+    <script src="https://cdn.bootcss.com/axios/0.18.0/axios.js"></script>
+</head>
+<body>
+<div id="app">
+
+</div>
+
+
+<script type="text/javascript">
+    new Vue({
+        el:"#app",
+        data:{
+
+        },
+        methods:{
+            getData:function(){
+                console.log(axios);
+               var url="https://easy-mock.com/mock/5a9675042356aa41c5ad5168/aiweb-backstage/dataSearch";
+               var par={
+                pageSize:10,
+                page:1
+               }
+               axios.get(url,{params:par}).then(function(res){
+                console.log(res);
+               })
+           }
+        },
+        created:function(){
+            this.getData();
+        }
+
+    })
+</script>
+
+</body>
+</html>

@@ -4,6 +4,7 @@ Vue.use(Router);
 
 import App from '../App.vue'
 import test2 from '../test2.vue'
+import test4 from '../test4.vue'
 import urlRouter from '../urlRouter.vue'
 
 
@@ -20,6 +21,10 @@ var routers=new Router({
     {
       path:"/test2",
       component:test2
+    },
+    {
+      path:"/test4",
+      component:test4
     }
   ]
 })
